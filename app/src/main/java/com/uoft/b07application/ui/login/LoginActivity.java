@@ -80,7 +80,7 @@ public class LoginActivity extends AppCompatActivity {
                 if (loginResult.getSuccess() != null) {
                     String studentName = usernameEditText.getText().toString();
                     String studentEmail = "placeholder";
-
+                    writeNewStudent(studentName, studentName, studentEmail);
                     updateUiWithUser(loginResult.getSuccess());
                 }
                 setResult(Activity.RESULT_OK);
