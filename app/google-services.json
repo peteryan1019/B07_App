@@ -1,0 +1,47 @@
+{
+  "project_info": {
+    "project_number": "784490258522",
+    "project_id": "b07project-3383e",
+    "storage_bucket": "b07project-3383e.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:784490258522:android:206c644fc375e451f13863",
+        "android_client_info": {
+          "package_name": "com.uoft.b07application"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "784490258522-re229ogb7268i3p8gnksg0frditlsp3q.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.uoft.b07application",
+            "certificate_hash": "8eb32b53e0db23bd6f76d85f4974cc41a646f0c3"
+          }
+        },
+        {
+          "client_id": "784490258522-ongim55m0uopoem8d845d07jl7kps5h5.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDycLjbBymC1K_nqwTkp3FgLrLhynq0FZE"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "784490258522-ongim55m0uopoem8d845d07jl7kps5h5.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
