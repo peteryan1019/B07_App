@@ -1,23 +1,17 @@
-package com.uoft.b07application.ui.login;
+package com.uoft.b07application.ui.profile;
 
-public class Student {
+public class User {
     private String name;
     private String username;
     private String email;
     private String password;
-    // Add other properties as needed
 
-    // Constructor, getters and setters
-    public Student() {
-        // Default constructor required for calls to DataSnapshot.getValue(Student.class)
-    }
-
-    public Student(String name, String username, String email, String password) {
+    public User(String name, String username, String email, String password) {
         this.name = name;
         this.username = username;
         this.email = email;
         this.password = password;
-        // Initialize other properties
+        // Initialize other properties if needed
     }
 
     // Getter and setter methods
@@ -33,7 +27,9 @@ public class Student {
         return username;
     }
 
-    public void setUsername(String username) {this.username = username;}
+    public void setUsername(String username) {
+        this.username = username;
+    }
 
     public String getEmail() {
         return email;
@@ -50,7 +46,4 @@ public class Student {
     public void setPassword(String password) {
         this.password = password;
     }
-
-    // Additional getters and setters for other properties
 }
-
