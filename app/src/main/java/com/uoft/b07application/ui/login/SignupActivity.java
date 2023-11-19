@@ -13,6 +13,7 @@ import android.widget.Toast;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.uoft.b07application.R;
+import com.uoft.b07application.ui.profile.Student;
 
 public class SignupActivity extends AppCompatActivity {
 
