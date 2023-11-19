@@ -49,6 +49,18 @@
             <EditText
                 android:layout_width="match_parent"
                 android:layout_height="50dp"
+                android:id="@+id/signup_username"
+                android:background="@drawable/deepblue_border"
+                android:layout_marginTop="20dp"
+                android:padding="8dp"
+                android:hint="Username"
+                android:drawableLeft="@drawable/baseline_person_pin_24"
+                android:drawablePadding="8dp"
+                android:textColor="@color/black"/>
+
+            <EditText
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
                 android:id="@+id/signup_email"
                 android:background="@drawable/deepblue_border"
                 android:layout_marginTop="20dp"
