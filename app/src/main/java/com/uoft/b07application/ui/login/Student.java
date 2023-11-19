@@ -1,8 +1,10 @@
-package com.uoft.b07application;
+package com.uoft.b07application.ui.login;
 
 public class Student {
     private String name;
+    private String username;
     private String email;
+    private String password;
     // Add other properties as needed
 
     // Constructor, getters and setters
@@ -10,9 +12,11 @@ public class Student {
         // Default constructor required for calls to DataSnapshot.getValue(Student.class)
     }
 
-    public Student(String name, String email) {
+    public Student(String name, String username, String email, String password) {
         this.name = name;
+        this.username = username;
         this.email = email;
+        this.password = password;
         // Initialize other properties
     }
 
@@ -25,12 +29,26 @@ public class Student {
         this.name = name;
     }
 
+    public String getUsername() {
+        return username;
+    }
+
+    public void setUsername(String username) {this.username = username;}
+
     public String getEmail() {
         return email;
     }
 
     public void setEmail(String email) {
         this.email = email;
+    }
+
+    public String getPassword() {
+        return password;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
     }
 
     // Additional getters and setters for other properties
