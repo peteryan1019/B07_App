@@ -101,7 +101,6 @@ public class LoginActivity extends AppCompatActivity {
                             String emailFromDB = adminSnapshot.child("email").getValue(String.class);
 
                             // User found and credentials match
-                            // Proceed with your logic, like starting an activity
                             // Pass retrieved information to the next activity
                             Intent intent = new Intent(LoginActivity.this, AdminActivity.class);
                             intent.putExtra("name", nameFromDB);
@@ -127,7 +126,6 @@ public class LoginActivity extends AppCompatActivity {
                                         String emailFromDB = studentSnapshot.child("email").getValue(String.class);
 
                                         // Student found and credentials match
-                                        // Proceed with your logic, like starting an activity
                                         // Pass retrieved information to the next activity
                                         Intent intent = new Intent(LoginActivity.this, MainActivity.class);
                                         intent.putExtra("name", nameFromDB);
