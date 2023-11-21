@@ -5,6 +5,7 @@
     android:layout_height="180dp"
     android:orientation="vertical"
     android:background="@color/DeepBlue"
+    android:id="@+id/nav_admin_header"
     android:padding="20dp">
 
     <ImageView
