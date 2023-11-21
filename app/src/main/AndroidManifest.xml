@@ -13,6 +13,18 @@
         android:theme="@style/Theme.MyApplication"
         tools:targetApi="31">
         <activity
+            android:name=".ui.admin.AdminReviewCommentsActivity"
+            android:exported="false" />
+        <activity
+            android:name=".ui.admin.AdminEventActivity"
+            android:exported="false" />
+        <activity
+            android:name=".ui.admin.AdminAnnouncementActivity"
+            android:exported="false" />
+        <activity
+            android:name=".ui.admin.AdminProfileActivity"
+            android:exported="false" />
+        <activity
             android:name=".ui.admin.AdminActivity"
             android:exported="false" />
         <activity
