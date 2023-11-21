@@ -9,11 +9,13 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
+import com.google.android.material.switchmaterial.SwitchMaterial;
 
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.uoft.b07application.R;
 import com.uoft.b07application.ui.profile.Student;
+import com.uoft.b07application.ui.profile.Admin;
 
 public class SignupActivity extends AppCompatActivity {
 
@@ -33,6 +35,7 @@ public class SignupActivity extends AppCompatActivity {
         signupUsername = findViewById(R.id.signup_username);
         signupPassword = findViewById(R.id.signup_password);
         loginRedirectText = findViewById(R.id.loginRedirectText);
+        SwitchMaterial adminSwitch = findViewById(R.id.admin_switch);
         signupButton = findViewById(R.id.signup_button);
 
         signupButton.setOnClickListener(new View.OnClickListener() {
@@ -40,15 +43,25 @@ public class SignupActivity extends AppCompatActivity {
             public void onClick(View view) {
 
                 database = FirebaseDatabase.getInstance();
-                reference = database.getReference("users");
+                // reference = database.getReference("users");
+                DatabaseReference usersRef = FirebaseDatabase.getInstance().getReference("users");
+
 
                 String name = signupName.getText().toString();
                 String email = signupEmail.getText().toString();
                 String username = signupUsername.getText().toString();
                 String password = signupPassword.getText().toString();
+                boolean isAdmin = adminSwitch.isChecked();
 
-                Student student = new Student(name, username, email, password);
-                reference.child(username).setValue(student);
+                if (isAdmin) {
+                    DatabaseReference adminRef = usersRef.child("admins").child(username);
+                    Admin admin = new Admin(name, username, email, password);
+                    adminRef.setValue(admin);
+                } else {
+                    DatabaseReference studentRef = usersRef.child("students").child(username);
+                    Student student = new Student(name, username, email, password);
+                    studentRef.setValue(student);
+                }
 
                 Toast.makeText(SignupActivity.this, "You have signup successfully!", Toast.LENGTH_SHORT).show();
                 Intent intent = new Intent(SignupActivity.this, LoginActivity.class);
