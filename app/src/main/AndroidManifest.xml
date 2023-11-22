@@ -16,6 +16,12 @@
             android:name=".ui.student.StudentPOSTCheckerActivity"
             android:exported="false" />
         <activity
+            android:name=".ui.student.CSMajorQualifications"
+            android:exported="false"/>
+        <activity
+            android:name=".ui.student.CSSpecQualifications"
+            android:exported="false"/>
+        <activity
             android:name=".ui.student.StudentActivity"
             android:exported="false">
 <!--            <intent-filter>-->
@@ -40,7 +46,7 @@
             android:name=".ui.admin.AdminAnnouncementActivity"
             android:exported="false" />
         <activity
-            android:name=".ui.ProfileActivity"
+            android:name=".ui.student.ProfileActivity"
             android:exported="false" />
         <activity
             android:name=".ui.admin.AdminActivity"

@@ -2,7 +2,6 @@ package com.uoft.b07application.ui.student;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.view.Menu;
 import android.view.MenuItem;
 
 import androidx.activity.ComponentActivity;
@@ -16,10 +15,6 @@ import androidx.drawerlayout.widget.DrawerLayout;
 
 import com.google.android.material.navigation.NavigationView;
 import com.uoft.b07application.R;
-import com.uoft.b07application.ui.admin.AdminAnnouncementActivity;
-import com.uoft.b07application.ui.admin.AdminEventActivity;
-import com.uoft.b07application.ui.ProfileActivity;
-import com.uoft.b07application.ui.admin.AdminReviewCommentsActivity;
 
 public class StudentActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
     private ComponentActivity componentActivity;
@@ -62,6 +57,7 @@ public class StudentActivity extends AppCompatActivity implements NavigationView
 
     @Override
     public boolean onNavigationItemSelected(@NonNull MenuItem menuItem) {
+        Intent i = getIntent();
         Intent intent = null;
         if (menuItem.getItemId() == R.id.nav_POST_checker) {
             intent = new Intent(StudentActivity.this, StudentPOSTCheckerActivity.class);
@@ -70,7 +66,11 @@ public class StudentActivity extends AppCompatActivity implements NavigationView
         } else if (menuItem.getItemId() == R.id.nav_inbox) {
             intent = new Intent(StudentActivity.this, StudentInboxActivity.class);
         } else if (menuItem.getItemId() == R.id.nav_profile) {
+            String username = i.getStringExtra("username");
+            String email = i.getStringExtra("email");
             intent = new Intent(StudentActivity.this, ProfileActivity.class);
+            intent.putExtra("username", username);
+            intent.putExtra("email",email);
         }
         //switch statement does not work in this case for some reason
         if (intent != null) {

@@ -11,12 +11,11 @@ import androidx.drawerlayout.widget.DrawerLayout;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.view.Menu;
 import android.view.MenuItem;
 
 import com.google.android.material.navigation.NavigationView;
 import com.uoft.b07application.R;
-import com.uoft.b07application.ui.ProfileActivity;
+import com.uoft.b07application.ui.student.ProfileActivity;
 
 public class AdminActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
     private ComponentActivity componentActivity;
