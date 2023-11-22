@@ -2,17 +2,17 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
     <group android:checkableBehavior="single">
         <item
-            android:id="@id/nav_announcement"
-            android:icon="@drawable/announcement_icon"
-            android:title="Announcement"></item>
+            android:id="@id/nav_POST_checker"
+            android:icon="@drawable/checker_icon"
+            android:title="POST Qualification Checker"></item>
         <item
-            android:id="@id/nav_departmentEvent"
-            android:icon="@drawable/event_icon"
-            android:title="Event"></item>
+            android:id="@id/nav_complaints"
+            android:icon="@drawable/complaint_icon"
+            android:title="Complaint"></item>
         <item
-            android:id="@id/nav_reviewComments"
-            android:icon="@drawable/comments_icon"
-            android:title="Review Comments"></item>
+            android:id="@id/nav_inbox"
+            android:icon="@drawable/inbox_icon"
+            android:title="Inbox"></item>
     </group>
 
 
@@ -20,11 +20,11 @@
         <menu>
             <group android:checkableBehavior="single">
                 <item
-                    android:id="@id/nav_admin_profile"
+                    android:id="@id/nav_student_profile"
                     android:icon="@drawable/profile_icon"
                     android:title="Profile"></item>
                 <item
-                    android:id="@id/nav_admin_logout"
+                    android:id="@id/nav_student_logout"
                     android:icon="@drawable/logout_icon"
                     android:title="Logout"></item>
             </group>

@@ -1,4 +1,4 @@
-package com.uoft.b07application.ui.admin;
+package com.uoft.b07application.ui;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -6,7 +6,7 @@ import android.os.Bundle;
 
 import com.uoft.b07application.R;
 
-public class AdminProfileActivity extends AppCompatActivity {
+public class ProfileActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

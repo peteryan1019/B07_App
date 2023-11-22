@@ -1,4 +1,9 @@
-package com.uoft.b07application.ui.admin;
+package com.uoft.b07application.ui.student;
+
+import android.content.Intent;
+import android.os.Bundle;
+import android.view.Menu;
+import android.view.MenuItem;
 
 import androidx.activity.ComponentActivity;
 import androidx.activity.OnBackPressedDispatcher;
@@ -9,16 +14,14 @@ import androidx.appcompat.widget.Toolbar;
 import androidx.core.view.GravityCompat;
 import androidx.drawerlayout.widget.DrawerLayout;
 
-import android.content.Intent;
-import android.os.Bundle;
-import android.view.Menu;
-import android.view.MenuItem;
-
 import com.google.android.material.navigation.NavigationView;
 import com.uoft.b07application.R;
+import com.uoft.b07application.ui.admin.AdminAnnouncementActivity;
+import com.uoft.b07application.ui.admin.AdminEventActivity;
 import com.uoft.b07application.ui.ProfileActivity;
+import com.uoft.b07application.ui.admin.AdminReviewCommentsActivity;
 
-public class AdminActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
+public class StudentActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
     private ComponentActivity componentActivity;
     //to handle onBackPressedDispatcher method for menu
     DrawerLayout drawerLayout;
@@ -28,11 +31,11 @@ public class AdminActivity extends AppCompatActivity implements NavigationView.O
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_admin);
+        setContentView(R.layout.activity_student);
 
-        drawerLayout = findViewById(R.id.drawer_layout);
-        navigationView = findViewById(R.id.nav_admin_view);
-        toolbar = findViewById(R.id.admin_toolbar);
+        drawerLayout = findViewById(R.id.student_drawer_layout);
+        navigationView = findViewById(R.id.nav_student_view);
+        toolbar = findViewById(R.id.student_toolbar);
 
         setSupportActionBar(toolbar);
 
@@ -60,14 +63,14 @@ public class AdminActivity extends AppCompatActivity implements NavigationView.O
     @Override
     public boolean onNavigationItemSelected(@NonNull MenuItem menuItem) {
         Intent intent = null;
-        if (menuItem.getItemId() == R.id.nav_announcement) {
-            intent = new Intent(AdminActivity.this, AdminAnnouncementActivity.class);
-        } else if (menuItem.getItemId() == R.id.nav_departmentEvent) {
-            intent = new Intent(AdminActivity.this, AdminEventActivity.class);
-        } else if (menuItem.getItemId() == R.id.nav_reviewComments) {
-            intent = new Intent(AdminActivity.this, AdminReviewCommentsActivity.class);
+        if (menuItem.getItemId() == R.id.nav_POST_checker) {
+            intent = new Intent(StudentActivity.this, StudentPOSTCheckerActivity.class);
+        } else if (menuItem.getItemId() == R.id.nav_complaints) {
+            intent = new Intent(StudentActivity.this, StudentComplaintActivity.class);
+        } else if (menuItem.getItemId() == R.id.nav_inbox) {
+            intent = new Intent(StudentActivity.this, StudentInboxActivity.class);
         } else if (menuItem.getItemId() == R.id.nav_profile) {
-            intent = new Intent(AdminActivity.this, ProfileActivity.class);
+            intent = new Intent(StudentActivity.this, ProfileActivity.class);
         }
         //switch statement does not work in this case for some reason
         if (intent != null) {
