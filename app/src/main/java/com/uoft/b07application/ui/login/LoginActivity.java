@@ -1,5 +1,5 @@
 package com.uoft.b07application.ui.login;
-import com.uoft.b07application.ui.MainActivity;
+import com.uoft.b07application.ui.student.StudentActivity;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
@@ -19,6 +19,7 @@ import com.google.firebase.database.Query;
 import com.google.firebase.database.ValueEventListener;
 import com.uoft.b07application.R;
 import com.uoft.b07application.ui.admin.AdminActivity;
+import com.uoft.b07application.ui.student.StudentActivity;
 
 import java.util.Objects;
 
@@ -127,7 +128,7 @@ public class LoginActivity extends AppCompatActivity {
 
                                         // Student found and credentials match
                                         // Pass retrieved information to the next activity
-                                        Intent intent = new Intent(LoginActivity.this, MainActivity.class);
+                                        Intent intent = new Intent(LoginActivity.this, StudentActivity.class);
                                         intent.putExtra("name", nameFromDB);
                                         intent.putExtra("email", emailFromDB);
                                         // Add more data if needed

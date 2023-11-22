@@ -13,6 +13,12 @@
         android:theme="@style/Theme.MyApplication"
         tools:targetApi="31">
         <activity
+            android:name=".ui.student.StudentComplaintActivity"
+            android:exported="false" />
+        <activity
+            android:name=".ui.student.StudentInboxActivity"
+            android:exported="false" />
+        <activity
             android:name=".ui.admin.AdminReviewCommentsActivity"
             android:exported="false" />
         <activity
@@ -22,7 +28,7 @@
             android:name=".ui.admin.AdminAnnouncementActivity"
             android:exported="false" />
         <activity
-            android:name=".ui.admin.AdminProfileActivity"
+            android:name=".ui.ProfileActivity"
             android:exported="false" />
         <activity
             android:name=".ui.admin.AdminActivity"

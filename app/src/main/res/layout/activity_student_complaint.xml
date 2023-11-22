@@ -4,7 +4,6 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".ui.ProfileActivity"
-    android:id="@+id/nav_admin_profile">
+    tools:context=".ui.student.StudentComplaintActivity">
 
 </androidx.constraintlayout.widget.ConstraintLayout>
