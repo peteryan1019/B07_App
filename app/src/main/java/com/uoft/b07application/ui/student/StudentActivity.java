@@ -16,10 +16,12 @@ import androidx.drawerlayout.widget.DrawerLayout;
 
 import com.google.android.material.navigation.NavigationView;
 import com.uoft.b07application.R;
+import com.uoft.b07application.ui.admin.AdminActivity;
 import com.uoft.b07application.ui.admin.AdminAnnouncementActivity;
 import com.uoft.b07application.ui.admin.AdminEventActivity;
 import com.uoft.b07application.ui.ProfileActivity;
 import com.uoft.b07application.ui.admin.AdminReviewCommentsActivity;
+import com.uoft.b07application.ui.login.LoginActivity;
 
 public class StudentActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
     private ComponentActivity componentActivity;
@@ -71,6 +73,8 @@ public class StudentActivity extends AppCompatActivity implements NavigationView
             intent = new Intent(StudentActivity.this, StudentInboxActivity.class);
         } else if (menuItem.getItemId() == R.id.nav_profile) {
             intent = new Intent(StudentActivity.this, ProfileActivity.class);
+        } else if (menuItem.getItemId() == R.id.nav_admin_logout) {
+            intent = new Intent(StudentActivity.this, LoginActivity.class);
         }
         //switch statement does not work in this case for some reason
         if (intent != null) {
