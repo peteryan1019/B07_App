@@ -20,7 +20,7 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="vertical">
-
+        
         <!-- Your Button should be inside this LinearLayout -->
         <Button
             android:id="@+id/button2"
