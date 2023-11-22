@@ -11,7 +11,6 @@ import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
-import androidx.lifecycle.ViewModelProvider;
 
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
@@ -34,7 +33,7 @@ public class GalleryFragment extends Fragment {
 
         // Initialize UI elements
         editTextComplaint = root.findViewById(R.id.editTextComplaint);
-        submitButton = root.findViewById(R.id.submit);
+        submitButton = root.findViewById(R.id.submit_complaint);
 
 
         submitButton.setOnClickListener(new View.OnClickListener() {

@@ -23,4 +23,12 @@
     <string name ="second_fragment_label">previous error</string>
     <string name="admin_navigation_drawer_open">Open navigation drawer</string>
     <string name="admin_navigation_drawer_close">Close navigation drawer</string>
+    <string-array name="dropdown_items">
+        <item>Complaint Topic</item>
+        <item>TA Quality</item>
+        <item>Professor Quality</item>
+        <item>Course Quality</item>
+        <item>Other</item>
+        <!-- Add more items as needed -->
+    </string-array>
 </resources>
