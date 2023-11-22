@@ -13,10 +13,14 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.ImageButton;
 
 import com.google.android.material.navigation.NavigationView;
 import com.uoft.b07application.R;
 import com.uoft.b07application.ui.ProfileActivity;
+import com.uoft.b07application.ui.login.LoginActivity;
+import com.uoft.b07application.ui.login.SignupActivity;
 
 public class AdminActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
     private ComponentActivity componentActivity;
@@ -24,11 +28,50 @@ public class AdminActivity extends AppCompatActivity implements NavigationView.O
     DrawerLayout drawerLayout;
     NavigationView navigationView;
     Toolbar toolbar;
+    ImageButton adminAnnouncementButton, adminEventButton,
+            adminReviewcommentsButton, adminProfileButton;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_admin);
+
+        adminAnnouncementButton = findViewById(R.id.admin_announcements_button);
+        adminEventButton = findViewById(R.id.admin_event_button);
+        adminReviewcommentsButton = findViewById(R.id.admin_reviewcomments_button);
+        adminProfileButton = findViewById(R.id.admin_profile_button);
+
+        //buttons event on dashboards
+        adminAnnouncementButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(AdminActivity.this, AdminAnnouncementActivity.class);
+                startActivity(intent);
+            }
+        });
+        adminEventButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(AdminActivity.this, AdminEventActivity.class);
+                startActivity(intent);
+            }
+        });
+        adminReviewcommentsButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(AdminActivity.this, AdminReviewCommentsActivity.class);
+                startActivity(intent);
+            }
+        });
+        adminProfileButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(AdminActivity.this, ProfileActivity.class);
+                startActivity(intent);
+            }
+        });
+
+        //side menu
 
         drawerLayout = findViewById(R.id.drawer_layout);
         navigationView = findViewById(R.id.nav_admin_view);
@@ -66,8 +109,10 @@ public class AdminActivity extends AppCompatActivity implements NavigationView.O
             intent = new Intent(AdminActivity.this, AdminEventActivity.class);
         } else if (menuItem.getItemId() == R.id.nav_reviewComments) {
             intent = new Intent(AdminActivity.this, AdminReviewCommentsActivity.class);
-        } else if (menuItem.getItemId() == R.id.nav_profile) {
+        } else if (menuItem.getItemId() == R.id.nav_admin_profile) {
             intent = new Intent(AdminActivity.this, ProfileActivity.class);
+        } else if (menuItem.getItemId() == R.id.nav_admin_logout) {
+            intent = new Intent(AdminActivity.this, LoginActivity.class);
         }
         //switch statement does not work in this case for some reason
         if (intent != null) {
