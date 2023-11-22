@@ -1,0 +1,66 @@
+Name: Peter Yan
+
+What have you done since yesterday?
+-Integrated Firebase with the project. 
+-Set up the basic layout and functionality for the sign-up page so that users can write data into firebase.
+
+	- 
+
+What are you planning on doing today?
+set up the 'complaint submission' button and functionalities.
+   	- 
+
+Any impediments or stumbling blocks?
+do not know how to link my activity xml with the java code. don't know where to find the java file.
+======================================
+
+Name: Edward Zhang
+
+What have you done since yesterday?
+Cloned the project repository to local computer.
+	- 
+
+What are you planning on doing today?
+Get familiar with navigating github
+   	- 
+
+Any impediments or stumbling blocks?
+no impediments so far
+==========================================
+Name: Leo Yang
+
+What have you done since yesterday?
+Cloned the project repository to local computer.
+	- 
+
+What are you planning on doing today?
+Get familiar with navigating github
+
+Any impediments or stumbling blocks?
+no impediments so far
+
+=======================================
+Name: Benjamin Yu Shang Chang
+
+What have you done since yesterday?
+Cloned the project repository to local computer.
+	- 
+
+What are you planning on doing today?
+Get familiar with navigating github
+
+Any impediments or stumbling blocks?
+no impediments so far
+==============================================
+Name: Ben Lu
+
+What have you done since yesterday?
+Cloned the project repository to local computer.
+	- 
+
+What are you planning on doing today?
+Get familiar with navigating github
+   	- 
+
+Any impediments or stumbling blocks?
+no impediments so far
