@@ -4,6 +4,8 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.ImageButton;
 
 import androidx.activity.ComponentActivity;
 import androidx.activity.OnBackPressedDispatcher;
@@ -29,6 +31,8 @@ public class StudentActivity extends AppCompatActivity implements NavigationView
     DrawerLayout drawerLayout;
     NavigationView navigationView;
     Toolbar toolbar;
+    ImageButton studentPOSTCheckerButton, studentComplaintButton,
+            studentInboxButton, studentProfileButton;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -38,8 +42,45 @@ public class StudentActivity extends AppCompatActivity implements NavigationView
         drawerLayout = findViewById(R.id.student_drawer_layout);
         navigationView = findViewById(R.id.nav_student_view);
         toolbar = findViewById(R.id.student_toolbar);
+        studentPOSTCheckerButton = findViewById(R.id.student_POST_checker_button);
+        studentComplaintButton = findViewById(R.id.student_complaint_button);
+        studentInboxButton = findViewById(R.id.student_inbox_button);
+        studentProfileButton = findViewById(R.id.student_profile_button);
+
+        //buttons event on dashboards
+        studentPOSTCheckerButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(StudentActivity.this, StudentPOSTCheckerActivity.class);
+                startActivity(intent);
+            }
+        });
+        studentComplaintButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(StudentActivity.this, StudentComplaintActivity.class);
+                startActivity(intent);
+            }
+        });
+        studentInboxButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(StudentActivity.this, StudentInboxActivity.class);
+                startActivity(intent);
+            }
+        });
+        studentProfileButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(StudentActivity.this, ProfileActivity.class);
+                startActivity(intent);
+            }
+        });
+
+        //side menu
 
         setSupportActionBar(toolbar);
+
 
         navigationView.bringToFront();
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(this, drawerLayout, toolbar,
@@ -71,9 +112,9 @@ public class StudentActivity extends AppCompatActivity implements NavigationView
             intent = new Intent(StudentActivity.this, StudentComplaintActivity.class);
         } else if (menuItem.getItemId() == R.id.nav_inbox) {
             intent = new Intent(StudentActivity.this, StudentInboxActivity.class);
-        } else if (menuItem.getItemId() == R.id.nav_profile) {
+        } else if (menuItem.getItemId() == R.id.nav_student_profile) {
             intent = new Intent(StudentActivity.this, ProfileActivity.class);
-        } else if (menuItem.getItemId() == R.id.nav_admin_logout) {
+        } else if (menuItem.getItemId() == R.id.nav_student_logout) {
             intent = new Intent(StudentActivity.this, LoginActivity.class);
         }
         //switch statement does not work in this case for some reason
@@ -85,7 +126,6 @@ public class StudentActivity extends AppCompatActivity implements NavigationView
 
         return false;
     }
-
 
 
 }

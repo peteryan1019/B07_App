@@ -41,6 +41,7 @@ public class AdminActivity extends AppCompatActivity implements NavigationView.O
         adminReviewcommentsButton = findViewById(R.id.admin_reviewcomments_button);
         adminProfileButton = findViewById(R.id.admin_profile_button);
 
+        //buttons event on dashboards
         adminAnnouncementButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -70,7 +71,7 @@ public class AdminActivity extends AppCompatActivity implements NavigationView.O
             }
         });
 
-
+        //side menu
 
         drawerLayout = findViewById(R.id.drawer_layout);
         navigationView = findViewById(R.id.nav_admin_view);
@@ -108,7 +109,7 @@ public class AdminActivity extends AppCompatActivity implements NavigationView.O
             intent = new Intent(AdminActivity.this, AdminEventActivity.class);
         } else if (menuItem.getItemId() == R.id.nav_reviewComments) {
             intent = new Intent(AdminActivity.this, AdminReviewCommentsActivity.class);
-        } else if (menuItem.getItemId() == R.id.nav_profile) {
+        } else if (menuItem.getItemId() == R.id.nav_admin_profile) {
             intent = new Intent(AdminActivity.this, ProfileActivity.class);
         } else if (menuItem.getItemId() == R.id.nav_admin_logout) {
             intent = new Intent(AdminActivity.this, LoginActivity.class);
