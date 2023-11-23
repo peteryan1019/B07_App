@@ -24,6 +24,8 @@ import com.uoft.b07application.ui.login.LoginActivity;
 public class AdminActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
     String username;
     String email;
+    String isadminorstudent;
+
     private ComponentActivity componentActivity;
     //to handle onBackPressedDispatcher method for menu
     DrawerLayout drawerLayout;
@@ -37,6 +39,7 @@ public class AdminActivity extends AppCompatActivity implements NavigationView.O
         Intent i = getIntent();
         username = i.getStringExtra("name");
         email = i.getStringExtra("email");
+        isadminorstudent = i.getStringExtra("isadminorstudent");
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_admin);
 
@@ -73,6 +76,7 @@ public class AdminActivity extends AppCompatActivity implements NavigationView.O
                 Intent intent = new Intent(AdminActivity.this, ProfileActivity.class);
                 intent.putExtra("username", username);
                 intent.putExtra("email", email);
+                intent.putExtra("isadminorstudent", isadminorstudent);
                 startActivity(intent);
             }
         });

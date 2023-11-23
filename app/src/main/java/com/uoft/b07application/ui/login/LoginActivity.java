@@ -106,6 +106,7 @@ public class LoginActivity extends AppCompatActivity {
                             Intent intent = new Intent(LoginActivity.this, AdminActivity.class);
                             intent.putExtra("name", nameFromDB);
                             intent.putExtra("email", emailFromDB);
+                            intent.putExtra("isadmin", "Is Admin");
                             // Add more data if needed
                             startActivity(intent);
                         } else {
@@ -131,6 +132,7 @@ public class LoginActivity extends AppCompatActivity {
                                         Intent intent = new Intent(LoginActivity.this, StudentActivity.class);
                                         intent.putExtra("name", nameFromDB);
                                         intent.putExtra("email", emailFromDB);
+                                        intent.putExtra("isadminorstudent", "Is Student");
                                         // Add more data if needed
                                         startActivity(intent);
                                         return;

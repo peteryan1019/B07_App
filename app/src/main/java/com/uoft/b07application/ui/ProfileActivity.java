@@ -1,7 +1,13 @@
 package com.uoft.b07application.ui;
 
 import androidx.appcompat.app.AppCompatActivity;
-
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.Query;
+import com.google.firebase.database.ValueEventListener;
+import com.uoft.b07application.R;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
@@ -16,15 +22,21 @@ import com.uoft.b07application.ui.profile.Student;
 import com.uoft.b07application.ui.student.StudentActivity;
 
 public class ProfileActivity extends AppCompatActivity {
+    String isadminorstudent;
+    String old_un;
+    String old_em;
     String updated_un;
     String updated_em;
+    DatabaseReference reference;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        //get lsit of current users on firebase
+        reference = FirebaseDatabase.getInstance().getReference("users");
+
         Intent i = getIntent();
-        String un = i.getStringExtra("username");
-        String em = i.getStringExtra("email");
-        Log.d("ProfileActivity", "un is" + un);
-        Log.d("ProfileActivity", "em is" + em);
+         old_un = i.getStringExtra("username");
+        old_em = i.getStringExtra("email");
+        isadminorstudent = i.getStringExtra("isadminorstudent");
         super.onCreate(savedInstanceState);
 
         setContentView(R.layout.activity_admin_profile);
@@ -37,9 +49,9 @@ public class ProfileActivity extends AppCompatActivity {
         save_profile.setVisibility(View.INVISIBLE);
         //rest of code
         TextView user_name = (TextView) findViewById(R.id.uns);
-        user_name.setText(un);
+        user_name.setText(old_un);
         TextView user_email = (TextView) findViewById(R.id.ems);
-        user_email.setText(em);
+        user_email.setText(old_em);
     }
 
     public void editProfile(View view) {
@@ -96,6 +108,17 @@ public class ProfileActivity extends AppCompatActivity {
         //update text
         old_username.setText(updated_un);
         old_email.setText(updated_em);
+        if(isadminorstudent.equals("Is Admin")){
+            reference.child("admins").child(old_un).child("username").setValue(updated_un);
+            reference.child("admins").child(old_em).child("email").setValue(updated_em);
+        }
+        else if(isadminorstudent.equals("Is Student")){
+            reference.child("students").child(old_un).child("username").setValue(updated_un);
+            reference.child("students").child(old_em).child("email").setValue(updated_em);
+        }
 
     }
+
+
+
 }
