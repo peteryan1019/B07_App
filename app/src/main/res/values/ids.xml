@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <item name="nav_profile" type="id" />
+    <item name="nav_announcement" type="id" />
+    <item name="nav_departmentEvent" type="id" />
+    <item name="nav_reviewComments" type="id" />
+    <item name="nav_logout" type="id" />
+    <item name="nav_POST_checker" type="id" />
+    <item name="nav_complaints" type="id" />
+    <item name="nav_inbox" type="id" />
+    <item name="nav_student_profile" type="id" />
+    <item name="nav_student_logout" type="id" />
+    <item name="nav_admin_logout" type="id" />
+</resources>
