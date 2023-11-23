@@ -89,7 +89,7 @@ public class AdminActivity extends AppCompatActivity implements NavigationView.O
         adminProfileButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(AdminActivity.this, ProfileActivity.class);
+                Intent intent = new Intent(AdminActivity.this, AdminProfileActivity.class);
                 startActivity(intent);
             }
         });
@@ -105,7 +105,7 @@ public class AdminActivity extends AppCompatActivity implements NavigationView.O
         } else if (menuItem.getItemId() == R.id.nav_reviewComments) {
             intent = new Intent(AdminActivity.this, AdminReviewCommentsActivity.class);
         } else if (menuItem.getItemId() == R.id.nav_admin_profile) {
-            intent = new Intent(AdminActivity.this, ProfileActivity.class);
+            intent = new Intent(AdminActivity.this, AdminProfileActivity.class);
         } else if (menuItem.getItemId() == R.id.nav_admin_logout) {
             intent = new Intent(AdminActivity.this, LoginActivity.class);
         }
