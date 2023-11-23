@@ -23,25 +23,48 @@ import com.uoft.b07application.ui.login.LoginActivity;
 import com.uoft.b07application.ui.login.SignupActivity;
 
 public class AdminActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
-    private ComponentActivity componentActivity;
-    //to handle onBackPressedDispatcher method for menu
-    DrawerLayout drawerLayout;
-    NavigationView navigationView;
-    Toolbar toolbar;
-    ImageButton adminAnnouncementButton, adminEventButton,
-            adminReviewcommentsButton, adminProfileButton;
+    protected DrawerLayout drawerLayout;
+    protected NavigationView navigationView;
+    protected Toolbar toolbar;
+    private ImageButton adminAnnouncementButton, adminEventButton,
+            adminReviewCommentsButton, adminProfileButton;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_admin);
+        int layoutId = setLayoutId(R.layout.activity_admin);
+        setContentView(layoutId);
 
+        //set listeners on this page
+        setButtonListeners();
+
+        // set side menu
+        setAdminMenu();
+
+        setSupportActionBar(toolbar);
+
+        navigationView.bringToFront();
+        ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(this, drawerLayout, toolbar,
+                R.string.admin_navigation_drawer_open, R.string.admin_navigation_drawer_close);
+        drawerLayout.addDrawerListener(toggle);
+        toggle.syncState();
+        navigationView.setNavigationItemSelectedListener(this);
+    }
+
+    protected int setLayoutId(int layoutId) {
+        return R.layout.activity_admin;
+    }
+
+    protected void setAdminMenu(){
+        drawerLayout = findViewById(R.id.admin_drawer_layout);
+        navigationView = findViewById(R.id.nav_admin_view);
+        toolbar = findViewById(R.id.admin_toolbar);
+    }
+    protected void setButtonListeners(){
         adminAnnouncementButton = findViewById(R.id.admin_announcements_button);
         adminEventButton = findViewById(R.id.admin_event_button);
-        adminReviewcommentsButton = findViewById(R.id.admin_reviewcomments_button);
+        adminReviewCommentsButton = findViewById(R.id.admin_reviewcomments_button);
         adminProfileButton = findViewById(R.id.admin_profile_button);
-
-        //buttons event on dashboards
         adminAnnouncementButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -56,7 +79,7 @@ public class AdminActivity extends AppCompatActivity implements NavigationView.O
                 startActivity(intent);
             }
         });
-        adminReviewcommentsButton.setOnClickListener(new View.OnClickListener() {
+        adminReviewCommentsButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(AdminActivity.this, AdminReviewCommentsActivity.class);
@@ -70,35 +93,7 @@ public class AdminActivity extends AppCompatActivity implements NavigationView.O
                 startActivity(intent);
             }
         });
-
-        //side menu
-
-        drawerLayout = findViewById(R.id.drawer_layout);
-        navigationView = findViewById(R.id.nav_admin_view);
-        toolbar = findViewById(R.id.admin_toolbar);
-
-        setSupportActionBar(toolbar);
-
-        navigationView.bringToFront();
-        ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(this, drawerLayout, toolbar,
-                R.string.admin_navigation_drawer_open, R.string.admin_navigation_drawer_close);
-        drawerLayout.addDrawerListener(toggle);
-        toggle.syncState();
-        navigationView.setNavigationItemSelectedListener(this);
-
-
     }
-
-    public void menuOnPress() {
-        if (drawerLayout.isDrawerOpen(GravityCompat.START)) {
-            drawerLayout.closeDrawer(GravityCompat.START);
-        } else {
-            OnBackPressedDispatcher onBackPressedDispatcher = componentActivity.getOnBackPressedDispatcher();
-            onBackPressedDispatcher.onBackPressed();
-        }
-
-    }
-
 
     @Override
     public boolean onNavigationItemSelected(@NonNull MenuItem menuItem) {
@@ -123,7 +118,4 @@ public class AdminActivity extends AppCompatActivity implements NavigationView.O
 
         return false;
     }
-
-
-
 }
