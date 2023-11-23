@@ -15,13 +15,13 @@ public class AdminAnnouncementActivity extends AdminActivity {
         return R.layout.activity_admin_announcement;
     }
     @Override
-    protected void setAdminMenu(){
+    protected void setMenu(){
         drawerLayout = findViewById(R.id.announcement_drawer_layout);
         navigationView = findViewById(R.id.nav_announcement_view);
         toolbar = findViewById(R.id.announcement_toolbar);
     }
     @Override
-    protected void setButtonListeners(){
+    public void setButtonListeners(){
 
     }
 

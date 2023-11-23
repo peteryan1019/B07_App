@@ -37,7 +37,7 @@ public class AdminActivity extends MenuActivity {
         return R.layout.activity_admin;
     }
     @Override
-    protected void setAdminMenu(){
+    protected void setMenu(){
         drawerLayout = findViewById(R.id.admin_drawer_layout);
         navigationView = findViewById(R.id.nav_admin_view);
         toolbar = findViewById(R.id.admin_toolbar);

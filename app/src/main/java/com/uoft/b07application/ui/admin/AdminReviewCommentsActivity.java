@@ -15,7 +15,7 @@ public class AdminReviewCommentsActivity extends AdminActivity {
         return R.layout.activity_admin_review_comments;
     }
     @Override
-    protected void setAdminMenu(){
+    protected void setMenu(){
         drawerLayout = findViewById(R.id.admin_review_comments_drawer_layout);
         navigationView = findViewById(R.id.nav_admin_review_comments_view);
         toolbar = findViewById(R.id.admin_review_comments_toolbar);

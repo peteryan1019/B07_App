@@ -17,7 +17,7 @@ public class AdminEventActivity extends AdminActivity {
         return R.layout.activity_admin_event;
     }
     @Override
-    protected void setAdminMenu(){
+    protected void setMenu(){
         drawerLayout = findViewById(R.id.admin_event_drawer_layout);
         navigationView = findViewById(R.id.nav_event_view);
         toolbar = findViewById(R.id.admin_event_toolbar);

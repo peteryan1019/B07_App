@@ -35,7 +35,7 @@ public abstract class MenuActivity extends AppCompatActivity implements Navigati
         setButtonListeners();
 
         // set side menu
-        setAdminMenu();
+        setMenu();
 
         setSupportActionBar(toolbar);
 
@@ -49,11 +49,7 @@ public abstract class MenuActivity extends AppCompatActivity implements Navigati
 
     protected abstract int setLayoutId();
 
-    protected void setAdminMenu(){
-        drawerLayout = findViewById(R.id.admin_drawer_layout);
-        navigationView = findViewById(R.id.nav_admin_view);
-        toolbar = findViewById(R.id.admin_toolbar);
-    }
+    protected abstract void setMenu();
     protected abstract void setButtonListeners();
     public abstract boolean onNavigationItemSelected(@NonNull MenuItem menuItem);
 }
