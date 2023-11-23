@@ -22,9 +22,10 @@ import com.uoft.b07application.ui.login.LoginActivity;
 
 
 public class AdminActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
-    String username;
+    String name;
     String email;
     String isadminorstudent;
+    String username;
 
     private ComponentActivity componentActivity;
     //to handle onBackPressedDispatcher method for menu
@@ -37,7 +38,8 @@ public class AdminActivity extends AppCompatActivity implements NavigationView.O
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         Intent i = getIntent();
-        username = i.getStringExtra("name");
+        username = i.getStringExtra("username");
+        name = i.getStringExtra("name");
         email = i.getStringExtra("email");
         isadminorstudent = i.getStringExtra("isadminorstudent");
         super.onCreate(savedInstanceState);
@@ -75,6 +77,7 @@ public class AdminActivity extends AppCompatActivity implements NavigationView.O
             public void onClick(View view) {
                 Intent intent = new Intent(AdminActivity.this, ProfileActivity.class);
                 intent.putExtra("username", username);
+                intent.putExtra("name", name);
                 intent.putExtra("email", email);
                 intent.putExtra("isadminorstudent", isadminorstudent);
                 startActivity(intent);
@@ -121,7 +124,7 @@ public class AdminActivity extends AppCompatActivity implements NavigationView.O
             intent = new Intent(AdminActivity.this, AdminReviewCommentsActivity.class);
         } else if (menuItem.getItemId() == R.id.nav_admin_profile) {
             intent = new Intent(AdminActivity.this, ProfileActivity.class);
-            intent.putExtra("username", username);
+            intent.putExtra("username", name);
             intent.putExtra("email", email);
         } else if (menuItem.getItemId() == R.id.nav_admin_logout) {
             intent = new Intent(AdminActivity.this, LoginActivity.class);

@@ -23,8 +23,9 @@ import com.uoft.b07application.ui.login.LoginActivity;
 
 
 public class StudentActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
-    public String username;
+    public String name;
     public String email;
+    public String username;
     public String isadminorstudent;
     private ComponentActivity componentActivity;
     //to handle onBackPressedDispatcher method for menu
@@ -37,13 +38,12 @@ public class StudentActivity extends AppCompatActivity implements NavigationView
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         Intent i = getIntent();
-        username = i.getStringExtra("name");
+        username = i.getStringExtra("username");
+        name = i.getStringExtra("name");
         email = i.getStringExtra("email");
         isadminorstudent = i.getStringExtra("isadminorstudent");
-        Log.d("StudentActivity", "Username is : " + username);
+        Log.d("StudentActivity", "name is : " + name);
         Log.d("StudentActivity", "email is : " + email);
-        username = i.getStringExtra("name");
-        email = i.getStringExtra("email");
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_student);
 
@@ -82,9 +82,10 @@ public class StudentActivity extends AppCompatActivity implements NavigationView
             public void onClick(View view) {
 
                 Intent intent = new Intent(StudentActivity.this, ProfileActivity.class);
-                intent.putExtra("username", username);
+                intent.putExtra("name", name);
                 intent.putExtra("email", email);
                 intent.putExtra("isadminorstudent", isadminorstudent);
+                intent.putExtra("username", username);
                 startActivity(intent);
             }
         });
