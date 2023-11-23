@@ -2,7 +2,7 @@
 <androidx.drawerlayout.widget.DrawerLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/announcent_drawer_layout"
+    android:id="@+id/announcement_drawer_layout"
     layout_height="match_parent"
     layout_width="match_parent"
     android:layout_width="match_parent"
@@ -39,23 +39,26 @@
                 android:layout_height="match_parent"
                 android:background="@color/white">
 
+
                 <EditText
-                    android:id="@+id/announcement_Dashboard_text"
+                    android:id="@+id/announcement_text"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginStart="140dp"
-                    android:layout_marginTop="8dp"
+                    android:layout_marginStart="115dp"
+                    android:layout_marginTop="4dp"
+                    android:layout_marginEnd="115dp"
                     android:background="@android:color/transparent"
                     android:fontFamily="@font/akaya_telivigala"
                     android:inputType="text"
-                    android:text="Dashboard"
+                    android:text="Announcement"
                     android:textAlignment="viewStart"
                     android:textAllCaps="false"
                     android:textSize="28dp"
                     android:textStyle="bold"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintHorizontal_bias="1.0"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent" />
-
 
                 <androidx.appcompat.widget.Toolbar
                     android:id="@+id/announcement_toolbar"
@@ -65,6 +68,7 @@
                     android:background="@android:color/transparent"
                     android:minHeight="?attr/actionBarSize"
                     android:theme="?attr/actionBarTheme"
+                    android:visibility="visible"
                     tools:ignore="MissingConstraints" />
 
             </androidx.constraintlayout.widget.ConstraintLayout>
