@@ -11,7 +11,7 @@ public class AdminAnnouncementActivity extends AdminActivity {
         super.onCreate(savedInstanceState);
     }
     @Override
-    protected int setLayoutId(int layoutId) {
+    protected int setLayoutId() {
         return R.layout.activity_admin_announcement;
     }
     @Override

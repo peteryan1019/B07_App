@@ -11,7 +11,7 @@ public class AdminReviewCommentsActivity extends AdminActivity {
         super.onCreate(savedInstanceState);
     }
     @Override
-    protected int setLayoutId(int layoutId) {
+    protected int setLayoutId() {
         return R.layout.activity_admin_review_comments;
     }
     @Override

@@ -21,45 +21,28 @@ import com.uoft.b07application.R;
 import com.uoft.b07application.ui.ProfileActivity;
 import com.uoft.b07application.ui.login.LoginActivity;
 import com.uoft.b07application.ui.login.SignupActivity;
+import com.uoft.b07application.ui.menu.MenuActivity;
 
-public class AdminActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
-    protected DrawerLayout drawerLayout;
-    protected NavigationView navigationView;
-    protected Toolbar toolbar;
+
+public class AdminActivity extends MenuActivity {
     private ImageButton adminAnnouncementButton, adminEventButton,
             adminReviewCommentsButton, adminProfileButton;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        int layoutId = setLayoutId(R.layout.activity_admin);
-        setContentView(layoutId);
-
-        //set listeners on this page
-        setButtonListeners();
-
-        // set side menu
-        setAdminMenu();
-
-        setSupportActionBar(toolbar);
-
-        navigationView.bringToFront();
-        ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(this, drawerLayout, toolbar,
-                R.string.admin_navigation_drawer_open, R.string.admin_navigation_drawer_close);
-        drawerLayout.addDrawerListener(toggle);
-        toggle.syncState();
-        navigationView.setNavigationItemSelectedListener(this);
     }
-
-    protected int setLayoutId(int layoutId) {
+    @Override
+    protected int setLayoutId() {
         return R.layout.activity_admin;
     }
-
+    @Override
     protected void setAdminMenu(){
         drawerLayout = findViewById(R.id.admin_drawer_layout);
         navigationView = findViewById(R.id.nav_admin_view);
         toolbar = findViewById(R.id.admin_toolbar);
     }
+    @Override
     protected void setButtonListeners(){
         adminAnnouncementButton = findViewById(R.id.admin_announcements_button);
         adminEventButton = findViewById(R.id.admin_event_button);
