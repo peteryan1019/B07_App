@@ -6,4 +6,44 @@
     android:layout_height="match_parent"
     tools:context=".ui.student.StudentPOSTCheckerActivity">
 
+    <Button
+        android:id="@+id/CS_major_check"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_marginBottom="29dp"
+        android:onClick="checkCSmajor"
+        android:text="Computer Science Major"
+        app:layout_constraintBottom_toTopOf="@+id/CS_spec_check"
+        app:layout_constraintEnd_toEndOf="@+id/CS_spec_check"
+        app:layout_constraintStart_toStartOf="@+id/CS_spec_check"
+        app:layout_constraintTop_toBottomOf="@+id/textView4" />
+
+    <Button
+        android:id="@+id/CS_spec_check"
+        android:layout_width="125dp"
+        android:layout_height="0dp"
+        android:layout_marginStart="119dp"
+        android:layout_marginEnd="119dp"
+        android:layout_marginBottom="349dp"
+        android:onClick="checkCSspec"
+        android:text="Computer Science Specialist "
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="@+id/textView4"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/CS_major_check" />
+
+    <TextView
+        android:id="@+id/textView4"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_marginStart="35dp"
+        android:layout_marginTop="33dp"
+        android:layout_marginEnd="35dp"
+        android:layout_marginBottom="24dp"
+        android:text="Select a program to check pOST recquirements for"
+        android:textSize="24sp"
+        app:layout_constraintBottom_toTopOf="@+id/CS_major_check"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 </androidx.constraintlayout.widget.ConstraintLayout>

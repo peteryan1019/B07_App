@@ -2,7 +2,7 @@ package com.uoft.b07application.ui.student;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.view.Menu;
+import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.ImageButton;
@@ -18,14 +18,13 @@ import androidx.drawerlayout.widget.DrawerLayout;
 
 import com.google.android.material.navigation.NavigationView;
 import com.uoft.b07application.R;
-import com.uoft.b07application.ui.admin.AdminActivity;
-import com.uoft.b07application.ui.admin.AdminAnnouncementActivity;
-import com.uoft.b07application.ui.admin.AdminEventActivity;
 import com.uoft.b07application.ui.ProfileActivity;
-import com.uoft.b07application.ui.admin.AdminReviewCommentsActivity;
 import com.uoft.b07application.ui.login.LoginActivity;
 
+
 public class StudentActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
+    public String username;
+    public String email;
     private ComponentActivity componentActivity;
     //to handle onBackPressedDispatcher method for menu
     DrawerLayout drawerLayout;
@@ -36,6 +35,13 @@ public class StudentActivity extends AppCompatActivity implements NavigationView
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        Intent i = getIntent();
+        username = i.getStringExtra("name");
+        email = i.getStringExtra("email");
+        Log.d("StudentActivity", "Username is : " + username);
+        Log.d("StudentActivity", "email is : " + email);
+        username = i.getStringExtra("name");
+        email = i.getStringExtra("email");
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_student);
 
@@ -72,7 +78,10 @@ public class StudentActivity extends AppCompatActivity implements NavigationView
         studentProfileButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+
                 Intent intent = new Intent(StudentActivity.this, ProfileActivity.class);
+                intent.putExtra("username", username);
+                intent.putExtra("email", email);
                 startActivity(intent);
             }
         });
@@ -105,6 +114,7 @@ public class StudentActivity extends AppCompatActivity implements NavigationView
 
     @Override
     public boolean onNavigationItemSelected(@NonNull MenuItem menuItem) {
+
         Intent intent = null;
         if (menuItem.getItemId() == R.id.nav_POST_checker) {
             intent = new Intent(StudentActivity.this, StudentPOSTCheckerActivity.class);
@@ -112,10 +122,10 @@ public class StudentActivity extends AppCompatActivity implements NavigationView
             intent = new Intent(StudentActivity.this, StudentComplaintActivity.class);
         } else if (menuItem.getItemId() == R.id.nav_inbox) {
             intent = new Intent(StudentActivity.this, StudentInboxActivity.class);
-        } else if (menuItem.getItemId() == R.id.nav_student_profile) {
-            intent = new Intent(StudentActivity.this, ProfileActivity.class);
         } else if (menuItem.getItemId() == R.id.nav_student_logout) {
             intent = new Intent(StudentActivity.this, LoginActivity.class);
+        } else if (menuItem.getItemId() == R.id.nav_student_profile) {
+            intent = new Intent(StudentActivity.this, ProfileActivity.class);
         }
         //switch statement does not work in this case for some reason
         if (intent != null) {
