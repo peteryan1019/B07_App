@@ -21,7 +21,7 @@ import com.uoft.b07application.R;
 import com.uoft.b07application.ui.admin.AdminActivity;
 import com.uoft.b07application.ui.admin.AdminAnnouncementActivity;
 import com.uoft.b07application.ui.admin.AdminEventActivity;
-import com.uoft.b07application.ui.ProfileActivity;
+import com.uoft.b07application.ui.student.StudentProfileActivity;
 import com.uoft.b07application.ui.admin.AdminReviewCommentsActivity;
 import com.uoft.b07application.ui.login.LoginActivity;
 import com.uoft.b07application.ui.menu.MenuActivity;
@@ -70,7 +70,7 @@ public class StudentActivity extends MenuActivity {
         studentProfileButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(StudentActivity.this, ProfileActivity.class);
+                Intent intent = new Intent(StudentActivity.this, StudentProfileActivity.class);
                 startActivity(intent);
             }
         });
@@ -92,7 +92,7 @@ public class StudentActivity extends MenuActivity {
         } else if (menuItem.getItemId() == R.id.nav_inbox) {
             intent = new Intent(StudentActivity.this, StudentInboxActivity.class);
         } else if (menuItem.getItemId() == R.id.nav_student_profile) {
-            intent = new Intent(StudentActivity.this, ProfileActivity.class);
+            intent = new Intent(StudentActivity.this, StudentProfileActivity.class);
         } else if (menuItem.getItemId() == R.id.nav_student_logout) {
             intent = new Intent(StudentActivity.this, LoginActivity.class);
         }
