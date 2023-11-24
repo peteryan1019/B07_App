@@ -11,44 +11,41 @@
         android:id="@+id/textView15"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="16dp"
-        android:layout_marginBottom="112dp"
+        android:layout_marginStart="28dp"
+        android:layout_marginBottom="358dp"
         android:text="email:"
-        app:layout_constraintBottom_toTopOf="@+id/ems"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent" />
 
     <TextView
         android:id="@+id/textView8"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="24dp"
-        android:layout_marginTop="96dp"
-        android:layout_marginBottom="63dp"
+        android:layout_marginStart="29dp"
+        android:layout_marginTop="118dp"
         android:text="Name"
-        app:layout_constraintBottom_toTopOf="@+id/uns"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
         android:id="@+id/uns"
-        android:layout_width="84dp"
-        android:layout_height="38dp"
-        android:layout_marginStart="16dp"
-        android:layout_marginBottom="76dp"
-        android:text="user"
-        android:textColor="#131313"
-        app:layout_constraintBottom_toTopOf="@+id/textView15"
-        app:layout_constraintStart_toStartOf="parent" />
+        android:layout_width="118dp"
+        android:layout_height="32dp"
+        android:layout_marginStart="28dp"
+        android:layout_marginTop="47dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textView8" />
 
     <TextView
         android:id="@+id/ems"
         android:layout_width="148dp"
-        android:layout_height="38dp"
-        android:layout_marginStart="24dp"
-        android:layout_marginBottom="72dp"
-        android:text="em"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintStart_toStartOf="parent" />
+        android:layout_height="32dp"
+        android:layout_marginStart="29dp"
+        android:layout_marginTop="157dp"
+        android:layout_marginBottom="159dp"
+        app:layout_constraintBottom_toTopOf="@+id/Save"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/new_un" />
 
     <Button
         android:id="@+id/edit_profile"
@@ -64,34 +61,36 @@
 
     <EditText
         android:id="@+id/new_un"
-        android:layout_width="111dp"
+        android:layout_width="135dp"
         android:layout_height="142dp"
-        android:layout_marginBottom="352dp"
+        android:layout_marginStart="29dp"
+        android:layout_marginBottom="59dp"
         android:text="TextView"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.053"
+        app:layout_constraintBottom_toTopOf="@+id/textView15"
         app:layout_constraintStart_toStartOf="parent" />
 
     <EditText
         android:id="@+id/new_em"
-        android:layout_width="111dp"
+        android:layout_width="0dp"
         android:layout_height="142dp"
-        android:layout_marginStart="24dp"
-        android:layout_marginTop="18dp"
+        android:layout_marginStart="23dp"
+        android:layout_marginEnd="97dp"
+        android:layout_marginBottom="40dp"
         android:text="TextView"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView15" />
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/Save"
+        app:layout_constraintStart_toStartOf="parent" />
 
     <Button
         android:id="@+id/Save"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginEnd="16dp"
+        android:layout_marginEnd="15dp"
         android:layout_marginBottom="40dp"
         android:onClick="saveProfile"
         android:text="Save Profile"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent" />
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/new_em" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

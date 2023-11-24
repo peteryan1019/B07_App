@@ -31,6 +31,9 @@ public class ProfileActivity extends AppCompatActivity {
     DatabaseReference reference;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+
+        setContentView(R.layout.activity_admin_profile);
         //get list of current users on firebase
         reference = FirebaseDatabase.getInstance().getReference().child("users");
         Intent i = getIntent();
@@ -44,9 +47,7 @@ public class ProfileActivity extends AppCompatActivity {
         Log.d("Old_n", "old_n is: "+ old_n);
         Log.d("Old_n", "old_em is: "+ old_em);
         Log.d("username", "username is :" + username);
-        super.onCreate(savedInstanceState);
 
-        setContentView(R.layout.activity_admin_profile);
         //these edit texts only are visible when the user wants to edit the text
         TextView new_username = findViewById(R.id.new_un);
         TextView new_email= findViewById(R.id.new_em);

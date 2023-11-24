@@ -118,18 +118,26 @@ public class StudentActivity extends AppCompatActivity implements NavigationView
 
     @Override
     public boolean onNavigationItemSelected(@NonNull MenuItem menuItem) {
-
+        Intent i = getIntent();
         Intent intent = null;
         if (menuItem.getItemId() == R.id.nav_POST_checker) {
             intent = new Intent(StudentActivity.this, StudentPOSTCheckerActivity.class);
-        } else if (menuItem.getItemId() == R.id.nav_complaints) {
+        }
+        else if (menuItem.getItemId() == R.id.nav_complaints) {
             intent = new Intent(StudentActivity.this, StudentComplaintActivity.class);
-        } else if (menuItem.getItemId() == R.id.nav_inbox) {
+        }
+        else if (menuItem.getItemId() == R.id.nav_inbox) {
             intent = new Intent(StudentActivity.this, StudentInboxActivity.class);
-        } else if (menuItem.getItemId() == R.id.nav_student_logout) {
+        }
+        else if (menuItem.getItemId() == R.id.nav_student_logout) {
             intent = new Intent(StudentActivity.this, LoginActivity.class);
-        } else if (menuItem.getItemId() == R.id.nav_student_profile) {
+        }
+        else if (menuItem.getItemId() == R.id.nav_student_profile) {
+            String username = i.getStringExtra("username");
+            String email = i.getStringExtra("email");
             intent = new Intent(StudentActivity.this, ProfileActivity.class);
+            intent.putExtra("username", username);
+            intent.putExtra("email",email);
         }
         //switch statement does not work in this case for some reason
         if (intent != null) {
