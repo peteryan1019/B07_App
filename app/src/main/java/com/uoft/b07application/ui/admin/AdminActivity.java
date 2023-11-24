@@ -1,49 +1,26 @@
 package com.uoft.b07application.ui.admin;
 
-import androidx.activity.ComponentActivity;
-import androidx.activity.OnBackPressedDispatcher;
-import androidx.annotation.NonNull;
-import androidx.appcompat.app.ActionBarDrawerToggle;
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.appcompat.widget.Toolbar;
-import androidx.core.view.GravityCompat;
-import androidx.drawerlayout.widget.DrawerLayout;
-
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.ImageButton;
 
-import com.google.android.material.navigation.NavigationView;
+import androidx.annotation.NonNull;
+import androidx.core.view.GravityCompat;
+
 import com.uoft.b07application.R;
-import com.uoft.b07application.ui.ProfileActivity;
+import com.uoft.b07application.ui.student.StudentProfileActivity;
 import com.uoft.b07application.ui.login.LoginActivity;
-<<<<<<< HEAD
-import com.uoft.b07application.ui.login.SignupActivity;
 import com.uoft.b07application.ui.menu.MenuActivity;
 
 
 public class AdminActivity extends MenuActivity {
-    private ImageButton adminAnnouncementButton, adminEventButton,
-            adminReviewCommentsButton, adminProfileButton;
-=======
-
-
-public class AdminActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
     String name;
     String email;
     String isadminorstudent;
     String username;
-
-    private ComponentActivity componentActivity;
-    //to handle onBackPressedDispatcher method for menu
-    DrawerLayout drawerLayout;
-    NavigationView navigationView;
-    Toolbar toolbar;
-    ImageButton adminAnnouncementButton, adminEventButton,
-            adminReviewcommentsButton, adminProfileButton;
->>>>>>> 18ee8574f93142df11a2b477dfd3cc2c76fb5b56
+    ImageButton adminAnnouncementButton, adminEventButton, adminReviewCommentsButton, adminProfileButton;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -94,15 +71,11 @@ public class AdminActivity extends AppCompatActivity implements NavigationView.O
         adminProfileButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-<<<<<<< HEAD
                 Intent intent = new Intent(AdminActivity.this, AdminProfileActivity.class);
-=======
-                Intent intent = new Intent(AdminActivity.this, ProfileActivity.class);
                 intent.putExtra("username", username);
                 intent.putExtra("name", name);
                 intent.putExtra("email", email);
                 intent.putExtra("isadminorstudent", isadminorstudent);
->>>>>>> 18ee8574f93142df11a2b477dfd3cc2c76fb5b56
                 startActivity(intent);
             }
         });
@@ -118,13 +91,9 @@ public class AdminActivity extends AppCompatActivity implements NavigationView.O
         } else if (menuItem.getItemId() == R.id.nav_reviewComments) {
             intent = new Intent(AdminActivity.this, AdminReviewCommentsActivity.class);
         } else if (menuItem.getItemId() == R.id.nav_admin_profile) {
-<<<<<<< HEAD
             intent = new Intent(AdminActivity.this, AdminProfileActivity.class);
-=======
-            intent = new Intent(AdminActivity.this, ProfileActivity.class);
             intent.putExtra("username", name);
             intent.putExtra("email", email);
->>>>>>> 18ee8574f93142df11a2b477dfd3cc2c76fb5b56
         } else if (menuItem.getItemId() == R.id.nav_admin_logout) {
             intent = new Intent(AdminActivity.this, LoginActivity.class);
         }

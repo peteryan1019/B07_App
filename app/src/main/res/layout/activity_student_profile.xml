@@ -71,6 +71,12 @@
                     android:visibility="visible"
                     tools:ignore="MissingConstraints" />
 
+                <include
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/student_profile_fragment"
+                    layout="@layout/fragment_profile" />
+
             </androidx.constraintlayout.widget.ConstraintLayout>
         </ScrollView>
 

@@ -24,24 +24,13 @@ public class StudentActivity extends MenuActivity {
         public String email;
         public String username;
         public String isadminorstudent;
-        private ComponentActivity componentActivity;
-        //to handle onBackPressedDispatcher method for menu
-        DrawerLayout drawerLayout;
-        NavigationView navigationView;
-        Toolbar toolbar;
         ImageButton studentPOSTCheckerButton, studentComplaintButton,
                 studentInboxButton, studentProfileButton;
 
         @Override
         protected void onCreate(Bundle savedInstanceState) {
-            Intent i = getIntent();
-            username = i.getStringExtra("username");
-            name = i.getStringExtra("name");
-            email = i.getStringExtra("email");
-            isadminorstudent = i.getStringExtra("isadminorstudent");
-            Log.d("StudentActivity", "name is : " + name);
-            Log.d("StudentActivity", "email is : " + email);
             super.onCreate(savedInstanceState);
+            handleIntentExtra();
         }
 
         @Override
@@ -126,6 +115,15 @@ public class StudentActivity extends MenuActivity {
 
             return false;
         }
-
+        // I move ur code here (Ben)
+        public void handleIntentExtra(){
+            Intent i = getIntent();
+            username = i.getStringExtra("username");
+            name = i.getStringExtra("name");
+            email = i.getStringExtra("email");
+            isadminorstudent = i.getStringExtra("isadminorstudent");
+            Log.d("StudentActivity", "name is : " + name);
+            Log.d("StudentActivity", "email is : " + email);
+        }
 
     }

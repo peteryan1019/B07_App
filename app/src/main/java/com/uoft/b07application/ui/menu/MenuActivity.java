@@ -1,26 +1,16 @@
 package com.uoft.b07application.ui.menu;
 
-import androidx.activity.ComponentActivity;
-import androidx.activity.OnBackPressedDispatcher;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.ActionBarDrawerToggle;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
-import androidx.core.view.GravityCompat;
 import androidx.drawerlayout.widget.DrawerLayout;
 
-import android.content.Intent;
 import android.os.Bundle;
-import android.view.Menu;
 import android.view.MenuItem;
-import android.view.View;
-import android.widget.ImageButton;
 
 import com.google.android.material.navigation.NavigationView;
 import com.uoft.b07application.R;
-import com.uoft.b07application.ui.ProfileActivity;
-import com.uoft.b07application.ui.login.LoginActivity;
-import com.uoft.b07application.ui.login.SignupActivity;
 
 public abstract class MenuActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
     protected DrawerLayout drawerLayout;

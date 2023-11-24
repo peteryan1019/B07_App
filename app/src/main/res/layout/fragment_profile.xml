@@ -1,0 +1,95 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:id="@+id/fragment_profile">
+
+    <TextView
+        android:id="@+id/textView15"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="28dp"
+        android:layout_marginBottom="358dp"
+        android:text="email:" />
+
+    <TextView
+        android:id="@+id/textView8"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="29dp"
+        android:layout_marginTop="118dp"
+        android:text="Name" />
+
+    <TextView
+        android:id="@+id/uns"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textView8"
+        android:layout_width="118dp"
+        android:layout_height="32dp"
+        android:layout_marginStart="28dp"
+        android:layout_marginTop="47dp" />
+
+    <TextView
+        android:id="@+id/ems"
+        app:layout_constraintBottom_toTopOf="@+id/Save"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/new_un"
+        android:layout_width="148dp"
+        android:layout_height="32dp"
+        android:layout_marginStart="29dp"
+        android:layout_marginTop="157dp"
+        android:layout_marginBottom="159dp" />
+
+    <Button
+        android:id="@+id/edit_profile"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:layout_marginEnd="28dp"
+        android:clickable="false"
+        android:onClick="editProfile"
+        android:text="Edit Profile" />
+
+    <EditText
+        android:id="@+id/new_un"
+        app:layout_constraintBottom_toTopOf="@+id/textView15"
+        app:layout_constraintStart_toStartOf="parent"
+        android:layout_width="135dp"
+        android:layout_height="142dp"
+        android:layout_marginStart="29dp"
+        android:layout_marginBottom="59dp"
+        android:text="TextView" />
+
+    <EditText
+        android:id="@+id/new_em"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/Save"
+        app:layout_constraintStart_toStartOf="parent"
+        android:layout_width="0dp"
+        android:layout_height="142dp"
+        android:layout_marginStart="23dp"
+        android:layout_marginEnd="97dp"
+        android:layout_marginBottom="40dp"
+        android:text="TextView" />
+
+    <Button
+        android:id="@+id/Save"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/new_em"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="15dp"
+        android:layout_marginBottom="40dp"
+        android:onClick="saveProfile"
+        android:text="Save Profile" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>
