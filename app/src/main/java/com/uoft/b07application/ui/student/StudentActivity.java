@@ -24,24 +24,22 @@ import com.uoft.b07application.ui.admin.AdminEventActivity;
 import com.uoft.b07application.ui.ProfileActivity;
 import com.uoft.b07application.ui.admin.AdminReviewCommentsActivity;
 import com.uoft.b07application.ui.login.LoginActivity;
+import com.uoft.b07application.ui.menu.MenuActivity;
 
-public class StudentActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
-    private ComponentActivity componentActivity;
-    //to handle onBackPressedDispatcher method for menu
-    DrawerLayout drawerLayout;
-    NavigationView navigationView;
-    Toolbar toolbar;
+public class StudentActivity extends MenuActivity {
     ImageButton studentPOSTCheckerButton, studentComplaintButton,
             studentInboxButton, studentProfileButton;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_student);
-
-        drawerLayout = findViewById(R.id.student_drawer_layout);
-        navigationView = findViewById(R.id.nav_student_view);
-        toolbar = findViewById(R.id.student_toolbar);
+    }
+    @Override
+    protected int setLayoutId() {
+        return R.layout.activity_student;
+    }
+    @Override
+    public void setButtonListeners(){
         studentPOSTCheckerButton = findViewById(R.id.student_POST_checker_button);
         studentComplaintButton = findViewById(R.id.student_complaint_button);
         studentInboxButton = findViewById(R.id.student_inbox_button);
@@ -76,32 +74,13 @@ public class StudentActivity extends AppCompatActivity implements NavigationView
                 startActivity(intent);
             }
         });
-
-        //side menu
-
-        setSupportActionBar(toolbar);
-
-
-        navigationView.bringToFront();
-        ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(this, drawerLayout, toolbar,
-                R.string.admin_navigation_drawer_open, R.string.admin_navigation_drawer_close);
-        drawerLayout.addDrawerListener(toggle);
-        toggle.syncState();
-        navigationView.setNavigationItemSelectedListener(this);
-
-
     }
-
-    public void menuOnPress() {
-        if (drawerLayout.isDrawerOpen(GravityCompat.START)) {
-            drawerLayout.closeDrawer(GravityCompat.START);
-        } else {
-            OnBackPressedDispatcher onBackPressedDispatcher = componentActivity.getOnBackPressedDispatcher();
-            onBackPressedDispatcher.onBackPressed();
-        }
-
+    @Override
+    protected void setMenu(){
+        drawerLayout = findViewById(R.id.student_drawer_layout);
+        navigationView = findViewById(R.id.nav_student_view);
+        toolbar = findViewById(R.id.student_toolbar);
     }
-
 
     @Override
     public boolean onNavigationItemSelected(@NonNull MenuItem menuItem) {

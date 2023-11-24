@@ -4,7 +4,7 @@ import android.os.Bundle;
 
 import com.uoft.b07application.R;
 
-public class AdminAnnouncementActivity extends AdminActivity {
+public class AdminProfileActivity extends AdminActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -12,17 +12,16 @@ public class AdminAnnouncementActivity extends AdminActivity {
     }
     @Override
     protected int setLayoutId() {
-        return R.layout.activity_admin_announcement;
+        return R.layout.activity_admin_profile;
     }
     @Override
     protected void setMenu(){
-        drawerLayout = findViewById(R.id.announcement_drawer_layout);
-        navigationView = findViewById(R.id.nav_announcement_view);
-        toolbar = findViewById(R.id.announcement_toolbar);
+        drawerLayout = findViewById(R.id.admin_profile_drawer_layout);
+        navigationView = findViewById(R.id.nav_admin_profile_view);
+        toolbar = findViewById(R.id.admin_profile_toolbar);
     }
     @Override
-    public void setButtonListeners(){
+    protected void setButtonListeners(){
 
     }
-
 }

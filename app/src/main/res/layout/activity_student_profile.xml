@@ -2,18 +2,18 @@
 <androidx.drawerlayout.widget.DrawerLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/complaint_drawer_layout"
+    android:id="@+id/student_profile_drawer_layout"
     layout_height="match_parent"
     layout_width="match_parent"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:layout_margin="5dp"
     android:fitsSystemWindows="true"
-    tools:context=".ui.student.StudentComplaintActivity"
+    tools:context=".ui.student.StudentPOSTCheckerActivity"
     tools:openDrawer="start">
 
     <com.google.android.material.navigation.NavigationView
-        android:id="@+id/nav_complaint_view"
+        android:id="@+id/nav_student_profile_view"
         android:layout_width="wrap_content"
         android:layout_height="match_parent"
         android:layout_gravity="start"
@@ -41,7 +41,7 @@
 
 
                 <EditText
-                    android:id="@+id/Complaint_text"
+                    android:id="@+id/student_profile_text"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="115dp"
@@ -50,7 +50,7 @@
                     android:background="@android:color/transparent"
                     android:fontFamily="@font/akaya_telivigala"
                     android:inputType="text"
-                    android:text="Complaint"
+                    android:text="Student Profiel"
                     android:textAlignment="viewStart"
                     android:textAllCaps="false"
                     android:textSize="28dp"
@@ -61,7 +61,7 @@
                     app:layout_constraintTop_toTopOf="parent" />
 
                 <androidx.appcompat.widget.Toolbar
-                    android:id="@+id/complaint_toolbar"
+                    android:id="@+id/student_profile_toolbar"
                     android:layout_width="50dp"
                     android:layout_height="50dp"
                     android:layout_margin="5dp"
@@ -71,49 +71,10 @@
                     android:visibility="visible"
                     tools:ignore="MissingConstraints" />
 
-                <!-- Spinner Widget -->
-
-                <Spinner
-                    android:id="@+id/spinner"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    app:layout_constraintBottom_toTopOf="@+id/editTextComplaint"
-                    app:layout_constraintHorizontal_bias="0.498"
-                    app:layout_constraintLeft_toLeftOf="parent"
-                    app:layout_constraintRight_toRightOf="parent"
-                    app:layout_constraintTop_toTopOf="parent" />
-
-                <Button
-                    android:id="@+id/submit_complaint"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginBottom="248dp"
-                    android:text="Submit Complaint"
-                    app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintHorizontal_bias="0.498"
-                    app:layout_constraintStart_toStartOf="parent" />
-
-                <EditText
-                    android:id="@+id/editTextComplaint"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:ems="10"
-                    android:gravity="start|top"
-                    android:inputType="textMultiLine"
-                    app:layout_constraintBottom_toTopOf="@+id/submit_complaint"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintHorizontal_bias="0.497"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="parent"
-                    app:layout_constraintVertical_bias="0.743" />
-
             </androidx.constraintlayout.widget.ConstraintLayout>
-
         </ScrollView>
 
     </FrameLayout>
 
 
 </androidx.drawerlayout.widget.DrawerLayout>
-

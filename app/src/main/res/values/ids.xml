@@ -11,4 +11,5 @@
     <item name="nav_student_profile" type="id" />
     <item name="nav_student_logout" type="id" />
     <item name="nav_admin_logout" type="id" />
+    <item name="nav_admin_profile" type="id" />
 </resources>
