@@ -2,7 +2,9 @@ package com.uoft.b07application.ui.student;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Intent;
 import android.os.Bundle;
+import android.view.View;
 
 import com.uoft.b07application.R;
 
@@ -25,5 +27,15 @@ public class StudentPOSTCheckerActivity extends StudentActivity {
     @Override
     public void setButtonListeners(){
 
+    }
+
+    public void checkCSmajor(View view){
+        Intent i = new Intent(this, CSMajorQualifications.class);
+        startActivity(i);
+    }
+
+    public void checkCSspec(View view){
+        Intent i = new Intent(this, CSSpecQualifications.class);
+        startActivity(i);
     }
 }
