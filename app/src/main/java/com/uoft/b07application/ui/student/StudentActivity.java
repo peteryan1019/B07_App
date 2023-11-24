@@ -116,7 +116,7 @@ public class StudentActivity extends MenuActivity {
             return false;
         }
         // I move ur code here (Ben)
-        public void handleIntentExtra(){
+        protected void handleIntentExtra(){
             Intent i = getIntent();
             username = i.getStringExtra("username");
             name = i.getStringExtra("name");
