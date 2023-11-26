@@ -8,6 +8,8 @@ import android.widget.TextView;
 import android.widget.Toast;
 //need to import the layout stuff
 import com.uoft.b07application.R;
+import android.content.Intent;
+
 
 import androidx.appcompat.app.AppCompatActivity;
 public class StudentFeedback extends AppCompatActivity{
@@ -42,9 +44,18 @@ public class StudentFeedback extends AppCompatActivity{
 
             // Display a toast message
             Toast.makeText(this, "Feedback submitted successfully", Toast.LENGTH_SHORT).show();
+
+            // After submitting feedback, navigate back to EventPageActivity
+            Intent intent = new Intent(this, EventPageActivity.class);
+            startActivity(intent);
+
+            // Close the current activity (StudentFeedback)
+            finish();
+
         } else {
             // Display an error message if the comment is empty
             Toast.makeText(this, "Please enter your feedback", Toast.LENGTH_SHORT).show();
         }
     }
+
 }
