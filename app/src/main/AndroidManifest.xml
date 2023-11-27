@@ -14,33 +14,73 @@
         tools:targetApi="31">
 
         <activity
+
             android:name=".ui.BenStudentPageEvents.EventPageActivity"
-            android:exported="true">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
-        </activity>
+            android:exported="true"/>
 
         <activity
             android:name=".ui.BenStudentPageEvents.StudentFeedback"
-            android:exported="true">
+            android:exported="true"/>
             <!-- Remove the MAIN action and LAUNCHER category for StudentFeedback -->
-        </activity>
 
-        <activity
-            android:name=".ui.login.LoginActivity"
-            android:exported="true"
-            android:label="@string/title_activity_login" />
+                    <activity
+                        android:name=".ui.menu.MenuActivity"
+                        android:exported="false" />
+                    <activity
+                        android:name=".ui.student.StudentProfileActivity"
+                        android:exported="false" />
+                    <activity
+                        android:name=".ui.admin.AdminProfileActivity"
+                        android:exported="false" />
+                    <activity
+                        android:name=".ui.student.StudentPOSTCheckerActivity"
+                        android:exported="false" />
+                    <activity
+                        android:name=".ui.student.CSMajorQualifications"
+                        android:exported="false" />
+                    <activity
+                        android:name=".ui.student.CSSpecQualifications"
+                        android:exported="false" />
+                    <activity
+                        android:name=".ui.student.StudentActivity"
+                        android:exported="false">>
+                    </activity>
+                    <activity
+                        android:name=".ui.student.StudentComplaintActivity"
+                        android:exported="false" />
+                    <activity
+                        android:name=".ui.student.StudentInboxActivity"
+                        android:exported="false" />
+                    <activity
+                        android:name=".ui.admin.AdminReviewCommentsActivity"
+                        android:exported="false" />
+                    <activity
+                        android:name=".ui.admin.AdminEventActivity"
+                        android:exported="false" />
+                    <activity
+                        android:name=".ui.admin.AdminAnnouncementActivity"
+                        android:exported="false" />
+                    <activity
+                        android:name=".ui.admin.AdminActivity"
+                        android:exported="false"/>
+                    <activity
+                        android:name=".ui.login.LoginActivity"
+                        android:exported="true"
+                        android:label="@string/title_activity_login">
+                        <intent-filter>
+                            <action android:name="android.intent.action.MAIN" />
 
-        <activity
-            android:name=".ui.login.SignupActivity"
-            android:exported="false" />
+                            <category android:name="android.intent.category.LAUNCHER" />
+                        </intent-filter>
+                    </activity>
+                    <activity
+                        android:name=".ui.login.SignupActivity"
+                        android:exported="false" />
 
-        <activity
-            android:name=".ui.MainActivity"
-            android:exported="false"
-            android:theme="@style/Theme.MyApplication.NoActionBar" />
-    </application>
+                    <meta-data
+                        android:name="preloaded_fonts"
+                        android:resource="@array/preloaded_fonts" />
 
-</manifest>
+                </application>
+
+            </manifest>

@@ -1,5 +1,5 @@
 package com.uoft.b07application.ui.login;
-import com.uoft.b07application.ui.MainActivity;
+import com.uoft.b07application.ui.student.StudentActivity;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
@@ -18,6 +18,8 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.Query;
 import com.google.firebase.database.ValueEventListener;
 import com.uoft.b07application.R;
+import com.uoft.b07application.ui.admin.AdminActivity;
+import com.uoft.b07application.ui.student.StudentActivity;
 
 import java.util.Objects;
 
@@ -80,51 +82,84 @@ public class LoginActivity extends AppCompatActivity {
         }
     }
 
-
-    public void checkUser(){
+    public void checkUser() {
         String userUsername = loginUsername.getText().toString().trim();
         String userPassword = loginPassword.getText().toString().trim();
 
-        DatabaseReference reference = FirebaseDatabase.getInstance().getReference("users");
-        Query checkUserDatabase = reference.orderByChild("username").equalTo(userUsername);
+        DatabaseReference usersRef = FirebaseDatabase.getInstance().getReference("users");
 
-        checkUserDatabase.addListenerForSingleValueEvent(new ValueEventListener() {
+        Query checkAdmin = usersRef.child("admins").orderByChild("username").equalTo(userUsername);
+        Query checkStudent = usersRef.child("students").orderByChild("username").equalTo(userUsername);
+
+        checkAdmin.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
+                if (snapshot.exists()) {
+                    for (DataSnapshot adminSnapshot : snapshot.getChildren()) {
+                        String passwordFromDB = adminSnapshot.child("password").getValue(String.class);
+                        if (passwordFromDB.equals(userPassword)) {
+                            String nameFromDB = adminSnapshot.child("name").getValue(String.class);
+                            String emailFromDB = adminSnapshot.child("email").getValue(String.class);
 
-                if (snapshot.exists()){
-
-                    loginUsername.setError(null);
-                    String passwordFromDB = snapshot.child(userUsername).child("password").getValue(String.class);
-
-                    if (passwordFromDB.equals(userPassword)) {
-                        loginUsername.setError(null);
-
-                        String nameFromDB = snapshot.child(userUsername).child("name").getValue(String.class);
-                        String emailFromDB = snapshot.child(userUsername).child("email").getValue(String.class);
-                        String usernameFromDB = snapshot.child(userUsername).child("username").getValue(String.class);
-
-                        Intent intent = new Intent(LoginActivity.this, MainActivity.class);
-
-                        intent.putExtra("name", nameFromDB);
-                        intent.putExtra("email", emailFromDB);
-                        intent.putExtra("username", usernameFromDB);
-                        intent.putExtra("password", passwordFromDB);
-
-                        startActivity(intent);
-                    } else {
-                        loginPassword.setError("Invalid Credentials");
-                        loginPassword.requestFocus();
+                            // User found and credentials match
+                            // Pass retrieved information to the next activity
+                            Intent intent = new Intent(LoginActivity.this, AdminActivity.class);
+                            intent.putExtra("username", userUsername);
+                            intent.putExtra("name", nameFromDB);
+                            intent.putExtra("email", emailFromDB);
+                            intent.putExtra("isadmin", "Is Admin");
+                            // Add more data if needed
+                            startActivity(intent);
+                        } else {
+                            loginPassword.setError("Invalid Credentials");
+                            loginPassword.requestFocus();
+                        }
+                        return;
                     }
                 } else {
-                    loginUsername.setError("User does not exist");
-                    loginUsername.requestFocus();
+                    // Admin not found, check if the user is a student
+                    checkStudent.addListenerForSingleValueEvent(new ValueEventListener() {
+                        @Override
+                        public void onDataChange(@NonNull DataSnapshot snapshot) {
+                            if (snapshot.exists()) {
+                                for (DataSnapshot studentSnapshot : snapshot.getChildren()) {
+                                    String passwordFromDB = studentSnapshot.child("password").getValue(String.class);
+                                    if (passwordFromDB.equals(userPassword)) {
+                                        String nameFromDB = studentSnapshot.child("name").getValue(String.class);
+                                        String emailFromDB = studentSnapshot.child("email").getValue(String.class);
+
+                                        // Student found and credentials match
+                                        // Pass retrieved information to the next activity
+                                        Intent intent = new Intent(LoginActivity.this, StudentActivity.class);
+                                        intent.putExtra("username", userUsername);
+                                        intent.putExtra("name", nameFromDB);
+                                        intent.putExtra("email", emailFromDB);
+                                        intent.putExtra("isadminorstudent", "Is Student");
+                                        // Add more data if needed
+                                        startActivity(intent);
+                                        return;
+                                    } else {
+                                        loginPassword.setError("Invalid Credentials");
+                                        loginPassword.requestFocus();
+                                    }
+                                }
+                            } else {
+                                loginUsername.setError("User does not exist");
+                                loginUsername.requestFocus();
+                            }
+                        }
+
+                        @Override
+                        public void onCancelled(@NonNull DatabaseError error) {
+                            // Handle onCancelled
+                        }
+                    });
                 }
             }
 
             @Override
             public void onCancelled(@NonNull DatabaseError error) {
-
+                // Handle onCancelled
             }
         });
     }

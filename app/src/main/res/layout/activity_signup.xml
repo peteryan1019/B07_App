@@ -84,7 +84,7 @@
                 android:textColor="@color/black"/>
 
             <com.google.android.material.switchmaterial.SwitchMaterial
-                android:id="@+id/material_switch"
+                android:id="@+id/admin_switch"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:text="Are you an admin?"
