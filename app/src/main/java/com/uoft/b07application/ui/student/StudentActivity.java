@@ -25,7 +25,7 @@ public class StudentActivity extends MenuActivity {
         public String username;
         public String isadminorstudent;
         ImageButton studentPOSTCheckerButton, studentComplaintButton,
-                studentInboxButton, studentProfileButton;
+                studentInboxButton, studentProfileButton, studentEventButton;
 
         @Override
         protected void onCreate(Bundle savedInstanceState) {
@@ -44,6 +44,7 @@ public class StudentActivity extends MenuActivity {
             studentComplaintButton = findViewById(R.id.student_complaint_button);
             studentInboxButton = findViewById(R.id.student_inbox_button);
             studentProfileButton = findViewById(R.id.student_profile_button);
+            studentEventButton = findViewById(R.id.student_event_button);
 
             //buttons event on dashboards
             studentPOSTCheckerButton.setOnClickListener(new View.OnClickListener() {
@@ -78,6 +79,14 @@ public class StudentActivity extends MenuActivity {
                     startActivity(intent);
                 }
             });
+            studentEventButton.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    Intent intent = new Intent(StudentActivity.this, StudentEventActivity.class);
+                    startActivity(intent);
+                }
+            });
+
         }
 
         @Override
@@ -97,6 +106,8 @@ public class StudentActivity extends MenuActivity {
                 intent = new Intent(StudentActivity.this, StudentComplaintActivity.class);
             } else if (menuItem.getItemId() == R.id.nav_inbox) {
                 intent = new Intent(StudentActivity.this, StudentInboxActivity.class);
+            } else if (menuItem.getItemId() == R.id.nav_event) {
+                intent = new Intent(StudentActivity.this, StudentEventActivity.class);
             } else if (menuItem.getItemId() == R.id.nav_student_logout) {
                 intent = new Intent(StudentActivity.this, LoginActivity.class);
             } else if (menuItem.getItemId() == R.id.nav_student_profile) {
