@@ -1,4 +1,4 @@
-package com.uoft.b07application.ui.BenStudentPageEvents;
+package com.uoft.b07application.ui.student;
 
 import android.os.Bundle;
 import android.view.View;
@@ -8,6 +8,8 @@ import android.widget.TextView;
 import android.widget.Toast;
 //need to import the layout stuff
 import com.uoft.b07application.R;
+import com.uoft.b07application.ui.admin.AdminEventActivity;
+
 import android.content.Intent;
 
 
@@ -46,7 +48,7 @@ public class StudentFeedback extends AppCompatActivity{
             Toast.makeText(this, "Feedback submitted successfully", Toast.LENGTH_SHORT).show();
 
             // After submitting feedback, navigate back to EventPageActivity
-            Intent intent = new Intent(this, EventPageActivity.class);
+            Intent intent = new Intent(this, StudentEventActivity.class);
             startActivity(intent);
 
             // Close the current activity (StudentFeedback)
