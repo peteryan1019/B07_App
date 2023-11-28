@@ -24,6 +24,7 @@ public class StudentComplaintActivity extends StudentActivity {
     private EditText editTextComplaint;
     private boolean isTopicSelected = false;
 
+
     String topic;
     DatabaseReference reference;
 
@@ -66,7 +67,8 @@ public class StudentComplaintActivity extends StudentActivity {
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
                 // Get the selected item
                 topic = parent.getItemAtPosition(position).toString();
-                isTopicSelected = true;
+                if(topic!="Complaint Topic")
+                {isTopicSelected = true;}
             }
 
             @Override
