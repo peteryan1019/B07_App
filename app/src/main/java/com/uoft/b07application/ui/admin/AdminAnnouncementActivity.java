@@ -8,6 +8,7 @@ import android.widget.ImageButton;
 import com.uoft.b07application.R;
 
 public class AdminAnnouncementActivity extends AdminActivity {
+    private AnnouncementDialog.DialogDismissListener dismissListener;
     private ImageButton composeButton;
 
     @Override
@@ -37,5 +38,14 @@ public class AdminAnnouncementActivity extends AdminActivity {
     private void openDialog(){
         AnnouncementDialog announcementDialog = new AnnouncementDialog();
         announcementDialog.show(getSupportFragmentManager(), "announcement dialog");
+        dismissListener = new AnnouncementDialog.DialogDismissListener() {
+            @Override
+            public void onDialogDismissed() {
+                drawerLayout.requestFocus();
+                navigationView.requestFocus();
+                toolbar.requestFocus();
+            }
+        };
+        announcementDialog.setDismissListener(dismissListener);
     }
 }

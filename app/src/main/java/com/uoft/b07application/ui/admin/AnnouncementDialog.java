@@ -16,6 +16,7 @@ import androidx.appcompat.app.AppCompatDialogFragment;
 import com.uoft.b07application.R;
 
 public class AnnouncementDialog extends AppCompatDialogFragment {
+    private DialogDismissListener dismissListener;
     private EditText messageBody;
 //    private ImageButton closeButton;
 //    private ImageButton sendButton;
@@ -31,6 +32,7 @@ public class AnnouncementDialog extends AppCompatDialogFragment {
                 .setNegativeButton("close", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
+                        notifyDismissListener();
                         // Handle close button click
                     }
                 })
@@ -45,4 +47,23 @@ public class AnnouncementDialog extends AppCompatDialogFragment {
         subjectAutoTextView = view.findViewById(R.id.subjectAutoCompleteTextView);
         return builder.create();
     }
+
+    public interface DialogDismissListener {
+        void onDialogDismissed();
+    }
+
+    // Set the listener in your AdminAnnouncementActivity
+    public void setDismissListener(DialogDismissListener listener) {
+        dismissListener = listener;
+    }
+
+    // Call this method when dismissing the dialog
+    private void notifyDismissListener() {
+        if (dismissListener != null) {
+            dismissListener.onDialogDismissed();
+        }
+    }
 }
+
+
+
