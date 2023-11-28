@@ -17,7 +17,7 @@
         android:layout_width="wrap_content"
         android:layout_height="match_parent"
         android:layout_gravity="start"
-        android:visibility="visible"
+        android:visibility="gone"
         app:headerLayout="@layout/header"
         app:menu="@menu/admin_menu"
         tools:visibility="visible">
@@ -70,6 +70,25 @@
                     android:theme="?attr/actionBarTheme"
                     android:visibility="visible"
                     tools:ignore="MissingConstraints" />
+
+                <TextView
+                    android:id="@+id/textView11"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="TextView" />
+
+                <Button
+                    android:id="@+id/button"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="150dp"
+                    android:layout_marginTop="92dp"
+                    android:layout_marginEnd="150dp"
+                    android:text="Button"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintHorizontal_bias="1.0"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/announcement_text" />
 
             </androidx.constraintlayout.widget.ConstraintLayout>
         </ScrollView>
