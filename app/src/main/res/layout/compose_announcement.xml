@@ -13,13 +13,6 @@
         android:padding="16dp">
 
         <!-- Back Button -->
-        <ImageView
-            android:id="@+id/backButton"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center_vertical"
-            android:layout_marginEnd="16dp"
-            android:src="@drawable/back_icon" />
 
         <!-- Title -->
         <TextView
@@ -34,13 +27,6 @@
             android:textStyle="bold" />
 
         <!-- Send Button -->
-        <ImageView
-            android:id="@+id/sendButton"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center_vertical"
-            android:layout_marginStart="16dp"
-            android:src="@drawable/close_icon" />
 
     </LinearLayout>
 
@@ -60,26 +46,28 @@
 
     </LinearLayout>
 
-    <View
-        android:id="@+id/underline"
-        android:layout_width="match_parent"
-        android:layout_height="2dp"
-        android:layout_below="@id/toField"
-        android:background="@android:color/darker_gray"/>
-
-    <EditText
-        android:id="@+id/subjectEditText"
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_below="@id/toField"
-        android:hint="Subject:"
-        android:padding="16dp"/>
+        android:orientation="horizontal"
+        android:id="@+id/subjectField">
+        <AutoCompleteTextView
+            android:id="@+id/subjectAutoCompleteTextView"
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_height="wrap_content"
+            android:hint="Subject"
+            android:paddingLeft="16dp"/>
+
+    </LinearLayout>
+
 
     <EditText
         android:id="@+id/messageBodyEditText"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@id/subjectEditText"
+        android:layout_below="@id/subjectField"
         android:layout_marginStart="16dp"
         android:layout_marginTop="16dp"
         android:layout_marginEnd="16dp"

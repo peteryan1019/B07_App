@@ -1,10 +1,14 @@
 package com.uoft.b07application.ui.admin;
 
+import android.content.Intent;
 import android.os.Bundle;
+import android.view.View;
+import android.widget.ImageButton;
 
 import com.uoft.b07application.R;
 
 public class AdminAnnouncementActivity extends AdminActivity {
+    private ImageButton composeButton;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -22,7 +26,16 @@ public class AdminAnnouncementActivity extends AdminActivity {
     }
     @Override
     public void setButtonListeners(){
-
+        composeButton = findViewById(R.id.composeButton);
+        composeButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                openDialog();
+            }
+        });
     }
-
+    private void openDialog(){
+        AnnouncementDialog announcementDialog = new AnnouncementDialog();
+        announcementDialog.show(getSupportFragmentManager(), "announcement dialog");
+    }
 }
