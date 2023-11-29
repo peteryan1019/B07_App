@@ -54,26 +54,7 @@ public class StudentEventActivity extends StudentActivity {
     }
     @Override
     public void setButtonListeners(){
-//        String[] events = {"Event 1", "Event 2", "Event 3"};
-//        ArrayAdapter<String> adapter = new ArrayAdapter<>(this, android.R.layout.simple_list_item_1, events);
-//
-//        ListView listView = findViewById(R.id.eventListView);
-//        listView.setAdapter(adapter);
-//
-//        listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-//            @Override
-//            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-//                // Launch the StudentFeedback activity
-//                Intent intent = new Intent(StudentEventActivity.this, StudentFeedback.class);
-//                // Pass any data you want to the form activity, for example, the selected event
-//                intent.putExtra("event_name", events[position]);
-//
-//                // Explicitly set the component to ensure it opens the correct activity
-//                intent.setComponent(new ComponentName(StudentEventActivity.this, StudentFeedback.class));
-//
-//                startActivity(intent);
-//            }
-//        });
+
     }
     private void resetEvents() {
         eventRef.addValueEventListener(new ValueEventListener() {
@@ -83,6 +64,7 @@ public class StudentEventActivity extends StudentActivity {
                 for(DataSnapshot childSnapshot: snapshot.getChildren()){
                     String key = childSnapshot.getKey();
                     HashMap<String, String> childHashMap = (HashMap<String, String>) childSnapshot.getValue();
+                    childHashMap.put("key", key);
                     EventModel childAnModel = new EventModel(childHashMap);
                     events.add(childAnModel);
                     Log.d(TAG, "key" + key + "values: " + childHashMap);

@@ -76,6 +76,7 @@ public class AdminEventActivity extends AdminActivity {
                 for(DataSnapshot childSnapshot: snapshot.getChildren()){
                     String key = childSnapshot.getKey();
                     HashMap<String, String> childHashMap = (HashMap<String, String>) childSnapshot.getValue();
+                    childHashMap.put("key", key);
                     EventModel childAnModel = new EventModel(childHashMap);
                     events.add(childAnModel);
                     Log.d(TAG, "key" + key + "values: " + childHashMap);
