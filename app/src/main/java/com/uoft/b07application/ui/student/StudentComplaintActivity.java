@@ -18,7 +18,7 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.uoft.b07application.R;
 
-public class StudentComplaintActivity extends AppCompatActivity {
+public class StudentComplaintActivity extends StudentActivity {
     Button submit_button;
     FirebaseDatabase database;
     private EditText editTextComplaint;
@@ -30,7 +30,19 @@ public class StudentComplaintActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_student_complaint);
+    }
+    @Override
+    protected int setLayoutId() {
+        return R.layout.activity_student_complaint;
+    }
+    @Override
+    protected void setMenu(){
+        drawerLayout = findViewById(R.id.complaint_drawer_layout);
+        navigationView = findViewById(R.id.nav_complaint_view);
+        toolbar = findViewById(R.id.complaint_toolbar);
+    }
+    @Override
+    public void setButtonListeners(){
         Spinner spinner = findViewById(R.id.spinner);
 
 

@@ -104,8 +104,10 @@ public class LoginActivity extends AppCompatActivity {
                             // User found and credentials match
                             // Pass retrieved information to the next activity
                             Intent intent = new Intent(LoginActivity.this, AdminActivity.class);
+                            intent.putExtra("username", userUsername);
                             intent.putExtra("name", nameFromDB);
                             intent.putExtra("email", emailFromDB);
+                            intent.putExtra("isadmin", "Is Admin");
                             // Add more data if needed
                             startActivity(intent);
                         } else {
@@ -129,8 +131,10 @@ public class LoginActivity extends AppCompatActivity {
                                         // Student found and credentials match
                                         // Pass retrieved information to the next activity
                                         Intent intent = new Intent(LoginActivity.this, StudentActivity.class);
+                                        intent.putExtra("username", userUsername);
                                         intent.putExtra("name", nameFromDB);
                                         intent.putExtra("email", emailFromDB);
+                                        intent.putExtra("isadminorstudent", "Is Student");
                                         // Add more data if needed
                                         startActivity(intent);
                                         return;
