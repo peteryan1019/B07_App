@@ -1,5 +1,6 @@
 package com.uoft.b07application.ui.admin;
 
+import android.annotation.SuppressLint;
 import android.app.AlertDialog;
 import android.app.Dialog;
 import android.content.DialogInterface;
@@ -7,9 +8,11 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
+import android.widget.ArrayAdapter;
 import android.widget.AutoCompleteTextView;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.Toast;
 
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatDialogFragment;
@@ -65,6 +68,7 @@ public class AnnouncementDialog extends AppCompatDialogFragment {
                             sendAnnouncement(message, recipient, subject, senderUsername, senderEmail);
                             dismiss();
                         }
+                        Toast.makeText(getContext(), "please fill out all fields", Toast.LENGTH_SHORT).show();
                     }
                 });
 
