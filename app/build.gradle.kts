@@ -42,6 +42,7 @@ dependencies {
     implementation("androidx.navigation:navigation-fragment:2.7.5")
     implementation("androidx.navigation:navigation-ui:2.7.5")
     implementation("com.google.firebase:firebase-auth:22.2.0")
+    implementation ("com.firebaseui:firebase-ui-database:8.0.2")
     implementation("com.google.firebase:firebase-database:20.3.0")
     implementation("androidx.annotation:annotation:1.6.0")
     implementation("com.google.firebase:firebase-messaging:23.3.1")

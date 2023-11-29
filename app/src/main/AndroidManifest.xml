@@ -69,7 +69,7 @@
 
         <activity
             android:name=".ui.student.StudentFeedback"
-            android:exported="true">
+            android:exported="false">
             <!-- Remove the MAIN action and LAUNCHER category for StudentFeedback -->
         </activity>
 
