@@ -6,20 +6,17 @@ import android.content.DialogInterface;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
-import android.widget.ArrayAdapter;
 import android.widget.AutoCompleteTextView;
-import android.widget.Button;
 import android.widget.EditText;
-import android.widget.Toast;
 
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatDialogFragment;
 
-import com.google.firebase.Firebase;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.uoft.b07application.R;
-import com.uoft.b07application.ui.message.Announcement;
+
+import java.util.HashMap;
 
 public class AnnouncementDialog extends AppCompatDialogFragment {
     DatabaseReference database;
@@ -50,9 +47,10 @@ public class AnnouncementDialog extends AppCompatDialogFragment {
                         final String message = messageBody.getText().toString();
                         final String recipient = recipientAutoTextView.getText().toString();
                         final String subject = subjectAutoTextView.getText().toString();
-//                        if(!(message.isEmpty()||recipient.isEmpty()||subject.isEmpty())){
+                        if(!(message.isEmpty()||recipient.isEmpty()||subject.isEmpty())){
                             sendAnnouncement(message, recipient, subject);
-//                        }
+                        }
+                        
                     }
                 });
         messageBody = view.findViewById(R.id.messageBodyEditText);
@@ -77,8 +75,11 @@ public class AnnouncementDialog extends AppCompatDialogFragment {
         return subjectAutoTextView;
     }
     private void sendAnnouncement(String message, String recipient, String subject) {
-        Announcement announcement = new Announcement(message, recipient, subject);
-//        database.child("announcements").child("recipient").setValue(announcement);
+        HashMap announcement = new HashMap();
+        announcement.put("message", message);
+        announcement.put("recipient", recipient);
+        announcement.put("subject", subject);
+        database.child("announcements").push().setValue(announcement);
     }
 }
 
