@@ -12,4 +12,5 @@
     <item name="nav_student_logout" type="id" />
     <item name="nav_admin_logout" type="id" />
     <item name="nav_admin_profile" type="id" />
+    <item name="nav_event" type="id" />
 </resources>

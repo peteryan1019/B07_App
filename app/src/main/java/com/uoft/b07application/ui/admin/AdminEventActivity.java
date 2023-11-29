@@ -1,10 +1,15 @@
 package com.uoft.b07application.ui.admin;
 
-import androidx.appcompat.app.AppCompatActivity;
-
+import android.content.ComponentName;
+import android.content.Intent;
 import android.os.Bundle;
+import android.view.View;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
+import android.widget.ListView;
 
 import com.uoft.b07application.R;
+import com.uoft.b07application.ui.student.StudentFeedback;
 
 public class AdminEventActivity extends AdminActivity {
 
@@ -15,6 +20,7 @@ public class AdminEventActivity extends AdminActivity {
     @Override
     protected int setLayoutId() {
         return R.layout.activity_admin_event;
+
     }
     @Override
     protected void setMenu(){
@@ -24,6 +30,5 @@ public class AdminEventActivity extends AdminActivity {
     }
     @Override
     protected void setButtonListeners(){
-
     }
 }
