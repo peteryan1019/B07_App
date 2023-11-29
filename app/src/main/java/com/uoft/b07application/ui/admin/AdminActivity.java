@@ -51,6 +51,8 @@ public class AdminActivity extends MenuActivity {
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(AdminActivity.this, AdminAnnouncementActivity.class);
+                intent.putExtra("username", username);
+                intent.putExtra("email", email);
                 startActivity(intent);
             }
         });
@@ -86,6 +88,8 @@ public class AdminActivity extends MenuActivity {
         Intent intent = null;
         if (menuItem.getItemId() == R.id.nav_announcement) {
             intent = new Intent(AdminActivity.this, AdminAnnouncementActivity.class);
+            intent.putExtra("username", username);
+            intent.putExtra("email", email);
         } else if (menuItem.getItemId() == R.id.nav_departmentEvent) {
             intent = new Intent(AdminActivity.this, AdminEventActivity.class);
         } else if (menuItem.getItemId() == R.id.nav_reviewComments) {

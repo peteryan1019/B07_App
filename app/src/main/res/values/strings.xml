@@ -31,4 +31,11 @@
         <item>Other</item>
         <!-- Add more items as needed -->
     </string-array>
+    <string-array name="recipient_dropdown_items">
+        <item>Everyone</item>
+        <!-- Add more items as needed -->
+    </string-array>
+    <string-array name="Subject_dropdown_items">
+        <!-- Add more items as needed -->
+    </string-array>
 </resources>
