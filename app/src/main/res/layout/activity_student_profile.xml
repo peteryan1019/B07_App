@@ -44,20 +44,16 @@
                     android:id="@+id/student_profile_text"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginStart="115dp"
                     android:layout_marginTop="4dp"
                     android:layout_marginEnd="115dp"
                     android:background="@android:color/transparent"
                     android:fontFamily="@font/akaya_telivigala"
                     android:inputType="text"
-                    android:text="Student Profiel"
                     android:textAlignment="viewStart"
                     android:textAllCaps="false"
                     android:textSize="28dp"
                     android:textStyle="bold"
                     app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintHorizontal_bias="1.0"
-                    app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent" />
 
                 <androidx.appcompat.widget.Toolbar
