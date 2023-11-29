@@ -1,5 +1,6 @@
 package com.uoft.b07application.ui.admin;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -36,8 +37,10 @@ public class AdminEventActivity extends AdminActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        Intent intent = getIntent();
         recyclerView = findViewById(R.id.admin_event_recycler_view);
-        adapter = new E_RecyclerViewAdapter(this, events, true);
+        adapter = new E_RecyclerViewAdapter(this, events, true,
+                intent.getStringExtra("name"), intent.getStringExtra("email"));
         recyclerView.setAdapter(adapter);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
         resetEvents();

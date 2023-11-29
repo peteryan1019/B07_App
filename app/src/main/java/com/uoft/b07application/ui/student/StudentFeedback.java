@@ -53,7 +53,8 @@ public class StudentFeedback extends AppCompatActivity {
 
         // Create a Feedback object with the provided data
         HashMap<String, String> feedback = new HashMap<>();
-        feedback.put("name", name);
+        feedback.put("commenterName", intent.getStringExtra("commenterName"));
+        feedback.put("commenterEmail", intent.getStringExtra("commenterEmail"));
         feedback.put("eventKey", intent.getStringExtra("eventKey"));
         feedback.put("eventName", intent.getStringExtra("eventName"));
         feedback.put("rating", Float.toString(rating));

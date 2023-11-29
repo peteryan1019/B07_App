@@ -1,5 +1,6 @@
 package com.uoft.b07application.ui.student;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.widget.ImageButton;
@@ -33,7 +34,9 @@ public class StudentEventActivity extends StudentActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         recyclerView = findViewById(R.id.student_event_recycler_view);
-        adapter = new E_RecyclerViewAdapter(this, events, false);
+        Intent intent = getIntent();
+        adapter = new E_RecyclerViewAdapter(this, events, false,
+                intent.getStringExtra("name"), intent.getStringExtra("email"));
         recyclerView.setAdapter(adapter);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
         resetEvents();

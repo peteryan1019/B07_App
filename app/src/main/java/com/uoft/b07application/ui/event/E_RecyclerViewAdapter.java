@@ -22,11 +22,16 @@ public class E_RecyclerViewAdapter extends RecyclerView.Adapter<E_RecyclerViewAd
     ArrayList<EventModel> events = new ArrayList<>();
 
     boolean viewFeedBackButtonVisibility;
+    String commenterName;
+    String commenterEmail;
 
-    public E_RecyclerViewAdapter(Context context, ArrayList<EventModel> events, boolean visibility) {
+    public E_RecyclerViewAdapter(Context context, ArrayList<EventModel> events, boolean visibility, String commenterName, String commenterEmail) {
         this.context = context;
         this.events = events;
         this.viewFeedBackButtonVisibility = visibility;
+        this.commenterEmail = commenterEmail;
+        this.commenterName = commenterName;
+
     }
 
     @NonNull
@@ -56,6 +61,8 @@ public class E_RecyclerViewAdapter extends RecyclerView.Adapter<E_RecyclerViewAd
                 intent.putExtra("eventData", holder.eventDateView.getText().toString()
                         .replaceFirst("Date: ", ""));
                 intent.putExtra("eventKey", holder.eventKey.getText().toString());
+                intent.putExtra("commenterName", commenterName);
+                intent.putExtra("commenterEmail", commenterEmail);
                 context.startActivity(intent);
             }
         });
