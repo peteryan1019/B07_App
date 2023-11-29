@@ -66,6 +66,15 @@ public class E_RecyclerViewAdapter extends RecyclerView.Adapter<E_RecyclerViewAd
                 context.startActivity(intent);
             }
         });
+        holder.viewFeedbackButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                // Build your intent here and start the activity or perform the desired action
+                // For example, you can open a new activity using an intent
+                Intent intent = new Intent(context, StudentFeedback.class);
+                context.startActivity(intent);
+            }
+        });
 
     }
 
