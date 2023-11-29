@@ -6,12 +6,14 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
+import android.widget.ImageButton;
 import android.widget.ListView;
 
 import com.uoft.b07application.R;
 import com.uoft.b07application.ui.student.StudentFeedback;
 
 public class AdminEventActivity extends AdminActivity {
+    ImageButton scheduleButton;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -30,5 +32,16 @@ public class AdminEventActivity extends AdminActivity {
     }
     @Override
     protected void setButtonListeners(){
+        scheduleButton = findViewById(R.id.schedule_button);
+        scheduleButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                openDialog();
+            }
+        });
+    }
+    void openDialog(){
+        EventDialog dialog = new EventDialog();
+        dialog.show(getSupportFragmentManager(), "event dialog");
     }
 }
