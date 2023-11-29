@@ -1,18 +1,29 @@
 package com.uoft.b07application.ui.admin;
 
+import java.util.HashMap;
+
 public class AnnouncementModel {
     String senderUsername;
     String senderEmail;
     String recipient;
     String subject;
     String message;
+
     public AnnouncementModel(String senderUsername, String senderEmail
-            , String recipient, String subject, String message){
+            , String recipient, String subject, String message) {
         this.senderUsername = senderUsername;
         this.senderEmail = senderEmail;
-        this.recipient = recipient;
-        this.subject = subject;
+        this.recipient = "TO: " + recipient;
+        this.subject = "Subject: " + subject;
         this.message = message;
+    }
+
+    public AnnouncementModel(HashMap<String, String> hashMap) {
+        this.senderUsername = hashMap.get("senderUsername");
+        this.senderEmail = hashMap.get("senderEmail");
+        this.recipient = "TO: " + hashMap.get("recipient");
+        this.subject = "Subject: " + hashMap.get("subject");
+        this.message = hashMap.get("message");
     }
 
     public String getSenderUsername() {

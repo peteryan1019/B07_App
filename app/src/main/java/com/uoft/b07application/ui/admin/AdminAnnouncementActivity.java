@@ -2,26 +2,42 @@ package com.uoft.b07application.ui.admin;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
-import android.widget.Button;
 import android.widget.ImageButton;
 
-import androidx.appcompat.app.AlertDialog;
+import androidx.annotation.NonNull;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 import com.uoft.b07application.R;
 
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.HashMap;
 
 public class AdminAnnouncementActivity extends AdminActivity {
-    final DatabaseReference databaseReference = FirebaseDatabase.getInstance().getReference();
+    private static final String TAG = "AdminAnnouncement";
+    final DatabaseReference announcementRef = FirebaseDatabase.getInstance().getReference().
+            child("announcements").getRef();
     private ImageButton composeButton;
+    private RecyclerView recyclerView;
+    private AN_RecyclerViewAdapter adapter;
     private ArrayList<AnnouncementModel> announcementModels = new ArrayList<AnnouncementModel>();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        recyclerView = findViewById(R.id.announcement_recycler_view);
+        adapter = new AN_RecyclerViewAdapter(this, announcementModels);
+        recyclerView.setAdapter(adapter);
+        recyclerView.setLayoutManager(new LinearLayoutManager(this));
+        resetAnnouncementModels();
     }
     @Override
     protected int setLayoutId() {
@@ -42,16 +58,36 @@ public class AdminAnnouncementActivity extends AdminActivity {
                 openDialog();
             }
         });
+
     }
     private void openDialog(){
         AnnouncementDialog announcementDialog = new AnnouncementDialog();
-        Intent intent = getIntent();
-        announcementDialog.setSenderUsername(intent.getStringExtra("username"));
-        announcementDialog.setSenderEmail(intent.getStringExtra("email"));
+        announcementDialog.setSenderUsername(username);
+        announcementDialog.setSenderEmail(email);
         announcementDialog.show(getSupportFragmentManager(), "announcement dialog");
     }
 
-    public void setAnnouncementModels() {
-        
+    public void resetAnnouncementModels() {
+        announcementRef.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                announcementModels.clear();
+                for(DataSnapshot childSnapshot: snapshot.getChildren()){
+                    String key = childSnapshot.getKey();
+                    HashMap<String, String> childHashMap = (HashMap<String, String>) childSnapshot.getValue();
+                    AnnouncementModel childAnModel = new AnnouncementModel(childHashMap);
+                    announcementModels.add(childAnModel);
+                    Log.d(TAG, "key" + key + "values: " + childHashMap);
+                }
+                Collections.reverse(announcementModels);
+                adapter.notifyDataSetChanged();
+                Log.d(TAG, "size" + announcementModels.size());
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+                Log.e(TAG, "fail to read announcement hash map");
+            }
+        });
     }
 }

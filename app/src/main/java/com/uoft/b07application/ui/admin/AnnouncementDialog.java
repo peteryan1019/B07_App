@@ -64,11 +64,13 @@ public class AnnouncementDialog extends AppCompatDialogFragment {
                         final String message = messageBody.getText().toString();
                         final String recipient = recipientAutoTextView.getText().toString();
                         final String subject = subjectAutoTextView.getText().toString();
-                        if(!(message.isEmpty()||recipient.isEmpty()||subject.isEmpty())){
-                            sendAnnouncement(message, recipient, subject, senderUsername, senderEmail);
-                            dismiss();
+                        if(message.isEmpty()||recipient.isEmpty()||subject.isEmpty()){
+                            Toast.makeText(getContext(), "please fill out all fields", Toast.LENGTH_SHORT).show();
+
                         }
-                        Toast.makeText(getContext(), "please fill out all fields", Toast.LENGTH_SHORT).show();
+                        sendAnnouncement(message, recipient, subject, senderUsername, senderEmail);
+                        Toast.makeText(getContext(), "announcement sent", Toast.LENGTH_SHORT).show();
+                        dismiss();
                     }
                 });
 
