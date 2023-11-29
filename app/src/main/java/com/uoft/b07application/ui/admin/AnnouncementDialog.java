@@ -7,6 +7,7 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.AutoCompleteTextView;
+import android.widget.Button;
 import android.widget.EditText;
 
 import androidx.annotation.Nullable;
@@ -35,24 +36,8 @@ public class AnnouncementDialog extends AppCompatDialogFragment {
 
 
         builder.setView(view)
-                .setNegativeButton("close", new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialog, int which) {
-
-                    }
-                })
-                .setPositiveButton("send", new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialog, int which) {
-                        final String message = messageBody.getText().toString();
-                        final String recipient = recipientAutoTextView.getText().toString();
-                        final String subject = subjectAutoTextView.getText().toString();
-                        if(!(message.isEmpty()||recipient.isEmpty()||subject.isEmpty())){
-                            sendAnnouncement(message, recipient, subject);
-                        }
-                        
-                    }
-                });
+                .setNegativeButton("close", null)
+                .setPositiveButton("send", null);
         messageBody = view.findViewById(R.id.messageBodyEditText);
         recipientAutoTextView = view.findViewById(R.id.recipientAutoCompleteTextView);
         subjectAutoTextView = view.findViewById(R.id.subjectAutoCompleteTextView);
@@ -62,7 +47,35 @@ public class AnnouncementDialog extends AppCompatDialogFragment {
 //        recipientAdapter.setDropDownViewResource(android.R.layout.simple_dropdown_item_1line);
 //        recipientAutoTextView.setAdapter(recipientAdapter);
 
-        return builder.create();
+        AlertDialog alertDialog = builder.create();
+
+        alertDialog.setOnShowListener(new DialogInterface.OnShowListener() {
+            @Override
+            public void onShow(DialogInterface dialog) {
+                Button positiveButton = alertDialog.getButton(AlertDialog.BUTTON_POSITIVE);
+                positiveButton.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        final String message = messageBody.getText().toString();
+                        final String recipient = recipientAutoTextView.getText().toString();
+                        final String subject = subjectAutoTextView.getText().toString();
+                        if(!(message.isEmpty()||recipient.isEmpty()||subject.isEmpty())){
+                            sendAnnouncement(message, recipient, subject);
+                            dismiss();
+                        }
+                    }
+                });
+
+                Button negativeButton = alertDialog.getButton(AlertDialog.BUTTON_NEGATIVE);
+                negativeButton.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        dismiss();
+                    }
+                });
+            }
+        });
+        return alertDialog;
     }
     public EditText getMessageBody(){
         return messageBody;

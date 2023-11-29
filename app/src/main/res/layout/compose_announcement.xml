@@ -42,6 +42,8 @@
             android:layout_weight="1"
             android:layout_height="wrap_content"
             android:hint="To"
+            android:completionThreshold="1"
+            android:completionHint="To"
             android:paddingLeft="16dp"/>
 
     </LinearLayout>
@@ -58,6 +60,8 @@
             android:layout_weight="1"
             android:layout_height="wrap_content"
             android:hint="Subject"
+            android:completionThreshold="1"
+            android:completionHint="Subject"
             android:paddingLeft="16dp"/>
 
     </LinearLayout>
