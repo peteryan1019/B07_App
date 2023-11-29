@@ -86,12 +86,14 @@ public class StudentComplaintActivity extends StudentActivity {
 
 //                EditText complaint_topic = findViewById(R.id.complaint_topic);
 //                String topic = complaint_topic.getText().toString().trim();
-                String complaint_body = editTextComplaint.getText().toString().trim();
-                if (!complaint_body.isEmpty()) {
-                    // Generate a unique key for the complaint
-//                    String complaintId = reference.child("complaints").push().getKey();
 
-                    reference.child(topic).setValue(complaint_body)
+                String complaint_body = editTextComplaint.getText().toString().trim();
+                Complaint complaint = new Complaint(topic, complaint_body);
+                if (!complaint_body.isEmpty() && isTopicSelected) {
+                    // Generate a unique key for the complaint
+                    String complaintId = reference.child("complaints").push().getKey();
+
+                    reference.child(complaintId).setValue(complaint)
                             .addOnSuccessListener(new OnSuccessListener<Void>() {
                                 @Override
                                 public void onSuccess(Void aVoid) {
