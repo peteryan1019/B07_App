@@ -8,10 +8,16 @@ import android.widget.ImageButton;
 
 import androidx.appcompat.app.AlertDialog;
 
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
 import com.uoft.b07application.R;
 
+import java.util.ArrayList;
+
 public class AdminAnnouncementActivity extends AdminActivity {
+    final DatabaseReference databaseReference = FirebaseDatabase.getInstance().getReference();
     private ImageButton composeButton;
+    private ArrayList<AnnouncementModel> announcementModels = new ArrayList<AnnouncementModel>();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -45,4 +51,7 @@ public class AdminAnnouncementActivity extends AdminActivity {
         announcementDialog.show(getSupportFragmentManager(), "announcement dialog");
     }
 
+    public void setAnnouncementModels() {
+        
+    }
 }
