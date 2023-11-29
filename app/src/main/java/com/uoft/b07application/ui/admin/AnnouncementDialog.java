@@ -3,6 +3,7 @@ package com.uoft.b07application.ui.admin;
 import android.app.AlertDialog;
 import android.app.Dialog;
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -21,7 +22,8 @@ import java.util.HashMap;
 
 public class AnnouncementDialog extends AppCompatDialogFragment {
     DatabaseReference database;
-    DatabaseReference reference;
+    private String senderUsername;
+    private String senderEmail;
 
     private EditText messageBody;
     private AutoCompleteTextView recipientAutoTextView;
@@ -60,7 +62,7 @@ public class AnnouncementDialog extends AppCompatDialogFragment {
                         final String recipient = recipientAutoTextView.getText().toString();
                         final String subject = subjectAutoTextView.getText().toString();
                         if(!(message.isEmpty()||recipient.isEmpty()||subject.isEmpty())){
-                            sendAnnouncement(message, recipient, subject);
+                            sendAnnouncement(message, recipient, subject, senderUsername, senderEmail);
                             dismiss();
                         }
                     }
@@ -87,11 +89,22 @@ public class AnnouncementDialog extends AppCompatDialogFragment {
     public AutoCompleteTextView getSubjectAutoTextView(){
         return subjectAutoTextView;
     }
-    private void sendAnnouncement(String message, String recipient, String subject) {
+
+    public void setSenderUsername(String senderUsername) {
+        this.senderUsername = senderUsername;
+    }
+
+    public void setSenderEmail(String senderEmail) {
+        this.senderEmail = senderEmail;
+    }
+
+    private void sendAnnouncement(String message, String recipient, String subject, String senderUsername, String senderEmail) {
         HashMap announcement = new HashMap();
         announcement.put("message", message);
         announcement.put("recipient", recipient);
         announcement.put("subject", subject);
+        announcement.put("senderUsername", senderUsername);
+        announcement.put("senderEmail", senderEmail);
         database.child("announcements").push().setValue(announcement);
     }
 }

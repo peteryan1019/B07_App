@@ -39,6 +39,9 @@ public class AdminAnnouncementActivity extends AdminActivity {
     }
     private void openDialog(){
         AnnouncementDialog announcementDialog = new AnnouncementDialog();
+        Intent intent = getIntent();
+        announcementDialog.setSenderUsername(intent.getStringExtra("username"));
+        announcementDialog.setSenderEmail(intent.getStringExtra("email"));
         announcementDialog.show(getSupportFragmentManager(), "announcement dialog");
     }
 
