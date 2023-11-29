@@ -40,30 +40,10 @@
                 android:background="@color/white">
 
 
-                <EditText
-                    android:id="@+id/admin_profile_text"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="115dp"
-                    android:layout_marginTop="4dp"
-                    android:layout_marginEnd="115dp"
-                    android:background="@android:color/transparent"
-                    android:fontFamily="@font/akaya_telivigala"
-                    android:inputType="text"
-                    android:text="Profile"
-                    android:textAlignment="viewStart"
-                    android:textAllCaps="false"
-                    android:textSize="28dp"
-                    android:textStyle="bold"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="parent" />
-
                 <androidx.appcompat.widget.Toolbar
                     android:id="@+id/admin_profile_toolbar"
                     android:layout_width="50dp"
                     android:layout_height="50dp"
-                    android:layout_margin="5dp"
                     android:background="@android:color/transparent"
                     android:minHeight="?attr/actionBarSize"
                     android:theme="?attr/actionBarTheme"
@@ -71,10 +51,12 @@
                     tools:ignore="MissingConstraints" />
 
                 <include
-                    android:layout_width="fill_parent"
-                    android:layout_height="wrap_content"
                     android:id="@+id/admin_profile_fragment"
-                    layout="@layout/fragment_profile" />
+                    layout="@layout/fragment_profile"
+                    android:layout_width="401dp"
+                    android:layout_height="wrap_content"
+                    tools:layout_editor_absoluteX="133dp"
+                    tools:layout_editor_absoluteY="38dp" />
 
 
             </androidx.constraintlayout.widget.ConstraintLayout>

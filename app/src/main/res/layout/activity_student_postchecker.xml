@@ -44,21 +44,22 @@
                     android:id="@+id/post_checker_text"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginStart="115dp"
-                    android:layout_marginTop="4dp"
-                    android:layout_marginEnd="115dp"
+                    android:layout_marginBottom="11dp"
                     android:background="@android:color/transparent"
                     android:fontFamily="@font/akaya_telivigala"
                     android:inputType="text"
-                    android:text="Post Checker"
+                    android:text="Select a Program of Study"
                     android:textAlignment="viewStart"
                     android:textAllCaps="false"
                     android:textSize="28dp"
                     android:textStyle="bold"
+                    app:layout_constraintBottom_toTopOf="@+id/Cs_Major"
                     app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintHorizontal_bias="1.0"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="parent" />
+                    app:layout_constraintHorizontal_bias="0.642"
+                    app:layout_constraintStart_toEndOf="@+id/post_checker_toolbar"
+                    app:layout_constraintStart_toStartOf="@+id/post_checker_toolbar"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintVertical_bias="0.0" />
 
                 <androidx.appcompat.widget.Toolbar
                     android:id="@+id/post_checker_toolbar"
@@ -71,46 +72,42 @@
                     android:visibility="visible"
                     tools:ignore="MissingConstraints" />
 
-                <Button
-                    android:id="@+id/CS_major_check"
-                    android:layout_width="0dp"
-                    android:layout_height="0dp"
-                    android:layout_marginBottom="29dp"
-                    android:onClick="checkCSmajor"
-                    android:text="Computer Science Major"
-                    app:layout_constraintBottom_toTopOf="@+id/CS_spec_check"
-                    app:layout_constraintEnd_toEndOf="@+id/CS_spec_check"
-                    app:layout_constraintStart_toStartOf="@+id/CS_spec_check"
-                    app:layout_constraintTop_toBottomOf="@+id/textView4" />
-
-                <Button
-                    android:id="@+id/CS_spec_check"
-                    android:layout_width="125dp"
-                    android:layout_height="0dp"
-                    android:layout_marginStart="119dp"
-                    android:layout_marginEnd="119dp"
-                    android:layout_marginBottom="349dp"
-                    android:onClick="checkCSspec"
-                    android:text="Computer Science Specialist "
-                    app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintEnd_toEndOf="@+id/textView4"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/CS_major_check" />
-
                 <TextView
                     android:id="@+id/textView4"
                     android:layout_width="0dp"
                     android:layout_height="0dp"
-                    android:layout_marginStart="35dp"
-                    android:layout_marginTop="33dp"
-                    android:layout_marginEnd="35dp"
-                    android:layout_marginBottom="24dp"
                     android:text="Select a program to check pOST recquirements for"
                     android:textSize="24sp"
-                    app:layout_constraintBottom_toTopOf="@+id/CS_major_check"
                     app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintHorizontal_bias="0.0"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="parent" />
+                    app:layout_constraintTop_toTopOf="@+id/post_checker_text" />
+
+                <Button
+                    android:id="@+id/Cs_Major"
+                    android:layout_width="325dp"
+                    android:layout_height="194dp"
+                    android:layout_marginStart="48dp"
+                    android:layout_marginBottom="8dp"
+                    android:onClick="checkCSmajor"
+                    android:text="CS Major"
+                    app:backgroundTint="#B0EEF6"
+                    app:layout_constraintBottom_toTopOf="@+id/Cs_Specialist"
+                    app:layout_constraintStart_toStartOf="parent" />
+
+                <Button
+                    android:id="@+id/Cs_Specialist"
+                    android:layout_width="328dp"
+                    android:layout_height="194dp"
+                    android:layout_marginBottom="20dp"
+                    android:onClick="checkCSspec"
+                    android:text="CS Specialist"
+                    app:backgroundTint="#F69999"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintHorizontal_bias="0.657"
+                    app:layout_constraintStart_toStartOf="parent" />
+
 
             </androidx.constraintlayout.widget.ConstraintLayout>
         </ScrollView>

@@ -41,7 +41,7 @@
 
 
                 <EditText
-                    android:id="@+id/admin_evenet_text"
+                    android:id="@+id/admin_event_text"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="115dp"
@@ -69,6 +69,31 @@
                     android:theme="?attr/actionBarTheme"
                     android:visibility="visible"
                     tools:ignore="MissingConstraints" />
+
+                <ImageButton
+                    android:id="@+id/schedule_button"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:padding="10dp"
+                    android:layout_marginTop="6dp"
+                    android:layout_marginEnd="16dp"
+                    android:layout_marginBottom="10dp"
+                    android:background="@color/white"
+                    android:src="@drawable/schedule_icon"
+                    app:layout_constraintBottom_toTopOf="@id/admin_event_recycler_view"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintLeft_toRightOf="@id/admin_event_text"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintVertical_bias="0.026" />
+
+                <androidx.recyclerview.widget.RecyclerView
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:id="@+id/admin_event_recycler_view"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/admin_event_text">
+
+                </androidx.recyclerview.widget.RecyclerView>
 
             </androidx.constraintlayout.widget.ConstraintLayout>
         </ScrollView>

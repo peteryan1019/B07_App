@@ -15,6 +15,7 @@ public class CSMajorQualifications extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_csmajor_qualifications);
+        //id's of buttons
     }
 
     public void inStream(View view){
