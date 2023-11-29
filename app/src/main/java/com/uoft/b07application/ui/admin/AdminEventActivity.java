@@ -3,22 +3,49 @@ package com.uoft.b07application.ui.admin;
 import android.content.ComponentName;
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ImageButton;
 import android.widget.ListView;
 
+import androidx.annotation.NonNull;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
+
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 import com.uoft.b07application.R;
 import com.uoft.b07application.ui.student.StudentFeedback;
 
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.HashMap;
+
 public class AdminEventActivity extends AdminActivity {
+    //For Debug
+    private static final String TAG = "AdminEvent";
+    final DatabaseReference eventRef = FirebaseDatabase.getInstance().getReference().
+            child("events").getRef();
     ImageButton scheduleButton;
+    private RecyclerView recyclerView;
+    private E_RecyclerViewAdapter adapter;
+    private ArrayList<EventModel> events = new ArrayList<EventModel>();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        recyclerView = findViewById(R.id.admin_event_recycler_view);
+        adapter = new E_RecyclerViewAdapter(this, events);
+        recyclerView.setAdapter(adapter);
+        recyclerView.setLayoutManager(new LinearLayoutManager(this));
+        resetEvents();
     }
+
     @Override
     protected int setLayoutId() {
         return R.layout.activity_admin_event;
@@ -43,5 +70,28 @@ public class AdminEventActivity extends AdminActivity {
     void openDialog(){
         EventDialog dialog = new EventDialog();
         dialog.show(getSupportFragmentManager(), "event dialog");
+    }
+    private void resetEvents() {
+        eventRef.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                events.clear();
+                for(DataSnapshot childSnapshot: snapshot.getChildren()){
+                    String key = childSnapshot.getKey();
+                    HashMap<String, String> childHashMap = (HashMap<String, String>) childSnapshot.getValue();
+                    EventModel childAnModel = new EventModel(childHashMap);
+                    events.add(childAnModel);
+                    Log.d(TAG, "key" + key + "values: " + childHashMap);
+                }
+                Collections.reverse(events);
+                adapter.notifyDataSetChanged();
+                Log.d(TAG, "size" + events.size());
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+                Log.e(TAG, "fail to read event hash map");
+            }
+        });
     }
 }
