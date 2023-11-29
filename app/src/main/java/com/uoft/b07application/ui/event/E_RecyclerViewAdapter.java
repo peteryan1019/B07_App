@@ -1,4 +1,4 @@
-package com.uoft.b07application.ui.admin;
+package com.uoft.b07application.ui.event;
 
 import android.content.Context;
 import android.view.LayoutInflater;
@@ -17,9 +17,12 @@ import java.util.ArrayList;
 public class E_RecyclerViewAdapter extends RecyclerView.Adapter<E_RecyclerViewAdapter.E_ViewHolder>{
     Context context;
     ArrayList<EventModel> events = new ArrayList<>();
-    public E_RecyclerViewAdapter(Context context, ArrayList<EventModel> events){
+
+    boolean viewFeedBackButtonVisibility;
+    public E_RecyclerViewAdapter(Context context, ArrayList<EventModel> events, boolean visibility){
         this.context = context;
         this.events = events;
+        this.viewFeedBackButtonVisibility = visibility;
     }
 
     @NonNull
@@ -35,22 +38,33 @@ public class E_RecyclerViewAdapter extends RecyclerView.Adapter<E_RecyclerViewAd
     public void onBindViewHolder(@NonNull E_ViewHolder holder, int position) {
         holder.eventNameView.setText(events.get(position).getEventName());
         holder.eventDateView.setText(events.get(position).getEventDate());
+        if(viewFeedBackButtonVisibility) holder.setViewButtonVisibility(View.VISIBLE);
+        else holder.setViewButtonVisibility(View.INVISIBLE);
+
     }
 
     @Override
     public int getItemCount() {
         return events.size();
     }
+
+
     public static class E_ViewHolder extends RecyclerView.ViewHolder {
         TextView eventNameView;
         TextView eventDateView;
         ImageButton viewFeedbackButton;
+        ImageButton commentFeedbackButton;
 
         public E_ViewHolder(@NonNull View itemView) {
             super(itemView);
             eventNameView = itemView.findViewById(R.id.event_name);
             eventDateView = itemView.findViewById(R.id.event_date);
             viewFeedbackButton = itemView.findViewById(R.id.view_feedback_button);
+            commentFeedbackButton = itemView.findViewById(R.id.comment_feedback_button);
+        }
+
+        public void setViewButtonVisibility(int visibility) {
+            viewFeedbackButton.setVisibility(visibility);
         }
     }
 }

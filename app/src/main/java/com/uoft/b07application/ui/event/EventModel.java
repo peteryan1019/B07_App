@@ -1,4 +1,4 @@
-package com.uoft.b07application.ui.admin;
+package com.uoft.b07application.ui.event;
 
 import java.util.HashMap;
 

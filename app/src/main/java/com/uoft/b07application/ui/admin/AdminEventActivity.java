@@ -1,14 +1,9 @@
 package com.uoft.b07application.ui.admin;
 
-import android.content.ComponentName;
-import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
-import android.widget.AdapterView;
-import android.widget.ArrayAdapter;
 import android.widget.ImageButton;
-import android.widget.ListView;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -20,7 +15,9 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 import com.uoft.b07application.R;
-import com.uoft.b07application.ui.student.StudentFeedback;
+import com.uoft.b07application.ui.event.E_RecyclerViewAdapter;
+import com.uoft.b07application.ui.event.EventDialog;
+import com.uoft.b07application.ui.event.EventModel;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -40,7 +37,7 @@ public class AdminEventActivity extends AdminActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         recyclerView = findViewById(R.id.admin_event_recycler_view);
-        adapter = new E_RecyclerViewAdapter(this, events);
+        adapter = new E_RecyclerViewAdapter(this, events, true);
         recyclerView.setAdapter(adapter);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
         resetEvents();
