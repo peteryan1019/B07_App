@@ -7,25 +7,81 @@
     android:padding="16dp">
 
     <TextView
-        android:id="@+id/feedbackPromptTextView"
+        android:id="@+id/nameLabel"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:text="How did you find the event?"
+        android:text="Your Name:"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent" />
+
+    <EditText
+        android:id="@+id/nameEditText"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toBottomOf="@+id/nameLabel"
+        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        android:layout_marginBottom="16dp"
-        android:lines="3"/>
+        android:hint="Enter your name..." />
+
+    <TextView
+        android:id="@+id/eventLabel"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:text="Event Name:"
+        app:layout_constraintTop_toBottomOf="@+id/nameEditText"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_marginTop="16dp" />
+
+    <EditText
+        android:id="@+id/eventEditText"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toBottomOf="@+id/eventLabel"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:hint="Enter event name..." />
+
+    <TextView
+        android:id="@+id/ratingLabel"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:text="How did you find the event from 1-10?"
+        app:layout_constraintTop_toBottomOf="@+id/eventEditText"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_marginTop="16dp" />
+
+    <EditText
+        android:id="@+id/ratingEditText"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toBottomOf="@+id/ratingLabel"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:hint="Enter score from 1-10..."
+        android:inputType="number"
+        android:maxLength="2" />
+
+    <TextView
+        android:id="@+id/commentsLabel"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:text="Enter your additional comments if any:"
+        app:layout_constraintTop_toBottomOf="@+id/ratingEditText"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_marginTop="16dp" />
 
     <EditText
         android:id="@+id/commentEditText"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        app:layout_constraintTop_toBottomOf="@+id/feedbackPromptTextView"
+        app:layout_constraintTop_toBottomOf="@+id/commentsLabel"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        android:layout_marginTop="16dp"
-        android:text="Enter your comments..."
+        android:hint="Type your comments here..."
         android:inputType="textMultiLine"
         android:gravity="start|top"
         android:lines="5" />
@@ -38,5 +94,6 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         android:layout_marginTop="16dp"
-        android:text="Submit Feed" />
+        android:text="Submit" />
+
 </androidx.constraintlayout.widget.ConstraintLayout>
