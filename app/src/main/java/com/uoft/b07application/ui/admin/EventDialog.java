@@ -23,12 +23,14 @@ import java.util.HashMap;
 public class EventDialog extends AppCompatDialogFragment {
     final DatabaseReference databaseReference = FirebaseDatabase.getInstance().getReference();
     EditText eventName;
+    EditText eventDate;
     @Override
     public Dialog onCreateDialog(@Nullable Bundle savedInstanceState) {
         AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
         LayoutInflater inflater = getActivity().getLayoutInflater();
         View view = inflater.inflate(R.layout.schedule_event, null);
         eventName = view.findViewById(R.id.event_name);
+        eventDate = view.findViewById(R.id.event_date);
         builder.setView(view)
                 .setNegativeButton("close", null)
                 .setPositiveButton("send", null);
@@ -41,10 +43,11 @@ public class EventDialog extends AppCompatDialogFragment {
                     @Override
                     public void onClick(View v) {
                         final String eventNameString = eventName.getText().toString();
+                        final String eventDateString = eventDate.getText().toString();
                         if(eventNameString.isEmpty()){
                             Toast.makeText(getContext(), "event name cannot be empty", Toast.LENGTH_SHORT).show();
                         }
-                        scheduleEvent(eventNameString);
+                        scheduleEvent(eventNameString, eventDateString);
                         dismiss();
                     }
                 });
@@ -61,7 +64,10 @@ public class EventDialog extends AppCompatDialogFragment {
         return alertDialog;
     }
 
-    private void scheduleEvent(String eventName) {
-        databaseReference.child("events").push().child("eventName").setValue(eventName);
+    private void scheduleEvent(String eventName, String eventDate) {
+        HashMap<String, String> event = new HashMap<String, String>();
+        event.put("eventName", eventName);
+        event.put("eventDate", eventDate);
+        databaseReference.child("events").push().setValue(event);
     }
 }
