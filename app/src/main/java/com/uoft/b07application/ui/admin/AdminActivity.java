@@ -2,6 +2,7 @@ package com.uoft.b07application.ui.admin;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.ImageButton;
@@ -43,6 +44,8 @@ public class AdminActivity extends MenuActivity {
     }
     @Override
     protected void setButtonListeners(){
+        handleIntentExtra();
+        Intent i = getIntent();
         adminAnnouncementButton = findViewById(R.id.admin_announcements_button);
         adminEventButton = findViewById(R.id.admin_event_button);
         adminReviewCommentsButton = findViewById(R.id.admin_reviewcomments_button);
@@ -51,8 +54,7 @@ public class AdminActivity extends MenuActivity {
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(AdminActivity.this, AdminAnnouncementActivity.class);
-                intent.putExtra("username", username);
-                intent.putExtra("email", email);
+                putExtras(i, intent);
                 startActivity(intent);
             }
         });
@@ -60,6 +62,7 @@ public class AdminActivity extends MenuActivity {
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(AdminActivity.this, AdminEventActivity.class);
+                putExtras(i, intent);
                 startActivity(intent);
             }
         });
@@ -67,6 +70,7 @@ public class AdminActivity extends MenuActivity {
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(AdminActivity.this, AdminReviewCommentsActivity.class);
+                putExtras(i, intent);
                 startActivity(intent);
             }
         });
@@ -74,10 +78,7 @@ public class AdminActivity extends MenuActivity {
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(AdminActivity.this, AdminProfileActivity.class);
-                intent.putExtra("username", username);
-                intent.putExtra("name", name);
-                intent.putExtra("email", email);
-                intent.putExtra("isadminorstudent", isadminorstudent);
+                putExtras(i, intent);
                 startActivity(intent);
             }
         });
@@ -85,6 +86,7 @@ public class AdminActivity extends MenuActivity {
 
     @Override
     public boolean onNavigationItemSelected(@NonNull MenuItem menuItem) {
+        Intent i = getIntent();
         Intent intent = null;
         if (menuItem.getItemId() == R.id.nav_announcement) {
             intent = new Intent(AdminActivity.this, AdminAnnouncementActivity.class);
@@ -103,11 +105,31 @@ public class AdminActivity extends MenuActivity {
         }
         //switch statement does not work in this case for some reason
         if (intent != null) {
+            putExtras(i, intent);
             startActivity(intent);
             drawerLayout.closeDrawer(GravityCompat.START);
             return true;
         }
 
         return false;
+    }
+    protected void handleIntentExtra(){
+        Intent i = getIntent();
+        username = i.getStringExtra("username");
+        name = i.getStringExtra("name");
+        email = i.getStringExtra("email");
+        isadminorstudent = i.getStringExtra("isadminorstudent");
+        Log.d("StudentActivity", "name is : " + name);
+        Log.d("StudentActivity", "email is : " + email);
+    }
+    void putExtras(Intent i, Intent intent){
+        String username = i.getStringExtra("username");
+        String email = i.getStringExtra("email");
+        String isadminorstudent = i.getStringExtra("isadminorstudent");
+        String name = i.getStringExtra("name");
+        intent.putExtra("name", name);
+        intent.putExtra("email", email);
+        intent.putExtra("isadminorstudent", isadminorstudent);
+        intent.putExtra("username", username);
     }
 }

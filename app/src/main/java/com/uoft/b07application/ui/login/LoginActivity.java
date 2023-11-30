@@ -1,7 +1,6 @@
 package com.uoft.b07application.ui.login;
 import com.uoft.b07application.ui.student.StudentActivity;
 
-import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
@@ -10,24 +9,17 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
+import android.widget.Toast;
 
-import com.google.firebase.database.DataSnapshot;
-import com.google.firebase.database.DatabaseError;
-import com.google.firebase.database.DatabaseReference;
-import com.google.firebase.database.FirebaseDatabase;
-import com.google.firebase.database.Query;
-import com.google.firebase.database.ValueEventListener;
 import com.uoft.b07application.R;
 import com.uoft.b07application.ui.admin.AdminActivity;
-import com.uoft.b07application.ui.student.StudentActivity;
-
-import java.util.Objects;
 
 public class LoginActivity extends AppCompatActivity {
 
-    EditText loginUsername, loginPassword;
-    Button loginButton;
-    TextView signupRedirectText;
+    private EditText loginUsername, loginPassword;
+    private Button loginButton;
+    private TextView signupRedirectText;
+    private LoginActivityPresenter loginPresenter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -39,14 +31,14 @@ public class LoginActivity extends AppCompatActivity {
         loginButton = findViewById(R.id.login_button);
         signupRedirectText = findViewById(R.id.signupRedirectText);
 
+        loginPresenter = new LoginActivityPresenter(this);
+
         loginButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                if (!validateUsername() | !validatePassword()) {
-
-                } else {
-                    checkUser();
-                }
+                String username = loginUsername.getText().toString().trim();
+                String password = loginPassword.getText().toString().trim();
+                loginPresenter.validateCredentials(username, password);
             }
         });
 
@@ -60,107 +52,34 @@ public class LoginActivity extends AppCompatActivity {
 
     }
 
-    public Boolean validateUsername() {
-        String val = loginUsername.getText().toString();
-        if (val.isEmpty()) {
-            loginUsername.setError("Username cannot be empty");
-            return false;
-        } else {
-            loginUsername.setError(null);
-            return true;
-        }
+    //NEW
+    public void setUsernameError(String errorMessage) {
+        loginUsername.setError(errorMessage);
     }
 
-    public Boolean validatePassword(){
-        String val = loginPassword.getText().toString();
-        if (val.isEmpty()) {
-            loginPassword.setError("Password cannot be empty");
-            return false;
-        } else {
-            loginPassword.setError(null);
-            return true;
-        }
+    public void setPasswordError(String errorMessage) {
+        loginPassword.setError(errorMessage);
     }
 
-    public void checkUser() {
-        String userUsername = loginUsername.getText().toString().trim();
-        String userPassword = loginPassword.getText().toString().trim();
+    public void showLoginError(String errorMessage) {
+        Toast.makeText(this, errorMessage, Toast.LENGTH_SHORT).show();
+    }
 
-        DatabaseReference usersRef = FirebaseDatabase.getInstance().getReference("users");
+    public void navigateToAdminScreen(String username, String name, String email) {
+        Intent intent = new Intent(LoginActivity.this, AdminActivity.class);
+        intent.putExtra("username", username);
+        intent.putExtra("name", name);
+        intent.putExtra("email", email);
+        intent.putExtra("isadmin", "Is Admin");
+        startActivity(intent);
+    }
 
-        Query checkAdmin = usersRef.child("admins").orderByChild("username").equalTo(userUsername);
-        Query checkStudent = usersRef.child("students").orderByChild("username").equalTo(userUsername);
-
-        checkAdmin.addListenerForSingleValueEvent(new ValueEventListener() {
-            @Override
-            public void onDataChange(@NonNull DataSnapshot snapshot) {
-                if (snapshot.exists()) {
-                    for (DataSnapshot adminSnapshot : snapshot.getChildren()) {
-                        String passwordFromDB = adminSnapshot.child("password").getValue(String.class);
-                        if (passwordFromDB.equals(userPassword)) {
-                            String nameFromDB = adminSnapshot.child("name").getValue(String.class);
-                            String emailFromDB = adminSnapshot.child("email").getValue(String.class);
-
-                            // User found and credentials match
-                            // Pass retrieved information to the next activity
-                            Intent intent = new Intent(LoginActivity.this, AdminActivity.class);
-                            intent.putExtra("username", userUsername);
-                            intent.putExtra("name", nameFromDB);
-                            intent.putExtra("email", emailFromDB);
-                            intent.putExtra("isadmin", "Is Admin");
-                            // Add more data if needed
-                            startActivity(intent);
-                        } else {
-                            loginPassword.setError("Invalid Credentials");
-                            loginPassword.requestFocus();
-                        }
-                        return;
-                    }
-                } else {
-                    // Admin not found, check if the user is a student
-                    checkStudent.addListenerForSingleValueEvent(new ValueEventListener() {
-                        @Override
-                        public void onDataChange(@NonNull DataSnapshot snapshot) {
-                            if (snapshot.exists()) {
-                                for (DataSnapshot studentSnapshot : snapshot.getChildren()) {
-                                    String passwordFromDB = studentSnapshot.child("password").getValue(String.class);
-                                    if (passwordFromDB.equals(userPassword)) {
-                                        String nameFromDB = studentSnapshot.child("name").getValue(String.class);
-                                        String emailFromDB = studentSnapshot.child("email").getValue(String.class);
-
-                                        // Student found and credentials match
-                                        // Pass retrieved information to the next activity
-                                        Intent intent = new Intent(LoginActivity.this, StudentActivity.class);
-                                        intent.putExtra("username", userUsername);
-                                        intent.putExtra("name", nameFromDB);
-                                        intent.putExtra("email", emailFromDB);
-                                        intent.putExtra("isadminorstudent", "Is Student");
-                                        // Add more data if needed
-                                        startActivity(intent);
-                                        return;
-                                    } else {
-                                        loginPassword.setError("Invalid Credentials");
-                                        loginPassword.requestFocus();
-                                    }
-                                }
-                            } else {
-                                loginUsername.setError("User does not exist");
-                                loginUsername.requestFocus();
-                            }
-                        }
-
-                        @Override
-                        public void onCancelled(@NonNull DatabaseError error) {
-                            // Handle onCancelled
-                        }
-                    });
-                }
-            }
-
-            @Override
-            public void onCancelled(@NonNull DatabaseError error) {
-                // Handle onCancelled
-            }
-        });
+    public void navigateToStudentScreen(String username, String name, String email) {
+        Intent intent = new Intent(LoginActivity.this, StudentActivity.class);
+        intent.putExtra("username", username);
+        intent.putExtra("name", name);
+        intent.putExtra("email", email);
+        intent.putExtra("isadminorstudent", "Is Student");
+        startActivity(intent);
     }
 }

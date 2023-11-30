@@ -7,13 +7,9 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.ImageButton;
 
-import androidx.activity.ComponentActivity;
 import androidx.annotation.NonNull;
-import androidx.appcompat.widget.Toolbar;
 import androidx.core.view.GravityCompat;
-import androidx.drawerlayout.widget.DrawerLayout;
 
-import com.google.android.material.navigation.NavigationView;
 import com.uoft.b07application.R;
 import com.uoft.b07application.ui.login.LoginActivity;
 import com.uoft.b07application.ui.menu.MenuActivity;
@@ -30,7 +26,6 @@ public class StudentActivity extends MenuActivity {
         @Override
         protected void onCreate(Bundle savedInstanceState) {
             super.onCreate(savedInstanceState);
-            handleIntentExtra();
         }
 
         @Override
@@ -40,17 +35,21 @@ public class StudentActivity extends MenuActivity {
 
         @Override
         public void setButtonListeners() {
+            //move it here
+            handleIntentExtra();
+            Intent i = getIntent();
+
             studentPOSTCheckerButton = findViewById(R.id.student_POST_checker_button);
             studentComplaintButton = findViewById(R.id.student_complaint_button);
             studentInboxButton = findViewById(R.id.student_inbox_button);
             studentProfileButton = findViewById(R.id.student_profile_button);
             studentEventButton = findViewById(R.id.student_event_button);
-
             //buttons event on dashboards
             studentPOSTCheckerButton.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
                     Intent intent = new Intent(StudentActivity.this, StudentPOSTCheckerActivity.class);
+                    putExtras(i, intent);
                     startActivity(intent);
                 }
             });
@@ -58,6 +57,7 @@ public class StudentActivity extends MenuActivity {
                 @Override
                 public void onClick(View view) {
                     Intent intent = new Intent(StudentActivity.this, StudentComplaintActivity.class);
+                    putExtras(i, intent);
                     startActivity(intent);
                 }
             });
@@ -65,6 +65,7 @@ public class StudentActivity extends MenuActivity {
                 @Override
                 public void onClick(View view) {
                     Intent intent = new Intent(StudentActivity.this, StudentInboxActivity.class);
+                    putExtras(i, intent);
                     startActivity(intent);
                 }
             });
@@ -72,10 +73,7 @@ public class StudentActivity extends MenuActivity {
                 @Override
                 public void onClick(View view) {
                     Intent intent = new Intent(StudentActivity.this, StudentProfileActivity.class);
-                    intent.putExtra("name", name);
-                    intent.putExtra("email", email);
-                    intent.putExtra("isadminorstudent", isadminorstudent);
-                    intent.putExtra("username", username);
+                    putExtras(i, intent);
                     startActivity(intent);
                 }
             });
@@ -83,6 +81,7 @@ public class StudentActivity extends MenuActivity {
                 @Override
                 public void onClick(View view) {
                     Intent intent = new Intent(StudentActivity.this, StudentEventActivity.class);
+                    putExtras(i, intent);
                     startActivity(intent);
                 }
             });
@@ -111,14 +110,11 @@ public class StudentActivity extends MenuActivity {
             } else if (menuItem.getItemId() == R.id.nav_student_logout) {
                 intent = new Intent(StudentActivity.this, LoginActivity.class);
             } else if (menuItem.getItemId() == R.id.nav_student_profile) {
-                String username = i.getStringExtra("username");
-                String email = i.getStringExtra("email");
                 intent = new Intent(StudentActivity.this, StudentProfileActivity.class);
-                intent.putExtra("username", username);
-                intent.putExtra("email", email);
             }
             //switch statement does not work in this case for some reason
             if (intent != null) {
+                putExtras(i, intent);
                 startActivity(intent);
                 drawerLayout.closeDrawer(GravityCompat.START);
                 return true;
@@ -135,6 +131,16 @@ public class StudentActivity extends MenuActivity {
             isadminorstudent = i.getStringExtra("isadminorstudent");
             Log.d("StudentActivity", "name is : " + name);
             Log.d("StudentActivity", "email is : " + email);
+        }
+        void putExtras(Intent i, Intent intent){
+            String username = i.getStringExtra("username");
+            String email = i.getStringExtra("email");
+            String isadminorstudent = i.getStringExtra("isadminorstudent");
+            String name = i.getStringExtra("name");
+            intent.putExtra("name", name);
+            intent.putExtra("email", email);
+            intent.putExtra("isadminorstudent", isadminorstudent);
+            intent.putExtra("username", username);
         }
 
     }
