@@ -1,7 +1,9 @@
 package com.uoft.b07application.ui.admin;
 
 import android.os.Bundle;
+import android.util.Log;
 
+import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -11,6 +13,7 @@ import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 import com.uoft.b07application.R;
 import com.uoft.b07application.ui.student.Complaint;
 import com.uoft.b07application.ui.student.ComplaintsAdapter;
@@ -21,7 +24,7 @@ import java.util.List;
 public class AdminReviewCommentsActivity extends AdminActivity {
     private RecyclerView recyclerView;
     private ComplaintsAdapter adapter;
-    private List<Complaint> complaintsList = new ArrayList<>();
+    private ArrayList<Complaint> complaintsList=new ArrayList<>();
 
     DatabaseReference reference= FirebaseDatabase.getInstance().getReference("complaints");
 
@@ -47,12 +50,39 @@ public class AdminReviewCommentsActivity extends AdminActivity {
 //        recyclerView = findViewById(R.id.admin_review_comments_recycler_view);
         recyclerView = findViewById(R.id.recycler1);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
-        FirebaseRecyclerOptions<Complaint> options
-                = new FirebaseRecyclerOptions.Builder<Complaint>()
-                .setQuery(reference, Complaint.class)
-                .build();
-        adapter = new ComplaintsAdapter(options);
+        adapter = new ComplaintsAdapter(this, complaintsList);
         recyclerView.setAdapter(adapter);
+
+        reference.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+
+                for(DataSnapshot datasnapshot : snapshot.getChildren()){
+                    Complaint complaint = datasnapshot.getValue(Complaint.class);
+                    complaintsList.add(complaint);
+
+                }
+                adapter.notifyDataSetChanged();
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+
+            }
+        });
+
+
+
+
+//        FirebaseRecyclerOptions<Complaint> options
+//                = new FirebaseRecyclerOptions.Builder<Complaint>()
+//                .setQuery(reference.child("complaints"), Complaint.class)
+//                .build();
+//        Log.d("did it work?", "got past line 55");
+//        adapter = new ComplaintsAdapter(options);
+//        Log.d("did it work?", "got past line 56");
+//        recyclerView.setAdapter(adapter);
+//        Log.d("did it work?", "got past line 57");
 
     }
 
@@ -70,19 +100,19 @@ public class AdminReviewCommentsActivity extends AdminActivity {
 
             // Function to tell the app to start getting
             // data from database on starting of the activity
-             protected void onStart()
-            {
-                super.onStart();
-                adapter.startListening();
-            }
-
-            // Function to tell the app to stop getting
-            // data from database on stopping of the activity
-             protected void onStop()
-            {
-                super.onStop();
-                adapter.stopListening();
-            }
+//             protected void onStart()
+//            {
+//                super.onStart();
+//                adapter.startListening();
+//            }
+//
+//            // Function to tell the app to stop getting
+//            // data from database on stopping of the activity
+//             protected void onStop()
+//            {
+//                super.onStop();
+//                adapter.stopListening();
+//            }
 
 //            @Override
 //            public void onChildChanged(DataSnapshot dataSnapshot, String prevChildKey) {

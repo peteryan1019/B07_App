@@ -67,8 +67,7 @@ public class StudentComplaintActivity extends StudentActivity {
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
                 // Get the selected item
                 topic = parent.getItemAtPosition(position).toString();
-                if(topic!="Complaint Topic")
-                {isTopicSelected = true;}
+                isTopicSelected = true;
             }
 
             @Override
@@ -80,7 +79,7 @@ public class StudentComplaintActivity extends StudentActivity {
         submit_button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if (!isTopicSelected) {
+                if (!isTopicSelected || topic.equals("Complaint Topic")) {
                     Toast.makeText(StudentComplaintActivity.this, "Please select a topic", Toast.LENGTH_SHORT).show();
                     return;}
                 String complaint_body = editTextComplaint.getText().toString().trim();

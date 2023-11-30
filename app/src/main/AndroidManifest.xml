@@ -46,7 +46,7 @@
             android:exported="false" />
         <activity
             android:name=".ui.admin.AdminReviewCommentsActivity"
-            android:exported="false" />
+            android:exported="true" />
         <activity
             android:name=".ui.admin.AdminEventActivity"
             android:exported="false" />
