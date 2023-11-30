@@ -33,7 +33,6 @@ public class E_RecyclerViewAdapter extends RecyclerView.Adapter<E_RecyclerViewAd
         this.viewFeedBackButtonVisibility = visibility;
         this.commenterEmail = commenterEmail;
         this.commenterName = commenterName;
-
     }
 
     @NonNull
@@ -69,8 +68,11 @@ public class E_RecyclerViewAdapter extends RecyclerView.Adapter<E_RecyclerViewAd
         holder.viewFeedbackButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                FeedbackBottomSheetFragment bottomSheetFragment = new FeedbackBottomSheetFragment(holder.eventNameView.getText().toString());
-                bottomSheetFragment.show(((FragmentActivity) context).getSupportFragmentManager(), bottomSheetFragment.getTag());
+                FeedbackBottomSheetFragment bottomSheetFragment =
+                        new FeedbackBottomSheetFragment(holder.eventNameView.getText().toString()
+                                , holder.eventKey.getText().toString());
+                bottomSheetFragment.show(((FragmentActivity) context)
+                        .getSupportFragmentManager(), bottomSheetFragment.getTag());
 
             }
         });
@@ -97,7 +99,6 @@ public class E_RecyclerViewAdapter extends RecyclerView.Adapter<E_RecyclerViewAd
             eventDateView = itemView.findViewById(R.id.event_date);
             viewFeedbackButton = itemView.findViewById(R.id.view_feedback_button);
             commentFeedbackButton = itemView.findViewById(R.id.comment_feedback_button);
-
         }
 
         public void setViewButtonVisibility(int visibility) {
