@@ -41,7 +41,7 @@
 
 
                 <EditText
-                    android:id="@+id/student_evenet_text"
+                    android:id="@+id/student_event_text"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="115dp"
@@ -70,11 +70,14 @@
                     android:visibility="visible"
                     tools:ignore="MissingConstraints" />
 
-                <include
-                    android:layout_width="fill_parent"
-                    android:layout_height="wrap_content"
-                    android:id="@+id/student_event_fragment"
-                    layout="@layout/activity_event_page" />
+                <androidx.recyclerview.widget.RecyclerView
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:id="@+id/student_event_recycler_view"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/student_event_text">
+
+                </androidx.recyclerview.widget.RecyclerView>
 
             </androidx.constraintlayout.widget.ConstraintLayout>
         </ScrollView>
