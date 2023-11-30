@@ -69,8 +69,9 @@ public class E_RecyclerViewAdapter extends RecyclerView.Adapter<E_RecyclerViewAd
         holder.viewFeedbackButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                FeedbackBottomSheetFragment bottomSheetFragment = new FeedbackBottomSheetFragment();
+                FeedbackBottomSheetFragment bottomSheetFragment = new FeedbackBottomSheetFragment(holder.eventNameView.getText().toString());
                 bottomSheetFragment.show(((FragmentActivity) context).getSupportFragmentManager(), bottomSheetFragment.getTag());
+
             }
         });
 
