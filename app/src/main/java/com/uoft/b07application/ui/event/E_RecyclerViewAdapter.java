@@ -10,9 +10,11 @@ import android.widget.ImageButton;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
+import androidx.fragment.app.FragmentActivity;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.uoft.b07application.R;
+import com.uoft.b07application.ui.admin.FeedbackBottomSheetFragment;
 import com.uoft.b07application.ui.student.StudentFeedback;
 
 import java.util.ArrayList;
@@ -31,7 +33,6 @@ public class E_RecyclerViewAdapter extends RecyclerView.Adapter<E_RecyclerViewAd
         this.viewFeedBackButtonVisibility = visibility;
         this.commenterEmail = commenterEmail;
         this.commenterName = commenterName;
-
     }
 
     @NonNull
@@ -53,8 +54,6 @@ public class E_RecyclerViewAdapter extends RecyclerView.Adapter<E_RecyclerViewAd
         holder.commentFeedbackButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                // Build your intent here and start the activity or perform the desired action
-                // For example, you can open a new activity using an intent
                 Intent intent = new Intent(context, StudentFeedback.class);
                 intent.putExtra("eventName", holder.eventNameView.getText().
                         toString().replaceFirst("Event name: ", ""));
@@ -69,10 +68,12 @@ public class E_RecyclerViewAdapter extends RecyclerView.Adapter<E_RecyclerViewAd
         holder.viewFeedbackButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                // Build your intent here and start the activity or perform the desired action
-                // For example, you can open a new activity using an intent
-                Intent intent = new Intent(context, StudentFeedback.class);
-                context.startActivity(intent);
+                FeedbackBottomSheetFragment bottomSheetFragment =
+                        new FeedbackBottomSheetFragment(holder.eventNameView.getText().toString()
+                                , holder.eventKey.getText().toString());
+                bottomSheetFragment.show(((FragmentActivity) context)
+                        .getSupportFragmentManager(), bottomSheetFragment.getTag());
+
             }
         });
 
@@ -98,7 +99,6 @@ public class E_RecyclerViewAdapter extends RecyclerView.Adapter<E_RecyclerViewAd
             eventDateView = itemView.findViewById(R.id.event_date);
             viewFeedbackButton = itemView.findViewById(R.id.view_feedback_button);
             commentFeedbackButton = itemView.findViewById(R.id.comment_feedback_button);
-
         }
 
         public void setViewButtonVisibility(int visibility) {
