@@ -10,11 +10,13 @@ import android.widget.ImageButton;
 import android.widget.TextView;
 import com.uoft.b07application.ui.event.EventModel;
 import com.uoft.b07application.ui.event.EventDialog;
-
+import com.google.firebase.database.DataSnapshot;
 import androidx.annotation.NonNull;
+import androidx.fragment.app.FragmentActivity;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.uoft.b07application.R;
+import com.uoft.b07application.ui.admin.FeedbackBottomSheetFragment;
 import com.uoft.b07application.ui.student.StudentFeedback;
 
 import java.util.ArrayList;
@@ -39,7 +41,7 @@ public class E_RecyclerViewAdapter extends RecyclerView.Adapter<E_RecyclerViewAd
         this.viewFeedBackButtonVisibility = visibility;
         this.commenterEmail = commenterEmail;
         this.commenterName = commenterName;
-
+        this.databaseReference = FirebaseDatabase.getInstance().getReference();
     }
 
     @NonNull
@@ -53,7 +55,7 @@ public class E_RecyclerViewAdapter extends RecyclerView.Adapter<E_RecyclerViewAd
 
     @Override
     public void onBindViewHolder(@NonNull E_ViewHolder holder, int position) {
-        final int itemPosition = position;
+        int itemPosition = position;
         holder.eventNameView.setText(String.format("Event name: %s", events.get(position).getEventName()));
         holder.eventDateView.setText(String.format("Date: %s", events.get(position).getEventDate()));
         holder.eventKey.setText(events.get(position).getKey());
@@ -62,8 +64,6 @@ public class E_RecyclerViewAdapter extends RecyclerView.Adapter<E_RecyclerViewAd
         holder.commentFeedbackButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                // Build your intent here and start the activity or perform the desired action
-                // For example, you can open a new activity using an intent
                 Intent intent = new Intent(context, StudentFeedback.class);
                 intent.putExtra("eventName", holder.eventNameView.getText().
                         toString().replaceFirst("Event name: ", ""));
@@ -78,13 +78,23 @@ public class E_RecyclerViewAdapter extends RecyclerView.Adapter<E_RecyclerViewAd
         holder.viewFeedbackButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                // Build your intent here and start the activity or perform the desired action
-                // For example, you can open a new activity using an intent
-                Intent intent = new Intent(context, StudentFeedback.class);
-                context.startActivity(intent);
+                FeedbackBottomSheetFragment bottomSheetFragment =
+                        new FeedbackBottomSheetFragment(holder.eventNameView.getText().toString()
+                                , holder.eventKey.getText().toString());
+                bottomSheetFragment.show(((FragmentActivity) context)
+                        .getSupportFragmentManager(), bottomSheetFragment.getTag());
+
             }
         });
 
+        holder.signupButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                String eventKey = events.get(itemPosition).getKey();
+                handleSignup(eventKey);
+
+            }
+        });
 
 
     }
@@ -92,6 +102,35 @@ public class E_RecyclerViewAdapter extends RecyclerView.Adapter<E_RecyclerViewAd
     @Override
     public int getItemCount() {
         return events.size();
+    }
+
+    private void handleSignup(String eventKey) {
+        // Get a reference to the events node in Firebase
+        DatabaseReference eventsRef = databaseReference.child("events");
+
+        // Get the current number of attendees for the specific event
+        DatabaseReference numAttendeesRef = eventsRef.child(eventKey).child("numAttendees");
+        numAttendeesRef.get().addOnCompleteListener(task -> {
+            if (task.isSuccessful()) {
+                DataSnapshot snapshot = task.getResult();
+                if (snapshot.exists()) {
+                    // Get the current number of attendees
+                    int numAttendees = Integer.parseInt(snapshot.getValue().toString());
+
+                    // Check if there are available slots
+                    if (numAttendees > 0) {
+                        // Subtract one from numAttendees and update Firebase
+                        eventsRef.child(eventKey).child("numAttendees").setValue(numAttendees - 1);
+
+                        // Display a success message
+                        Toast.makeText(context, "Signed up for the event", Toast.LENGTH_SHORT).show();
+                    } else {
+                        // Display a message indicating the event is full
+                        Toast.makeText(context, "Event is full", Toast.LENGTH_SHORT).show();
+                    }
+                }
+            }
+        });
     }
 
 
@@ -102,7 +141,8 @@ public class E_RecyclerViewAdapter extends RecyclerView.Adapter<E_RecyclerViewAd
         ImageButton viewFeedbackButton;
         ImageButton commentFeedbackButton;
 
-        ImageButton signupButton;
+        ImageButton signupButton; // Add this line
+
 
         public E_ViewHolder(@NonNull View itemView) {
             super(itemView);
@@ -111,7 +151,7 @@ public class E_RecyclerViewAdapter extends RecyclerView.Adapter<E_RecyclerViewAd
             eventDateView = itemView.findViewById(R.id.event_date);
             viewFeedbackButton = itemView.findViewById(R.id.view_feedback_button);
             commentFeedbackButton = itemView.findViewById(R.id.comment_feedback_button);
-
+            signupButton = itemView.findViewById(R.id.signup_button);
         }
 
         public void setViewButtonVisibility(int visibility) {

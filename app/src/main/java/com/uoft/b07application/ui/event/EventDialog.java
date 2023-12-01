@@ -23,7 +23,7 @@ public class EventDialog extends AppCompatDialogFragment {
     final DatabaseReference databaseReference = FirebaseDatabase.getInstance().getReference();
     EditText eventName;
     EditText eventDate;
-   // EditText numAttendees; // Add this field
+    EditText numAttendees; // Add this field
 
     @Override
     public Dialog onCreateDialog(@Nullable Bundle savedInstanceState) {
@@ -32,7 +32,7 @@ public class EventDialog extends AppCompatDialogFragment {
         View view = inflater.inflate(R.layout.schedule_event, null);
         eventName = view.findViewById(R.id.event_name);
         eventDate = view.findViewById(R.id.event_date);
-       // numAttendees = view.findViewById(R.id.num_attendees); // Initialize the EditText for num attendees
+        numAttendees = view.findViewById(R.id.num_attendees); // Initialize the EditText for num attendees
         builder.setView(view)
                 .setNegativeButton("close", null)
                 .setPositiveButton("send", null);
@@ -46,14 +46,15 @@ public class EventDialog extends AppCompatDialogFragment {
                     public void onClick(View v) {
                         final String eventNameString = eventName.getText().toString();
                         final String eventDateString = eventDate.getText().toString();
-                   //     final String numAttendeesString = numAttendees.getText().toString();
+                        final String numAttendeesString = numAttendees.getText().toString();
 
-                    //    if (eventNameString.isEmpty() || numAttendeesString.isEmpty()) {
+                        if (eventNameString.isEmpty() || numAttendeesString.isEmpty()) {
                             Toast.makeText(getContext(), "Event name and number of attendees cannot be empty", Toast.LENGTH_SHORT).show();
-                     //   } else {
-                       //     scheduleEvent(eventNameString, eventDateString, numAttendeesString);
-                      //      dismiss();
-                     //   }
+                        } else {
+                            scheduleEvent(eventNameString, eventDateString, numAttendeesString);
+                            Toast.makeText(getContext(), "Event Scheduled",Toast.LENGTH_SHORT).show();
+                            dismiss();
+                        }
                     }
                 });
 
@@ -70,12 +71,12 @@ public class EventDialog extends AppCompatDialogFragment {
     }
 
    // private void scheduleEvent(String eventName, String eventDate, String numAttendees) {
-   private void scheduleEvent(String eventName, String eventDate) {
-       // int attendees = Integer.parseInt(numAttendees);
+   private void scheduleEvent(String eventName, String eventDate, String numAttendees) {
+        int attendees = Integer.parseInt(numAttendees);
         HashMap<String, Object> event = new HashMap<>();
         event.put("eventName", eventName);
         event.put("eventDate", eventDate);
-      //  event.put("numAttendees", attendees);
+        event.put("numAttendees", attendees);
         databaseReference.child("events").push().setValue(event);
     }
 }

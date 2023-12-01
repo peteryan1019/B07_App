@@ -27,8 +27,8 @@ public class EventModel {
         return key;
     }
 
-   // public int getNumAttendees() {
-  //      return numAttendees;
-   // }
+//    public int getNumAttendees() {
+//        return numAttendees;
+//    }
 }
 

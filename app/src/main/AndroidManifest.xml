@@ -14,9 +14,6 @@
         android:theme="@style/Theme.MyApplication"
         tools:targetApi="31">
         <activity
-            android:name=".ui.admin.AdminViewFeedback"
-            android:exported="false" />
-        <activity
             android:name=".ui.menu.MenuActivity"
             android:exported="false" />
         <activity
@@ -48,7 +45,7 @@
             android:exported="false" />
         <activity
             android:name=".ui.admin.AdminReviewCommentsActivity"
-            android:exported="false" />
+            android:exported="true" />
         <activity
             android:name=".ui.admin.AdminEventActivity"
             android:exported="false" />
@@ -68,6 +65,7 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        
         <activity
             android:name=".ui.student.StudentFeedback"
             android:exported="true" />

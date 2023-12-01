@@ -24,6 +24,7 @@ public class StudentComplaintActivity extends StudentActivity {
     private EditText editTextComplaint;
     private boolean isTopicSelected = false;
 
+
     String topic;
     DatabaseReference reference;
 
@@ -78,18 +79,17 @@ public class StudentComplaintActivity extends StudentActivity {
         submit_button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if (!isTopicSelected) {
+                if (!isTopicSelected || topic.equals("Complaint Topic")) {
                     Toast.makeText(StudentComplaintActivity.this, "Please select a topic", Toast.LENGTH_SHORT).show();
                     return;}
-
-//                EditText complaint_topic = findViewById(R.id.complaint_topic);
-//                String topic = complaint_topic.getText().toString().trim();
                 String complaint_body = editTextComplaint.getText().toString().trim();
-                if (!complaint_body.isEmpty()) {
-                    // Generate a unique key for the complaint
-//                    String complaintId = reference.child("complaints").push().getKey();
+                if (!complaint_body.isEmpty() && isTopicSelected) {
+                Complaint complaint = new Complaint(topic, complaint_body);
 
-                    reference.child(topic).setValue(complaint_body)
+                    // Generate a unique key for the complaint
+                    String complaintId = reference.child("complaints").push().getKey();
+
+                    reference.child(complaintId).setValue(complaint)
                             .addOnSuccessListener(new OnSuccessListener<Void>() {
                                 @Override
                                 public void onSuccess(Void aVoid) {
