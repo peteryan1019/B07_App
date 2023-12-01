@@ -53,13 +53,14 @@ public class SignupActivityModel {
                                                         listener.onError("Email already exists");
                                                     } else {
                                                         // Neither username nor email exists, proceed with signup
+                                                        String hashPassword = PasswordHasher.hashPassword(password);
                                                         if (isAdmin) {
                                                             DatabaseReference adminRef = usersRef.child("admins").child(username);
-                                                            Admin admin = new Admin(name, username, email, password);
+                                                            Admin admin = new Admin(name, username, email, hashPassword);
                                                             adminRef.setValue(admin);
                                                         } else {
                                                             DatabaseReference studentRef = usersRef.child("students").child(username);
-                                                            Student student = new Student(name, username, email, password);
+                                                            Student student = new Student(name, username, email, hashPassword);
                                                             studentRef.setValue(student);
                                                         }
                                                         listener.onSuccess();

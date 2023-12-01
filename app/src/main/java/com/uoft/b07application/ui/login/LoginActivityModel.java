@@ -15,6 +15,7 @@ public class LoginActivityModel {
 
     public void loginUser(String username, String password, OnLoginFinishedListener listener) {
         DatabaseReference usersRef = FirebaseDatabase.getInstance().getReference("users");
+        String hashedInputPassword = PasswordHasher.hashPassword(password);
 
         Query checkAdmin = usersRef.child("admins").orderByChild("username").equalTo(username);
         Query checkStudent = usersRef.child("students").orderByChild("username").equalTo(username);
@@ -25,7 +26,7 @@ public class LoginActivityModel {
                 if (snapshot.exists()) {
                     for (DataSnapshot adminSnapshot : snapshot.getChildren()) {
                         String passwordFromDB = adminSnapshot.child("password").getValue(String.class);
-                        if (passwordFromDB != null && passwordFromDB.equals(password)) {
+                        if (passwordFromDB != null && passwordFromDB.equals(hashedInputPassword)) {
                             String nameFromDB = adminSnapshot.child("name").getValue(String.class);
                             String emailFromDB = adminSnapshot.child("email").getValue(String.class);
 
@@ -44,7 +45,7 @@ public class LoginActivityModel {
                             if (snapshot.exists()) {
                                 for (DataSnapshot studentSnapshot : snapshot.getChildren()) {
                                     String passwordFromDB = studentSnapshot.child("password").getValue(String.class);
-                                    if (passwordFromDB != null && passwordFromDB.equals(password)) {
+                                    if (passwordFromDB != null && passwordFromDB.equals(hashedInputPassword)) {
                                         String nameFromDB = studentSnapshot.child("name").getValue(String.class);
                                         String emailFromDB = studentSnapshot.child("email").getValue(String.class);
 
