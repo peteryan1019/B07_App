@@ -5,8 +5,11 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.RatingBar;
-import android.widget.TextView;
+import android.content.Intent;
 import android.widget.Toast;
+
+import androidx.annotation.NonNull;
+import androidx.appcompat.app.AppCompatActivity;
 
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
@@ -14,8 +17,7 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.uoft.b07application.R;
 
-import androidx.annotation.NonNull;
-import androidx.appcompat.app.AppCompatActivity;
+import java.util.HashMap;
 
 public class StudentFeedback extends AppCompatActivity {
     private EditText nameEditText;
@@ -44,16 +46,23 @@ public class StudentFeedback extends AppCompatActivity {
     }
 
     private void saveFeedbackToFirebase(String name, String eventName, float rating, String feedbackComment) {
+        //getExtra
+        Intent intent = getIntent();
         // Get the reference to the "feedback" node in the database
         DatabaseReference feedbackReference = FirebaseDatabase.getInstance().getReference().child("feedback");
 
-        String feedbackId = name + "_" + eventName;
-
         // Create a Feedback object with the provided data
-        Feedback feedback = new Feedback(name, eventName, rating, feedbackComment);
+        HashMap<String, String> feedback = new HashMap<>();
+        feedback.put("commenterName", intent.getStringExtra("commenterName"));
+        feedback.put("commenterEmail", intent.getStringExtra("commenterEmail"));
+        feedback.put("eventKey", intent.getStringExtra("eventKey"));
+        feedback.put("eventName", intent.getStringExtra("eventName"));
+        feedback.put("rating", Float.toString(rating));
+        feedback.put("feedbackComment", feedbackComment);
+
 
         // Save the feedback to Firebase
-        feedbackReference.child(feedbackId).setValue(feedback)
+        feedbackReference.push().setValue(feedback)
                 .addOnSuccessListener(new OnSuccessListener<Void>() {
                     @Override
                     public void onSuccess(Void aVoid) {
