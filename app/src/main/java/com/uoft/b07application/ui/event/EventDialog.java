@@ -23,7 +23,7 @@ public class EventDialog extends AppCompatDialogFragment {
     final DatabaseReference databaseReference = FirebaseDatabase.getInstance().getReference();
     EditText eventName;
     EditText eventDate;
-    EditText numAttendees; // Add this field
+    EditText numAttendees;
 
     @Override
     public Dialog onCreateDialog(@Nullable Bundle savedInstanceState) {
@@ -70,13 +70,19 @@ public class EventDialog extends AppCompatDialogFragment {
         return alertDialog;
     }
 
-   // private void scheduleEvent(String eventName, String eventDate, String numAttendees) {
+
    private void scheduleEvent(String eventName, String eventDate, String numAttendees) {
-        int attendees = Integer.parseInt(numAttendees);
-        HashMap<String, Object> event = new HashMap<>();
-        event.put("eventName", eventName);
-        event.put("eventDate", eventDate);
-        event.put("numAttendees", attendees);
-        databaseReference.child("events").push().setValue(event);
-    }
+       int attendees = Integer.parseInt(numAttendees);
+       DatabaseReference eventsRef = databaseReference.child("events");
+       DatabaseReference newEventRef = eventsRef.push();
+
+       // Set the basic event information
+       newEventRef.child("eventName").setValue(eventName);
+       newEventRef.child("eventDate").setValue(eventDate);
+       newEventRef.child("numAttendees").setValue(attendees);
+
+       // Create an empty "signups" section
+       newEventRef.child("signups").setValue(new HashMap<String, Boolean>());
+   }
+
 }

@@ -33,7 +33,7 @@ public class E_RecyclerViewAdapter extends RecyclerView.Adapter<E_RecyclerViewAd
     String commenterName;
     String commenterEmail;
 
-    DatabaseReference databaseReference; // Add this line
+    DatabaseReference databaseReference;
 
     public E_RecyclerViewAdapter(Context context, ArrayList<EventModel> events, boolean visibility, String commenterName, String commenterEmail) {
         this.context = context;
@@ -44,6 +44,13 @@ public class E_RecyclerViewAdapter extends RecyclerView.Adapter<E_RecyclerViewAd
         this.databaseReference = FirebaseDatabase.getInstance().getReference();
     }
 
+    //for checking if already signed
+    private boolean hasStudentSignedUp(String eventKey, String studentEmail) {
+        DatabaseReference eventsRef = databaseReference.child("events");
+        DatabaseReference signupsRef = eventsRef.child(eventKey).child("signups").child(studentEmail);
+
+        return signupsRef != null;
+    }
     @NonNull
     @Override
     public E_RecyclerViewAdapter.E_ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
@@ -92,10 +99,8 @@ public class E_RecyclerViewAdapter extends RecyclerView.Adapter<E_RecyclerViewAd
             public void onClick(View view) {
                 String eventKey = events.get(itemPosition).getKey();
                 handleSignup(eventKey);
-
             }
         });
-
 
     }
 
@@ -131,7 +136,10 @@ public class E_RecyclerViewAdapter extends RecyclerView.Adapter<E_RecyclerViewAd
                 }
             }
         });
-    }
+
+}
+
+
 
 
     public static class E_ViewHolder extends RecyclerView.ViewHolder {
