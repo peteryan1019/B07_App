@@ -8,6 +8,8 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageButton;
 import android.widget.TextView;
+import com.uoft.b07application.ui.event.EventModel;
+import com.uoft.b07application.ui.event.EventDialog;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
@@ -16,6 +18,10 @@ import com.uoft.b07application.R;
 import com.uoft.b07application.ui.student.StudentFeedback;
 
 import java.util.ArrayList;
+import android.widget.Toast;
+
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
 
 public class E_RecyclerViewAdapter extends RecyclerView.Adapter<E_RecyclerViewAdapter.E_ViewHolder> {
     Context context;
@@ -24,6 +30,8 @@ public class E_RecyclerViewAdapter extends RecyclerView.Adapter<E_RecyclerViewAd
     boolean viewFeedBackButtonVisibility;
     String commenterName;
     String commenterEmail;
+
+    DatabaseReference databaseReference; // Add this line
 
     public E_RecyclerViewAdapter(Context context, ArrayList<EventModel> events, boolean visibility, String commenterName, String commenterEmail) {
         this.context = context;
@@ -45,6 +53,7 @@ public class E_RecyclerViewAdapter extends RecyclerView.Adapter<E_RecyclerViewAd
 
     @Override
     public void onBindViewHolder(@NonNull E_ViewHolder holder, int position) {
+        final int itemPosition = position;
         holder.eventNameView.setText(String.format("Event name: %s", events.get(position).getEventName()));
         holder.eventDateView.setText(String.format("Date: %s", events.get(position).getEventDate()));
         holder.eventKey.setText(events.get(position).getKey());
@@ -76,6 +85,8 @@ public class E_RecyclerViewAdapter extends RecyclerView.Adapter<E_RecyclerViewAd
             }
         });
 
+
+
     }
 
     @Override
@@ -90,6 +101,8 @@ public class E_RecyclerViewAdapter extends RecyclerView.Adapter<E_RecyclerViewAd
         TextView eventKey;
         ImageButton viewFeedbackButton;
         ImageButton commentFeedbackButton;
+
+        ImageButton signupButton;
 
         public E_ViewHolder(@NonNull View itemView) {
             super(itemView);
