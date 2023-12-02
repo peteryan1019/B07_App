@@ -6,6 +6,7 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.os.Bundle;
+import android.util.Log;
 
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -16,6 +17,7 @@ import com.uoft.b07application.R;
 import com.uoft.b07application.ui.admin.AnnouncementModel;
 
 import java.util.ArrayList;
+import java.util.Collections;
 
 public class StudentInboxActivity extends StudentActivity {
     private RecyclerView recyclerView;
@@ -43,7 +45,10 @@ public class StudentInboxActivity extends StudentActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         recyclerView = findViewById(R.id.announcement_recycler_view);
-        recyclerView.setLayoutManager(new LinearLayoutManager(this));
+        LinearLayoutManager layoutManager = new LinearLayoutManager(this);
+        layoutManager.setReverseLayout(true);
+        layoutManager.setStackFromEnd(true);
+        recyclerView.setLayoutManager(layoutManager);
         adapter = new AnnouncementAdapter(this, announcementList);
         recyclerView.setAdapter(adapter);
 
