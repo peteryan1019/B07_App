@@ -40,16 +40,16 @@ public class AnnouncementAdapter extends RecyclerView.Adapter<AnnouncementAdapte
         holder.subject.setText(announcementModel.getSubject());
         holder.message.setText(announcementModel.getMessage());
 
-        SharedPreferences sharedPreferences = holder.itemView.getContext().getSharedPreferences("MyPrefs", Context.MODE_PRIVATE);
-        boolean isDisabled = sharedPreferences.getBoolean("ButtonState_" + position, false);
+//        SharedPreferences sharedPreferences = holder.itemView.getContext().getSharedPreferences("MyPrefs", Context.MODE_PRIVATE);
+//        boolean isDisabled = sharedPreferences.getBoolean("ButtonState_" + position, false);
 
-        if (isDisabled) {
-            holder.button.setEnabled(false);
-            holder.button.setBackgroundColor(Color.GRAY);
-        } else {
-            holder.button.setEnabled(true);
-            holder.button.setBackgroundResource(R.color.original_background_color); // Assuming you have a drawable for the original background
-        }
+//        if (isDisabled) {
+//            holder.button.setEnabled(false);
+//            holder.button.setBackgroundColor(Color.GRAY);
+//        } else {
+//            holder.button.setEnabled(true);
+//            holder.button.setBackgroundResource(R.color.original_background_color); // Assuming you have a drawable for the original background
+//        }
     }
 
 
@@ -77,10 +77,10 @@ public class AnnouncementAdapter extends RecyclerView.Adapter<AnnouncementAdapte
                     button.setText("already read");
                     button.setBackgroundColor(Color.GRAY);
 
-                    SharedPreferences sharedPreferences = v.getContext().getSharedPreferences("MyPrefs", Context.MODE_PRIVATE);
-                    SharedPreferences.Editor editor = sharedPreferences.edit();
-                    editor.putBoolean("ButtonState_" + getBindingAdapterPosition(), true);
-                    editor.apply();
+//                    SharedPreferences sharedPreferences = v.getContext().getSharedPreferences("MyPrefs", Context.MODE_PRIVATE);
+//                    SharedPreferences.Editor editor = sharedPreferences.edit();
+//                    editor.putBoolean("ButtonState_" + getBindingAdapterPosition(), true);
+//                    editor.apply();
                 }
             });
 
