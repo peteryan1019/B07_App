@@ -5,6 +5,7 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.Button;
 import android.widget.ImageButton;
 
 import androidx.annotation.NonNull;
@@ -22,6 +23,8 @@ public class StudentActivity extends MenuActivity {
         public String isadminorstudent;
         ImageButton studentPOSTCheckerButton, studentComplaintButton,
                 studentInboxButton, studentProfileButton, studentEventButton;
+        Button studentEventButton_1, studentPOSTCheckerButton_1, studentComplaintButton_1,
+    studentInboxButton_1, studentProfileButton_1;
 
         @Override
         protected void onCreate(Bundle savedInstanceState) {
@@ -44,6 +47,48 @@ public class StudentActivity extends MenuActivity {
             studentInboxButton = findViewById(R.id.student_inbox_button);
             studentProfileButton = findViewById(R.id.student_profile_button);
             studentEventButton = findViewById(R.id.student_event_button);
+            studentEventButton_1=findViewById(R.id.student_event_text);
+            studentPOSTCheckerButton_1=findViewById(R.id.student_POST_checker_text);
+            studentComplaintButton_1=findViewById(R.id.student_complaint_text);
+            studentProfileButton_1=findViewById(R.id.student_profile_text);
+
+            studentProfileButton_1.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    Intent intent = new Intent(StudentActivity.this, StudentProfileActivity.class);
+                    putExtras(i, intent);
+                    startActivity(intent);
+                }
+            });
+
+            studentComplaintButton_1.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    Intent intent = new Intent(StudentActivity.this, StudentComplaintActivity.class);
+                    putExtras(i, intent);
+                    startActivity(intent);
+
+                }
+            });
+
+            studentEventButton_1.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    Intent intent = new Intent(StudentActivity.this, StudentEventActivity.class);
+                    putExtras(i, intent);
+                    startActivity(intent);
+                }
+            });
+
+            studentPOSTCheckerButton_1.setOnClickListener(new View.OnClickListener(){
+                @Override
+                public void onClick(View view){
+                    Intent intent =new Intent(StudentActivity.this, StudentPOSTCheckerActivity.class);
+                    putExtras(i, intent);
+                    startActivity(intent);
+                }
+            });
+
             //buttons event on dashboards
             studentPOSTCheckerButton.setOnClickListener(new View.OnClickListener() {
                 @Override

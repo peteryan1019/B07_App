@@ -43,7 +43,10 @@ public class AdminReviewCommentsActivity extends AdminActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         recyclerView = findViewById(R.id.recycler1);
-        recyclerView.setLayoutManager(new LinearLayoutManager(this));
+        LinearLayoutManager layoutManager = new LinearLayoutManager(this);
+        layoutManager.setReverseLayout(true);
+        layoutManager.setStackFromEnd(true);
+        recyclerView.setLayoutManager(layoutManager);
         adapter = new ComplaintsAdapter(this, complaintsList);
         recyclerView.setAdapter(adapter);
 
