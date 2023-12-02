@@ -40,7 +40,8 @@ public class ComplaintsAdapter extends RecyclerView.Adapter<ComplaintsAdapter.Co
         Complaint complaint = complaintList.get(position);
         holder.topic.setText(complaint.getId());
         holder.message.setText(complaint.getMessage());
-
+        holder.date.setText(complaint.getDate());
+        holder.time.setText(complaint.getTime());
     }
 
     @Override
@@ -49,9 +50,11 @@ public class ComplaintsAdapter extends RecyclerView.Adapter<ComplaintsAdapter.Co
     }
 
     public static class ComplaintViewHolder extends RecyclerView.ViewHolder{
-        TextView topic, message;
+        TextView topic, message, date, time;
         public ComplaintViewHolder(@NonNull View view){
             super(view);
+            date=view.findViewById(R.id.date_text_1);
+            time=view.findViewById(R.id.time_text_1);
             topic = view.findViewById(R.id.topic);
             message = view.findViewById(R.id.message);
         }

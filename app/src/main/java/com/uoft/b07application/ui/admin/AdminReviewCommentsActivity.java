@@ -47,7 +47,6 @@ public class AdminReviewCommentsActivity extends AdminActivity {
         layoutManager.setReverseLayout(true);
         layoutManager.setStackFromEnd(true);
         recyclerView.setLayoutManager(layoutManager);
-        Log.d("Reversed List", complaintsList.toString());
         adapter = new ComplaintsAdapter(this, complaintsList);
         recyclerView.setAdapter(adapter);
 
