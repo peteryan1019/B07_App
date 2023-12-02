@@ -39,12 +39,14 @@
                 android:layout_height="match_parent"
                 android:background="@color/white">
 
-                <EditText
+                <TextView
                     android:id="@+id/admin_Dashboard_text"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="140dp"
                     android:layout_marginTop="8dp"
+                    android:backgroundTint="@color/white"
+                    android:textColor="@color/black"
                     android:background="@android:color/transparent"
                     android:fontFamily="@font/akaya_telivigala"
                     android:inputType="text"
@@ -84,12 +86,14 @@
                         android:layout_margin="10dp"
                         android:layout_weight="1">
 
-                        <EditText
+                        <Button
                             android:id="@+id/admin_announcements_text"
                             android:layout_width="match_parent"
                             android:layout_height="90dp"
                             android:layout_gravity="bottom"
                             android:ems="10"
+                            android:backgroundTint="@color/white"
+                            android:textColor="@color/black"
                             android:fontFamily="@font/akaya_telivigala"
                             android:inputType="text"
                             android:text="Announcement"
@@ -112,16 +116,18 @@
                         android:layout_margin="10dp"
                         android:layout_weight="1">
 
-                        <EditText
+                        <Button
                             android:id="@+id/admin_event_text"
                             android:layout_width="match_parent"
-                            android:layout_height="90dp"
+                            android:layout_height="89dp"
                             android:layout_gravity="bottom"
+                            android:backgroundTint="@color/white"
                             android:ems="10"
                             android:fontFamily="@font/akaya_telivigala"
                             android:inputType="text"
                             android:text="Event"
                             android:textAlignment="center"
+                            android:textColor="@color/black"
                             android:textStyle="bold"
                             tools:ignore="RtlCompat" />
 
@@ -153,17 +159,20 @@
                         android:layout_margin="10dp"
                         android:layout_weight="1">
 
-                        <TextView
+                        <Button
                             android:id="@+id/admin_reviewcomments_text"
                             android:layout_width="match_parent"
-                            android:layout_height="90dp"
+                            android:layout_height="82dp"
                             android:layout_gravity="bottom"
+                            android:backgroundTint="@color/white"
                             android:ems="10"
                             android:fontFamily="@font/akaya_telivigala"
                             android:inputType="text"
                             android:text="Review Comments"
                             android:textAlignment="center"
+                            android:textColor="@color/black"
                             android:textStyle="bold"
+                            app:layout_constraintTop_toBottomOf="@+id/admin_reviewcomments_button"
                             tools:ignore="RtlCompat" />
 
                         <ImageButton
@@ -181,16 +190,18 @@
                         android:layout_margin="10dp"
                         android:layout_weight="1">
 
-                        <EditText
+                        <Button
                             android:id="@+id/admin_profile_text"
                             android:layout_width="match_parent"
-                            android:layout_height="90dp"
+                            android:layout_height="73dp"
                             android:layout_gravity="bottom"
+                            android:backgroundTint="@color/white"
                             android:ems="10"
                             android:fontFamily="@font/akaya_telivigala"
                             android:inputType="text"
                             android:text="Profile"
                             android:textAlignment="center"
+                            android:textColor="@color/black"
                             android:textStyle="bold"
                             tools:ignore="RtlCompat" />
 
