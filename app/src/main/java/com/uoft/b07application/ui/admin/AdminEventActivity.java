@@ -40,7 +40,7 @@ public class AdminEventActivity extends AdminActivity {
         Intent intent = getIntent();
         recyclerView = findViewById(R.id.admin_event_recycler_view);
         adapter = new E_RecyclerViewAdapter(this, events, true,
-                intent.getStringExtra("name"), intent.getStringExtra("email"));
+                intent.getStringExtra("name"), intent.getStringExtra("email"), intent.getStringExtra("username"));
         recyclerView.setAdapter(adapter);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
         resetEvents();

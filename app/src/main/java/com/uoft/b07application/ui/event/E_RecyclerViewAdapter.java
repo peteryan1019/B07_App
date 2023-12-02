@@ -8,9 +8,13 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageButton;
 import android.widget.TextView;
+
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.ValueEventListener;
 import com.uoft.b07application.ui.event.EventModel;
 import com.uoft.b07application.ui.event.EventDialog;
 import com.google.firebase.database.DataSnapshot;
+
 import androidx.annotation.NonNull;
 import androidx.fragment.app.FragmentActivity;
 import androidx.recyclerview.widget.RecyclerView;
@@ -20,6 +24,7 @@ import com.uoft.b07application.ui.admin.FeedbackBottomSheetFragment;
 import com.uoft.b07application.ui.student.StudentFeedback;
 
 import java.util.ArrayList;
+
 import android.widget.Toast;
 
 import com.google.firebase.database.DatabaseReference;
@@ -34,14 +39,16 @@ public class E_RecyclerViewAdapter extends RecyclerView.Adapter<E_RecyclerViewAd
     String commenterEmail;
 
     DatabaseReference databaseReference;
+    String username;
 
-    public E_RecyclerViewAdapter(Context context, ArrayList<EventModel> events, boolean visibility, String commenterName, String commenterEmail) {
+    public E_RecyclerViewAdapter(Context context, ArrayList<EventModel> events, boolean visibility, String commenterName, String commenterEmail, String username) {
         this.context = context;
         this.events = events;
         this.viewFeedBackButtonVisibility = visibility;
         this.commenterEmail = commenterEmail;
         this.commenterName = commenterName;
         this.databaseReference = FirebaseDatabase.getInstance().getReference();
+        this.username = username;
     }
 
     //for checking if already signed
@@ -51,6 +58,7 @@ public class E_RecyclerViewAdapter extends RecyclerView.Adapter<E_RecyclerViewAd
 
         return signupsRef != null;
     }
+
     @NonNull
     @Override
     public E_RecyclerViewAdapter.E_ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
@@ -98,7 +106,8 @@ public class E_RecyclerViewAdapter extends RecyclerView.Adapter<E_RecyclerViewAd
             @Override
             public void onClick(View view) {
                 String eventKey = events.get(itemPosition).getKey();
-                handleSignup(eventKey);
+                // handleSignup inside checkSignUP
+                checkSignUp(eventKey, username);
             }
         });
 
@@ -112,6 +121,8 @@ public class E_RecyclerViewAdapter extends RecyclerView.Adapter<E_RecyclerViewAd
     private void handleSignup(String eventKey) {
         // Get a reference to the events node in Firebase
         DatabaseReference eventsRef = databaseReference.child("events");
+        // Get signup ref
+        DatabaseReference signUpEventRef = databaseReference.child("signups");
 
         // Get the current number of attendees for the specific event
         DatabaseReference numAttendeesRef = eventsRef.child(eventKey).child("numAttendees");
@@ -126,7 +137,7 @@ public class E_RecyclerViewAdapter extends RecyclerView.Adapter<E_RecyclerViewAd
                     if (numAttendees > 0) {
                         // Subtract one from numAttendees and update Firebase
                         eventsRef.child(eventKey).child("numAttendees").setValue(numAttendees - 1);
-
+//                        databaseReference.child("signups").child(signUpKey[0]).child("isSignUpEvent").setValue(true);
                         // Display a success message
                         Toast.makeText(context, "Signed up for the event", Toast.LENGTH_SHORT).show();
                     } else {
@@ -136,9 +147,41 @@ public class E_RecyclerViewAdapter extends RecyclerView.Adapter<E_RecyclerViewAd
                 }
             }
         });
+    }
 
-}
+    private void checkSignUp(String eventKey, String targetUsername) {
+        DatabaseReference signupsRef = FirebaseDatabase.getInstance().getReference("signups");
+        final boolean[] isSignUp = {false};
+        final String[] signupKey = new String[1];
+        signupsRef.orderByChild("eventKey").equalTo(eventKey).addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
 
+
+                // Iterate through the results to find the matching username
+                for (DataSnapshot signupSnapshot : dataSnapshot.getChildren()) {
+                    String username = (String) signupSnapshot.child("username").getValue();
+
+                    if (username != null && username.equals(targetUsername)) {
+                        // Found the matching child
+                        isSignUp[0] = (boolean) signupSnapshot.child("isSignUpEvent").getValue();
+                        signupKey[0] = signupSnapshot.getKey();
+                        if(!isSignUp[0]){
+                            databaseReference.child("signups").child(signupSnapshot.getKey()).child("isSignUpEvent").setValue(true);
+                            handleSignup(eventKey);
+                        }
+                        else Toast.makeText(context, "Already sign up", Toast.LENGTH_SHORT).show();
+                        break; // No need to continue iterating
+                    }
+                }
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+                Toast.makeText(context, "Cannot check is signup", Toast.LENGTH_SHORT).show();
+            }
+        });
+    }
 
 
 

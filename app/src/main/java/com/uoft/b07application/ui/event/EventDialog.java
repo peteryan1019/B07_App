@@ -10,14 +10,19 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
+import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatDialogFragment;
 
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 import com.uoft.b07application.R;
 
 import java.util.HashMap;
+import java.util.List;
 
 public class EventDialog extends AppCompatDialogFragment {
     final DatabaseReference databaseReference = FirebaseDatabase.getInstance().getReference();
@@ -81,8 +86,43 @@ public class EventDialog extends AppCompatDialogFragment {
        newEventRef.child("eventDate").setValue(eventDate);
        newEventRef.child("numAttendees").setValue(attendees);
 
-       // Create an empty "signups" section
-       newEventRef.child("signups").setValue(new HashMap<String, Boolean>());
+       // Create boolean between all users and all events
+       createSignUpEvents(newEventRef.getKey());
+   }
+
+   private void createSignUpEvents(String eventKey) {
+       databaseReference.child("users").child("admins").addListenerForSingleValueEvent(new ValueEventListener() {
+           @Override
+           public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+               for (DataSnapshot userSnapshot : dataSnapshot.getChildren()) {
+                   DatabaseReference signUpRef = databaseReference.child("signups").push();
+                   signUpRef.child("eventKey").setValue(eventKey);
+                   signUpRef.child("username").setValue(userSnapshot.child("username").getValue());
+                   signUpRef.child("isSignUpEvent").setValue(false);
+               }
+           }
+
+           @Override
+           public void onCancelled(@NonNull DatabaseError databaseError) {
+               Toast.makeText(getContext(), "error to add sign up", Toast.LENGTH_SHORT);
+           }
+       });
+       databaseReference.child("users").child("students").addListenerForSingleValueEvent(new ValueEventListener() {
+           @Override
+           public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+               for (DataSnapshot userSnapshot : dataSnapshot.getChildren()) {
+                   DatabaseReference signUpRef = databaseReference.child("signups").push();
+                   signUpRef.child("eventKey").setValue(eventKey);
+                   signUpRef.child("username").setValue(userSnapshot.child("username").getValue());
+                   signUpRef.child("isSignUpEvent").setValue(false);
+               }
+           }
+
+           @Override
+           public void onCancelled(@NonNull DatabaseError databaseError) {
+               Toast.makeText(getContext(), "error to add sign up", Toast.LENGTH_SHORT);
+           }
+       });
    }
 
 }

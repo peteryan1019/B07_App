@@ -1,5 +1,7 @@
 package com.uoft.b07application.ui.login;
 
+import android.widget.Toast;
+
 import androidx.annotation.NonNull;
 import com.uoft.b07application.ui.profile.Student;
 import com.uoft.b07application.ui.profile.Admin;
@@ -63,6 +65,7 @@ public class SignupActivityModel {
                                                             Student student = new Student(name, username, email, hashPassword);
                                                             studentRef.setValue(student);
                                                         }
+                                                        addNewUserToRelations(username, listener);
                                                         listener.onSuccess();
                                                     }
                                                 }
@@ -88,6 +91,26 @@ public class SignupActivityModel {
                             listener.onError(databaseError.getMessage());
                         }
                     });
+                }
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+                listener.onError(databaseError.getMessage());
+            }
+        });
+    }
+
+    private void addNewUserToRelations(String username, OnSignupFinishedListener listener){
+        final DatabaseReference databaseReference = FirebaseDatabase.getInstance().getReference();
+        databaseReference.child("events").addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                for (DataSnapshot eventSnapshot : dataSnapshot.getChildren()) {
+                    DatabaseReference signUpRef = databaseReference.child("signups").push();
+                    signUpRef.child("eventKey").setValue(eventSnapshot.getKey());
+                    signUpRef.child("username").setValue(username);
+                    signUpRef.child("isSignUpEvent").setValue(false);
                 }
             }
 
