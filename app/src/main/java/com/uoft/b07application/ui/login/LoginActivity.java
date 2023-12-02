@@ -52,7 +52,6 @@ public class LoginActivity extends AppCompatActivity {
 
     }
 
-    //NEW
     public void setUsernameError(String errorMessage) {
         loginUsername.setError(errorMessage);
     }
