@@ -31,7 +31,7 @@ public class LoginActivity extends AppCompatActivity {
         loginButton = findViewById(R.id.login_button);
         signupRedirectText = findViewById(R.id.signupRedirectText);
 
-        loginPresenter = new LoginActivityPresenter(this);
+        loginPresenter = new LoginActivityPresenter(this, new LoginActivityModel());
 
         loginButton.setOnClickListener(new View.OnClickListener() {
             @Override

@@ -8,7 +8,7 @@ import com.google.firebase.database.Query;
 import com.google.firebase.database.ValueEventListener;
 
 public class LoginActivityModel {
-    interface OnLoginFinishedListener {
+    public interface OnLoginFinishedListener {
         void onSuccess(String username, String name, String email, boolean isAdminOrStudent);
         void onError(String errorMessage);
     }
