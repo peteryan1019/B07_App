@@ -39,6 +39,9 @@ public class AnnouncementAdapter extends RecyclerView.Adapter<AnnouncementAdapte
         AnnouncementModel announcementModel = announcementModels.get(position);
         holder.subject.setText(announcementModel.getSubject());
         holder.message.setText(announcementModel.getMessage());
+        holder.date.setText(announcementModel.getDate());
+        holder.time.setText(announcementModel.getTime());
+        holder.sender_name.setText(announcementModel.getSenderUsername());
 
 //        SharedPreferences sharedPreferences = holder.itemView.getContext().getSharedPreferences("MyPrefs", Context.MODE_PRIVATE);
 //        boolean isDisabled = sharedPreferences.getBoolean("ButtonState_" + position, false);
@@ -60,7 +63,7 @@ public class AnnouncementAdapter extends RecyclerView.Adapter<AnnouncementAdapte
 
 
     public static class AnnouncementViewHolder extends RecyclerView.ViewHolder{
-        TextView subject, message, date, time;
+        TextView subject, message, date, time, sender_name;
         public Button button;
         public AnnouncementViewHolder(@NonNull View view){
             super(view);
@@ -68,6 +71,7 @@ public class AnnouncementAdapter extends RecyclerView.Adapter<AnnouncementAdapte
             date = view.findViewById(R.id.date_text);
             time = view.findViewById(R.id.time_text);
             message = view.findViewById(R.id.message_body);
+            sender_name=view.findViewById(R.id.sender_name);
 
             button = view.findViewById(R.id.unread_button);
             button.setOnClickListener(new View.OnClickListener() {
