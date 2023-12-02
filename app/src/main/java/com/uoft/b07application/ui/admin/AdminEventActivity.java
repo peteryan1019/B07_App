@@ -40,7 +40,7 @@ public class AdminEventActivity extends AdminActivity {
         Intent intent = getIntent();
         recyclerView = findViewById(R.id.admin_event_recycler_view);
         adapter = new E_RecyclerViewAdapter(this, events, true,
-                intent.getStringExtra("name"), intent.getStringExtra("email"));
+                intent.getStringExtra("name"), intent.getStringExtra("email"), intent.getStringExtra("username"));
         recyclerView.setAdapter(adapter);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
         resetEvents();
@@ -78,7 +78,7 @@ public class AdminEventActivity extends AdminActivity {
                 events.clear();
                 for(DataSnapshot childSnapshot: snapshot.getChildren()){
                     String key = childSnapshot.getKey();
-                    HashMap<String, String> childHashMap = (HashMap<String, String>) childSnapshot.getValue();
+                    HashMap<String, Object> childHashMap = (HashMap<String, Object>) childSnapshot.getValue();
                     childHashMap.put("key", key);
                     EventModel childAnModel = new EventModel(childHashMap);
                     events.add(childAnModel);
