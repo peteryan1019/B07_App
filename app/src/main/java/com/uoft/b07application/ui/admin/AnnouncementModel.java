@@ -9,6 +9,12 @@ public class AnnouncementModel {
     String subject;
     String message;
 
+    String date;
+    String time;
+
+    public AnnouncementModel(){
+
+    }
     public AnnouncementModel(String senderUsername, String senderEmail
             , String recipient, String subject, String message) {
         this.senderUsername = senderUsername;
@@ -24,6 +30,14 @@ public class AnnouncementModel {
         this.recipient = "TO: " + hashMap.get("recipient");
         this.subject = "Subject: " + hashMap.get("subject");
         this.message = hashMap.get("message");
+    }
+
+    public void setDate(String date){
+        this.date=date;
+    }
+
+    public void setTime(String time){
+        this.time=time;
     }
 
     public String getSenderUsername() {

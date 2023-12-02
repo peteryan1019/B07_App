@@ -1,17 +1,29 @@
 package com.uoft.b07application.ui.student;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import android.os.Bundle;
 
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 import com.uoft.b07application.R;
+import com.uoft.b07application.ui.admin.AnnouncementModel;
+
+import java.util.ArrayList;
 
 public class StudentInboxActivity extends StudentActivity {
+    private RecyclerView recyclerView;
+    private AnnouncementAdapter adapter;
+    private ArrayList<AnnouncementModel> announcementList =new ArrayList<>();
 
-    @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-    }
+    DatabaseReference reference = FirebaseDatabase.getInstance().getReference("announcements");
+
     @Override
     protected int setLayoutId() {
         return R.layout.activity_student_inbox;
@@ -25,5 +37,31 @@ public class StudentInboxActivity extends StudentActivity {
     @Override
     public void setButtonListeners(){
 
+    }
+
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        recyclerView = findViewById(R.id.announcement_recycler_view);
+        recyclerView.setLayoutManager(new LinearLayoutManager(this));
+        adapter = new AnnouncementAdapter(this, announcementList);
+        recyclerView.setAdapter(adapter);
+
+        reference.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+
+                for(DataSnapshot dataSnapshot : snapshot.getChildren()){
+                    AnnouncementModel announcement= dataSnapshot.getValue(AnnouncementModel.class);
+                    announcementList.add(announcement);
+                }
+                adapter.notifyDataSetChanged();
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+
+            }
+        });
     }
 }

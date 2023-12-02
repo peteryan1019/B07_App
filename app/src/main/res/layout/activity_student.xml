@@ -17,10 +17,10 @@
         android:layout_width="wrap_content"
         android:layout_height="match_parent"
         android:layout_gravity="start"
-        android:visibility="visible"
+        android:visibility="invisible"
         app:headerLayout="@layout/header"
         app:menu="@menu/student_menu"
-        tools:visibility="visible">
+        tools:visibility="gone">
 
     </com.google.android.material.navigation.NavigationView>
 
@@ -89,6 +89,7 @@
                             android:layout_width="match_parent"
                             android:layout_height="90dp"
                             android:layout_gravity="bottom"
+                            android:editable="false"
                             android:ems="10"
                             android:fontFamily="@font/akaya_telivigala"
                             android:inputType="text"
