@@ -8,6 +8,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:layout_margin="5dp"
+    android:background="#ACE36E"
     android:fitsSystemWindows="true"
     tools:context=".ui.admin.AdminActivity"
     tools:openDrawer="start">
