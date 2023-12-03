@@ -33,7 +33,7 @@ public class SignupActivity extends AppCompatActivity {
         SwitchMaterial adminSwitch = findViewById(R.id.admin_switch);
         signupButton = findViewById(R.id.signup_button);
 
-        signupPresenter = new SignupActivityPresenter(this);
+        signupPresenter = new SignupActivityPresenter(this, new SignupActivityModel());
 
         signupButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -55,10 +55,6 @@ public class SignupActivity extends AppCompatActivity {
                 startActivity(intent);
             }
         });
-    }
-
-    public void showFieldError(String errorMessage) {
-        Toast.makeText(this, errorMessage, Toast.LENGTH_SHORT).show();
     }
 
     public void showSignupError(String errorMessage) {
