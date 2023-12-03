@@ -51,6 +51,30 @@ public class AnnouncementAdapter extends RecyclerView.Adapter<AnnouncementAdapte
         holder.date.setText(announcementModel.getDate());
         holder.time.setText(announcementModel.getTime());
         holder.sender_name.setText(announcementModel.getSenderUsername());
+        DatabaseReference readsRef = FirebaseDatabase.getInstance().getReference("reads");
+
+        readsRef.orderByChild("announcementKey").equalTo(announcementModel.getAnnouncementKey()).addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                for (DataSnapshot readsSnapshot : snapshot.getChildren()){
+                    String targetUsername = (String) readsSnapshot.child("username").getValue();
+                    if(targetUsername.equals(username)){
+                        boolean isRead = (boolean) readsSnapshot.child("isRead").getValue();
+                        if(isRead){
+                            holder.button.setEnabled(false);
+                            holder.button.setText("already read");
+                            holder.button.setBackgroundColor(Color.GRAY);
+                        }
+
+                    }
+                }
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+
+            }
+        });
         holder.button.setOnClickListener(new View.OnClickListener(){
 
             @Override
