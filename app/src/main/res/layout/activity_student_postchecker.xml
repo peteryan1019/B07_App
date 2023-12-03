@@ -20,7 +20,7 @@
         android:visibility="visible"
         app:headerLayout="@layout/header"
         app:menu="@menu/student_menu"
-        tools:visibility="visible">
+        tools:visibility="gone">
 
 
     </com.google.android.material.navigation.NavigationView>
@@ -40,7 +40,8 @@
                 android:background="@color/white">
 
 
-                <EditText
+                <TextView
+                    android:textColor="@color/black"
                     android:id="@+id/post_checker_text"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
