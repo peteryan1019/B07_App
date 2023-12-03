@@ -131,6 +131,7 @@ public class AnnouncementDialog extends AppCompatDialogFragment {
         announcement.put("senderEmail", senderEmail);
         announcement.put("time", time);
         announcement.put("date", date);
+        announcement.put("announcementKey", announcementRef.getKey());
         announcementRef.setValue(announcement);
         createReadAnnouncement(announcementRef.getKey());
     }
