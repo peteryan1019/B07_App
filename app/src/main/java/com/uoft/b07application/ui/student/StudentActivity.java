@@ -24,6 +24,7 @@ import java.util.ArrayList;
 
 
 public class StudentActivity extends MenuActivity {
+
     public String name;
     public String email;
     public String username;
@@ -33,17 +34,17 @@ public class StudentActivity extends MenuActivity {
     Button studentEventButton_1, studentPOSTCheckerButton_1, studentComplaintButton_1,
             studentInboxButton_1, studentProfileButton_1;
 
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
     }
 
-
-
     @Override
     protected int setLayoutId() {
         return R.layout.activity_student;
     }
+
 
     @Override
     public void setButtonListeners() {

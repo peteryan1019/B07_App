@@ -11,12 +11,15 @@ import com.uoft.b07application.R;
 
 import android.graphics.Color;
 import android.util.Log;
+
 import android.view.LayoutInflater;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.TextView;
 import android.view.View;
+
 import android.widget.Toast;
+
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
@@ -25,15 +28,18 @@ import com.uoft.b07application.ui.admin.AnnouncementModel;
 
 import java.util.ArrayList;
 
+
 public class AnnouncementAdapter extends RecyclerView.Adapter<AnnouncementAdapter.AnnouncementViewHolder>{
     Context context;
     ArrayList<AnnouncementModel> announcementModels;
+
     String username;
 
     public AnnouncementAdapter(Context context, ArrayList<AnnouncementModel> announcementModels, String username) {
         this.context = context;
         this.announcementModels = announcementModels;
         this.username = username;
+
     }
 
     @NonNull
@@ -51,6 +57,7 @@ public class AnnouncementAdapter extends RecyclerView.Adapter<AnnouncementAdapte
         holder.date.setText(announcementModel.getDate());
         holder.time.setText(announcementModel.getTime());
         holder.sender_name.setText(announcementModel.getSenderUsername());
+
         DatabaseReference readsRef = FirebaseDatabase.getInstance().getReference("reads");
 
         readsRef.orderByChild("announcementKey").equalTo(announcementModel.getAnnouncementKey()).addValueEventListener(new ValueEventListener() {
@@ -106,6 +113,7 @@ public class AnnouncementAdapter extends RecyclerView.Adapter<AnnouncementAdapte
         });
     }
 
+
     @Override
     public int getItemCount() {
         return announcementModels.size();
@@ -125,12 +133,12 @@ public class AnnouncementAdapter extends RecyclerView.Adapter<AnnouncementAdapte
 
             button = view.findViewById(R.id.unread_button);
 
-
         }
         public void setViewButtonRead() {
             button.setEnabled(false);
             button.setText("already read");
             button.setBackgroundColor(Color.GRAY);
         }
+
     }
 }

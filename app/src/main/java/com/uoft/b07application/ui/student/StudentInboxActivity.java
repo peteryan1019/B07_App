@@ -1,6 +1,7 @@
 package com.uoft.b07application.ui.student;
 
 import androidx.annotation.NonNull;
+
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -17,6 +18,7 @@ import com.uoft.b07application.R;
 import com.uoft.b07application.ui.admin.AnnouncementModel;
 
 import java.util.ArrayList;
+
 
 public class StudentInboxActivity extends StudentActivity {
     private RecyclerView recyclerView;
@@ -43,13 +45,17 @@ public class StudentInboxActivity extends StudentActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
         Intent intent = getIntent();
+
         recyclerView = findViewById(R.id.announcement_recycler_view);
         LinearLayoutManager layoutManager = new LinearLayoutManager(this);
         layoutManager.setReverseLayout(true);
         layoutManager.setStackFromEnd(true);
         recyclerView.setLayoutManager(layoutManager);
+
         adapter = new AnnouncementAdapter(this, announcementList, intent.getStringExtra("username"));
+
         recyclerView.setAdapter(adapter);
 
         reference.addValueEventListener(new ValueEventListener() {
@@ -70,7 +76,9 @@ public class StudentInboxActivity extends StudentActivity {
         });
 
 
+
     }
+
 
 
 }

@@ -2,10 +2,14 @@ package com.uoft.b07application;
 
 import static org.mockito.Mockito.*;
 
+<<<<<<< HEAD
 import android.text.Editable;
 import android.view.View;
 import android.widget.EditText;
 
+=======
+import com.uoft.b07application.ui.login.LoginActivityModel;
+>>>>>>> 2506eea0edbd7c642b729c2090c5877fb999d4e3
 import com.uoft.b07application.ui.login.LoginActivity;
 import com.uoft.b07application.ui.login.LoginActivityModel;
 import com.uoft.b07application.ui.login.LoginActivityPresenter;
@@ -22,15 +26,6 @@ public class LoginPresenterUnitTest {
 
     @Mock
     LoginActivity mockLoginView;
-
-    @Mock
-    EditText mockEditText;
-
-    @Mock
-    Editable mockEdit;
-
-    @Mock
-    View baseView;
 
     @Test
     public void testEmptyUsername() {
@@ -87,51 +82,13 @@ public class LoginPresenterUnitTest {
     }
 
     @Test
-    public void testAdminLoginFail() {
-        String adminUsername = "admin";
-        String adminPassword = "wrong_admin_password";
-
-        doAnswer(invocation -> {
-            LoginActivityModel.OnLoginFinishedListener listener = invocation.getArgument(2);
-            listener.onError("Invalid Admin Credentials");
-            return null;
-        }).when(mockLoginModel).loginUser(eq(adminUsername), eq(adminPassword), any(LoginActivityModel.OnLoginFinishedListener.class));
-
-        LoginActivityPresenter presenter = new LoginActivityPresenter(mockLoginView, mockLoginModel);
-        presenter.validateCredentials(adminUsername, adminPassword);
-
-        // Verify interactions: Expect the view to display a login error
-        verify(mockLoginView).showLoginError("Invalid Admin Credentials");
-        verifyNoMoreInteractions(mockLoginView);
-    }
-
-    @Test
-    public void testStudentLoginFail() {
-        String studentUsername = "student";
-        String studentPassword = "wrong_student_password";
-
-        doAnswer(invocation -> {
-            LoginActivityModel.OnLoginFinishedListener listener = invocation.getArgument(2);
-            listener.onError("Invalid Student Credentials");
-            return null;
-        }).when(mockLoginModel).loginUser(eq(studentUsername), eq(studentPassword), any(LoginActivityModel.OnLoginFinishedListener.class));
-
-        LoginActivityPresenter presenter = new LoginActivityPresenter(mockLoginView, mockLoginModel);
-        presenter.validateCredentials(studentUsername, studentPassword);
-
-        // Verify interactions: Expect the view to display a login error
-        verify(mockLoginView).showLoginError("Invalid Student Credentials");
-        verifyNoMoreInteractions(mockLoginView);
-    }
-
-    @Test
-    public void testUsernameInvalid() {
+    public void testLoginFail() {
         String username = "invalid_username";
-        String password = "password";
+        String password = "invalid_password";
 
         doAnswer(invocation -> {
             LoginActivityModel.OnLoginFinishedListener listener = invocation.getArgument(2);
-            listener.onError("User does not exist");
+            listener.onError("Invalid Credentials");
             return null;
         }).when(mockLoginModel).loginUser(eq(username), eq(password), any(LoginActivityModel.OnLoginFinishedListener.class));
 
@@ -139,7 +96,7 @@ public class LoginPresenterUnitTest {
         presenter.validateCredentials(username, password);
 
         // Verify interactions: Expect the view to display a login error
-        verify(mockLoginView).showLoginError("User does not exist");
+        verify(mockLoginView).showLoginError("Invalid Credentials");
         verifyNoMoreInteractions(mockLoginView);
     }
 }

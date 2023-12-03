@@ -8,6 +8,13 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageButton;
 import android.widget.TextView;
+import android.widget.Button;
+
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.ValueEventListener;
+import com.uoft.b07application.ui.event.EventModel;
+import com.uoft.b07application.ui.event.EventDialog;
+import com.google.firebase.database.DataSnapshot;
 
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.ValueEventListener;
@@ -71,7 +78,9 @@ public class E_RecyclerViewAdapter extends RecyclerView.Adapter<E_RecyclerViewAd
     @Override
     public void onBindViewHolder(@NonNull E_ViewHolder holder, int position) {
         int itemPosition = position;
+
         holder.eventNameView.setText(String.format("Event name: %s", events.get(position).getEventName()));
+
         holder.eventDateView.setText(String.format("Date: %s", events.get(position).getEventDate()));
         holder.eventKey.setText(events.get(position).getKey());
         if (viewFeedBackButtonVisibility) holder.setViewButtonVisibility(View.VISIBLE);
@@ -81,7 +90,7 @@ public class E_RecyclerViewAdapter extends RecyclerView.Adapter<E_RecyclerViewAd
             public void onClick(View view) {
                 Intent intent = new Intent(context, StudentFeedback.class);
                 intent.putExtra("eventName", holder.eventNameView.getText().
-                        toString().replaceFirst("Event name: ", ""));
+                        toString().replaceFirst("Event: ", ""));
                 intent.putExtra("eventData", holder.eventDateView.getText().toString()
                         .replaceFirst("Date: ", ""));
                 intent.putExtra("eventKey", holder.eventKey.getText().toString());
@@ -192,7 +201,9 @@ public class E_RecyclerViewAdapter extends RecyclerView.Adapter<E_RecyclerViewAd
         ImageButton viewFeedbackButton;
         ImageButton commentFeedbackButton;
 
-        ImageButton signupButton; // Add this line
+
+        Button signupButton; // Add this line
+
 
 
         public E_ViewHolder(@NonNull View itemView) {
@@ -203,6 +214,10 @@ public class E_RecyclerViewAdapter extends RecyclerView.Adapter<E_RecyclerViewAd
             viewFeedbackButton = itemView.findViewById(R.id.view_feedback_button);
             commentFeedbackButton = itemView.findViewById(R.id.comment_feedback_button);
             signupButton = itemView.findViewById(R.id.signup_button);
+
+            signupButton.setText("Sign Up"); // Set the text to "Signup"
+
+
         }
 
         public void setViewButtonVisibility(int visibility) {
