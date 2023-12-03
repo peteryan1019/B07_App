@@ -114,7 +114,7 @@ public class StudentProfileActivity extends StudentActivity {
         Log.d("username", "username is " + username);
         //collect the updated text
         updated_n = new_name.getText().toString();
-        updated_em = new_email.getText().toString();
+        updated_em = new_email.getText().toString().toLowerCase();
         if(updated_n.equals("") || updated_em.equals("")){
             Toast.makeText(this, "you cannot have an empty string as username or email!", Toast.LENGTH_LONG).show();
         }
