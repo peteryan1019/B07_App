@@ -72,7 +72,7 @@ public class E_RecyclerViewAdapter extends RecyclerView.Adapter<E_RecyclerViewAd
     @Override
     public void onBindViewHolder(@NonNull E_ViewHolder holder, int position) {
         int itemPosition = position;
-        holder.eventNameView.setText(String.format("Event name: %s", events.get(position).getEventName()));
+        holder.eventNameView.setText(String.format("Event: %s", events.get(position).getEventName()));
         holder.eventDateView.setText(String.format("Date: %s", events.get(position).getEventDate()));
         holder.eventKey.setText(events.get(position).getKey());
         if (viewFeedBackButtonVisibility) holder.setViewButtonVisibility(View.VISIBLE);
@@ -82,7 +82,7 @@ public class E_RecyclerViewAdapter extends RecyclerView.Adapter<E_RecyclerViewAd
             public void onClick(View view) {
                 Intent intent = new Intent(context, StudentFeedback.class);
                 intent.putExtra("eventName", holder.eventNameView.getText().
-                        toString().replaceFirst("Event name: ", ""));
+                        toString().replaceFirst("Event: ", ""));
                 intent.putExtra("eventData", holder.eventDateView.getText().toString()
                         .replaceFirst("Date: ", ""));
                 intent.putExtra("eventKey", holder.eventKey.getText().toString());
