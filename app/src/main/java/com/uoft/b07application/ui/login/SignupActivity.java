@@ -39,7 +39,7 @@ public class SignupActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 final String name = signupName.getText().toString();
-                final String email = signupEmail.getText().toString();
+                String email = signupEmail.getText().toString().toLowerCase();
                 final String username = signupUsername.getText().toString();
                 final String password = signupPassword.getText().toString();
                 final boolean isAdmin = adminSwitch.isChecked();

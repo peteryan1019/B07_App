@@ -25,6 +25,11 @@ public class SignupActivityPresenter {
             return;
         }
 
+        if (email.contains(" ")) {
+            signupView.showSignupError("Invalid email!");
+            return;
+        }
+
         if (password.contains(" ")) {
             signupView.showSignupError("Password cannot contain spaces!");
             return;
