@@ -1,5 +1,9 @@
 package com.uoft.b07application.ui.admin;
 
+import java.text.SimpleDateFormat;
+import java.util.Date;
+import java.util.Locale;
+
 import android.annotation.SuppressLint;
 import android.app.AlertDialog;
 import android.app.Dialog;
@@ -22,6 +26,7 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.uoft.b07application.R;
 
 import java.util.HashMap;
+import java.util.Locale;
 
 public class AnnouncementDialog extends AppCompatDialogFragment {
     DatabaseReference database;
@@ -68,7 +73,14 @@ public class AnnouncementDialog extends AppCompatDialogFragment {
                             Toast.makeText(getContext(), "please fill out all fields", Toast.LENGTH_SHORT).show();
 
                         }
-                        sendAnnouncement(message, recipient, subject, senderUsername, senderEmail);
+                        SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd", Locale.getDefault());
+                        SimpleDateFormat timeFormat = new SimpleDateFormat("HH:mm:ss", Locale.getDefault());
+                        String currentDate = dateFormat.format(new Date());
+                        String currentTime = timeFormat.format(new Date());
+                        sendAnnouncement(message, recipient, subject, senderUsername, senderEmail, currentTime, currentDate);
+
+
+
                         Toast.makeText(getContext(), "announcement sent", Toast.LENGTH_SHORT).show();
                         dismiss();
                     }
@@ -104,13 +116,19 @@ public class AnnouncementDialog extends AppCompatDialogFragment {
         this.senderEmail = senderEmail;
     }
 
-    private void sendAnnouncement(String message, String recipient, String subject, String senderUsername, String senderEmail) {
+    private void sendAnnouncement(String message, String recipient, String subject, String senderUsername, String senderEmail, String time, String date) {
+
+
         HashMap announcement = new HashMap();
         announcement.put("message", message);
         announcement.put("recipient", recipient);
         announcement.put("subject", subject);
         announcement.put("senderUsername", senderUsername);
         announcement.put("senderEmail", senderEmail);
+        announcement.put("time", time);
+        announcement.put("date", date);
+
+
         database.child("announcements").push().setValue(announcement);
     }
 }

@@ -1,8 +1,3 @@
-<<<<<<< HEAD
-
-=======
-<?xml version="1.0" encoding="utf-8"?>
->>>>>>> fd47e4a7a0486f5117ea101add1d15948cf8aaf9
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     package="com.uoft.b07application">
@@ -17,10 +12,7 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.MyApplication"
         tools:targetApi="31">
-<<<<<<< HEAD
 
-=======
->>>>>>> fd47e4a7a0486f5117ea101add1d15948cf8aaf9
         <activity
             android:name=".ui.menu.MenuActivity"
             android:exported="false" />
@@ -44,7 +36,8 @@
             android:exported="false" />
         <activity
             android:name=".ui.student.StudentActivity"
-            android:exported="false"></activity>
+            android:exported="false">
+        </activity>
         <activity
             android:name=".ui.student.StudentComplaintActivity"
             android:exported="false" />
@@ -62,28 +55,24 @@
             android:exported="false" />
         <activity
             android:name=".ui.admin.AdminActivity"
-            android:exported="false" />
+            android:exported="false"/>
         <activity
             android:name=".ui.login.LoginActivity"
             android:exported="true"
             android:label="@string/title_activity_login">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
-
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
+
         </activity>
-        
+
         <activity
             android:name=".ui.student.StudentFeedback"
-<<<<<<< HEAD
             android:exported="false">
             <!-- Remove the MAIN action and LAUNCHER category for StudentFeedback -->
         </activity>
 
-=======
-            android:exported="true" />
->>>>>>> fd47e4a7a0486f5117ea101add1d15948cf8aaf9
         <activity
             android:name=".ui.login.SignupActivity"
             android:exported="false" />
@@ -91,10 +80,7 @@
         <meta-data
             android:name="preloaded_fonts"
             android:resource="@array/preloaded_fonts" />
+
     </application>
 
-<<<<<<< HEAD
 </manifest>
-=======
-</manifest>
->>>>>>> fd47e4a7a0486f5117ea101add1d15948cf8aaf9

@@ -36,7 +36,7 @@ public class StudentEventActivity extends StudentActivity {
         recyclerView = findViewById(R.id.student_event_recycler_view);
         Intent intent = getIntent();
         adapter = new E_RecyclerViewAdapter(this, events, false,
-                intent.getStringExtra("name"), intent.getStringExtra("email"));
+                intent.getStringExtra("name"), intent.getStringExtra("email"), intent.getStringExtra("username"));
         recyclerView.setAdapter(adapter);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
         resetEvents();
@@ -66,7 +66,7 @@ public class StudentEventActivity extends StudentActivity {
                 events.clear();
                 for(DataSnapshot childSnapshot: snapshot.getChildren()){
                     String key = childSnapshot.getKey();
-                    HashMap<String, String> childHashMap = (HashMap<String, String>) childSnapshot.getValue();
+                    HashMap<String, Object> childHashMap = (HashMap<String, Object>) childSnapshot.getValue();
                     childHashMap.put("key", key);
                     EventModel childAnModel = new EventModel(childHashMap);
                     events.add(childAnModel);

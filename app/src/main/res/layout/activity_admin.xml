@@ -20,7 +20,7 @@
         android:visibility="visible"
         app:headerLayout="@layout/header"
         app:menu="@menu/admin_menu"
-        tools:visibility="visible">
+        tools:visibility="gone">
 
 
     </com.google.android.material.navigation.NavigationView>
@@ -153,7 +153,7 @@
                         android:layout_margin="10dp"
                         android:layout_weight="1">
 
-                        <EditText
+                        <TextView
                             android:id="@+id/admin_reviewcomments_text"
                             android:layout_width="match_parent"
                             android:layout_height="90dp"

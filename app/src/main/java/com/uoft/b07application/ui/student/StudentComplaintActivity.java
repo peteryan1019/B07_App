@@ -18,6 +18,10 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.uoft.b07application.R;
 
+import java.text.SimpleDateFormat;
+import java.util.Date;
+import java.util.Locale;
+
 public class StudentComplaintActivity extends StudentActivity {
     Button submit_button;
     FirebaseDatabase database;
@@ -83,8 +87,12 @@ public class StudentComplaintActivity extends StudentActivity {
                     Toast.makeText(StudentComplaintActivity.this, "Please select a topic", Toast.LENGTH_SHORT).show();
                     return;}
                 String complaint_body = editTextComplaint.getText().toString().trim();
+                SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd", Locale.getDefault());
+                SimpleDateFormat timeFormat = new SimpleDateFormat("HH:mm:ss", Locale.getDefault());
+                String currentDate = dateFormat.format(new Date());
+                String currentTime = timeFormat.format(new Date());
                 if (!complaint_body.isEmpty() && isTopicSelected) {
-                Complaint complaint = new Complaint(topic, complaint_body);
+                Complaint complaint = new Complaint(topic, complaint_body, currentDate, currentTime);
 
                     // Generate a unique key for the complaint
                     String complaintId = reference.child("complaints").push().getKey();
