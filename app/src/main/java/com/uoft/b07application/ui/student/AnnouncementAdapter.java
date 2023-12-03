@@ -124,14 +124,6 @@ public class AnnouncementAdapter extends RecyclerView.Adapter<AnnouncementAdapte
             sender_name=view.findViewById(R.id.sender_name);
 
             button = view.findViewById(R.id.unread_button);
-//            button.setOnClickListener(new View.OnClickListener() {
-//                @Override
-//                public void onClick(View v) {
-//                    button.setEnabled(false);
-//                    button.setText("already read");
-//                    button.setBackgroundColor(Color.GRAY);
-//                }
-//            });
 
 
         }

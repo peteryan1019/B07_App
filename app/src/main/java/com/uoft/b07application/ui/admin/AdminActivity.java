@@ -22,7 +22,7 @@ public class AdminActivity extends MenuActivity {
     String email;
     String isadminorstudent;
     String username;
-    ImageButton adminAnnouncementButton,  adminEventButton,  adminReviewCommentsButton,  adminProfileButton;
+    ImageButton adminAnnouncementButton,  adminEventButton,  adminReviewCommentsButton,  adminProfileButton, adminDashboardButton;
 Button adminEventButton_1, adminAnnouncementButton_1, adminReviewCommentsButton_1, adminProfileButton_1;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -33,6 +33,23 @@ Button adminEventButton_1, adminAnnouncementButton_1, adminReviewCommentsButton_
         isadminorstudent = i.getStringExtra("isadminorstudent");
         super.onCreate(savedInstanceState);
     }
+
+//    @Override
+//    protected void setUpAdminDashboardButton() {
+//        if(drawerLayout.isDrawerOpen(GravityCompat.START)){
+//            adminDashboardButton = findViewById(R.id.nav_app_icon);
+//            adminDashboardButton.setOnClickListener(new View.OnClickListener() {
+//                @Override
+//                public void onClick(View v) {
+//                    Intent i = getIntent();
+//                    Intent intent = new Intent(AdminActivity.this, AdminActivity.class);
+//                    putExtras(i, intent);
+//                    startActivity(intent);
+//                }
+//            });
+//        }
+//    }
+
     @Override
     protected int setLayoutId() {
         return R.layout.activity_admin;
@@ -51,6 +68,7 @@ Button adminEventButton_1, adminAnnouncementButton_1, adminReviewCommentsButton_
         adminAnnouncementButton_1 = findViewById(R.id.admin_announcements_text);
         adminEventButton = findViewById(R.id.admin_event_button);
         adminEventButton_1=findViewById(R.id.admin_event_text);
+
 
 
         adminReviewCommentsButton = findViewById(R.id.admin_reviewcomments_button);
@@ -142,6 +160,8 @@ Button adminEventButton_1, adminAnnouncementButton_1, adminReviewCommentsButton_
             intent.putExtra("email", email);
         } else if (menuItem.getItemId() == R.id.nav_admin_logout) {
             intent = new Intent(AdminActivity.this, LoginActivity.class);
+        } else if (menuItem.getItemId() == R.id.nav_home){
+            intent = new Intent(AdminActivity.this, AdminActivity.class);
         }
         //switch statement does not work in this case for some reason
         if (intent != null) {

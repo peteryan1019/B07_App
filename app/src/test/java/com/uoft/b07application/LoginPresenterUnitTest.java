@@ -1,19 +1,19 @@
 package com.uoft.b07application;
 
-import org.junit.Test;
-import org.junit.runner.RunWith;
-import org.mockito.Mock;
-import org.mockito.junit.MockitoJUnitRunner;
-
 import static org.mockito.Mockito.*;
 
 import android.text.Editable;
 import android.view.View;
 import android.widget.EditText;
 
-import com.uoft.b07application.ui.login.LoginActivityModel;
 import com.uoft.b07application.ui.login.LoginActivity;
+import com.uoft.b07application.ui.login.LoginActivityModel;
 import com.uoft.b07application.ui.login.LoginActivityPresenter;
+
+import org.junit.Test;
+import org.junit.runner.RunWith;
+import org.mockito.Mock;
+import org.mockito.junit.MockitoJUnitRunner;
 
 @RunWith(MockitoJUnitRunner.class)
 public class LoginPresenterUnitTest {

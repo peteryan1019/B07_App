@@ -68,7 +68,7 @@
         
         <activity
             android:name=".ui.student.StudentFeedback"
-            android:exported="true" />
+            android:exported="false" />
         <activity
             android:name=".ui.login.SignupActivity"
             android:exported="false" />

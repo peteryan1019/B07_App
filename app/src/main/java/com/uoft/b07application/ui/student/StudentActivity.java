@@ -38,6 +38,8 @@ public class StudentActivity extends MenuActivity {
         super.onCreate(savedInstanceState);
     }
 
+
+
     @Override
     protected int setLayoutId() {
         return R.layout.activity_student;
@@ -164,6 +166,8 @@ public class StudentActivity extends MenuActivity {
             intent = new Intent(StudentActivity.this, LoginActivity.class);
         } else if (menuItem.getItemId() == R.id.nav_student_profile) {
             intent = new Intent(StudentActivity.this, StudentProfileActivity.class);
+        } else if (menuItem.getItemId() == R.id.nav_home){
+            intent = new Intent(StudentActivity.this, StudentActivity.class);
         }
         //switch statement does not work in this case for some reason
         if (intent != null) {
