@@ -7,10 +7,6 @@ import org.mockito.junit.MockitoJUnitRunner;
 
 import static org.mockito.Mockito.*;
 
-import android.text.Editable;
-import android.view.View;
-import android.widget.EditText;
-
 import com.uoft.b07application.ui.login.LoginActivityModel;
 import com.uoft.b07application.ui.login.LoginActivity;
 import com.uoft.b07application.ui.login.LoginActivityPresenter;
