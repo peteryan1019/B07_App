@@ -1,0 +1,133 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".ui.student.CSMinorQualifications">
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        tools:context=".ui.student.CSMajorQualifications"
+        tools:layout_editor_absoluteX="0dp"
+        tools:layout_editor_absoluteY="32dp">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            tools:context=".ui.student.CSMajorQualifications">
+
+            <Button
+                android:id="@+id/q1_y"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="37dp"
+                android:layout_marginTop="187dp"
+                android:onClick="q1_yes"
+                android:text="Yes"
+                app:layout_constraintStart_toEndOf="@+id/textView5"
+                app:layout_constraintTop_toBottomOf="@+id/button12" />
+
+            <Button
+                android:id="@+id/q3_y"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="33dp"
+                android:layout_marginTop="280dp"
+                android:onClick="q3_yes"
+                android:text="Yes"
+                app:layout_constraintStart_toEndOf="@+id/textView7"
+                app:layout_constraintTop_toBottomOf="@+id/q1_y" />
+
+            <Button
+                android:id="@+id/q3_n"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="39dp"
+                android:layout_marginTop="283dp"
+                android:onClick="q3_no"
+                android:text="No"
+                app:layout_constraintStart_toEndOf="@+id/q3_y"
+                app:layout_constraintTop_toBottomOf="@+id/q1_n" />
+
+            <Button
+                android:id="@+id/q1_n"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="24dp"
+                android:layout_marginTop="232dp"
+                android:onClick="q1_no"
+                android:text="No"
+                app:layout_constraintStart_toEndOf="@+id/q1_y"
+                app:layout_constraintTop_toTopOf="@+id/button12" />
+
+            <TextView
+                android:id="@+id/textView3"
+                android:layout_width="82dp"
+                android:layout_height="46dp"
+                android:layout_marginStart="124dp"
+                android:layout_marginTop="16dp"
+                android:text="Status: "
+                android:textSize="20sp"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <TextView
+                android:id="@+id/qualification_status"
+                android:layout_width="182dp"
+                android:layout_height="57dp"
+                android:layout_marginStart="24dp"
+                android:layout_marginTop="16dp"
+                android:text="not Qualified"
+                android:textSize="20sp"
+                app:layout_constraintStart_toEndOf="@+id/textView3"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <TextView
+                android:id="@+id/textView5"
+                android:layout_width="151dp"
+                android:layout_height="397dp"
+                android:layout_marginStart="4dp"
+                android:layout_marginTop="204dp"
+                android:background="#C9F19C"
+                android:text="Have you passed the following CSC and MAT courses: CSCA08H3, CSCA48H3, and [one of: CSCA67H3, MATA67H3, MATA22H3, MATA23H3, MATA30H3, MATA31H3, or [(MATA32H3) or MATA34H3]]?"
+                android:textSize="20sp"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <TextView
+                android:id="@+id/textView7"
+                android:layout_width="153dp"
+                android:layout_height="71dp"
+                android:layout_marginTop="68dp"
+                android:background="#C9F19C"
+                android:text="Do you have at least 4.0 credits?"
+                android:textSize="20sp"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/textView5" />
+
+            <Button
+                android:id="@+id/button12"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="276dp"
+                android:layout_marginTop="40dp"
+                android:onClick="restart"
+                android:text="Restart"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/qualification_status" />
+
+            <Button
+                android:id="@+id/button3"
+                android:layout_width="117dp"
+                android:layout_height="55dp"
+                android:layout_marginTop="4dp"
+                android:onClick="goBackToPostPages"
+                android:text="Go Back"
+                app:backgroundTint="#E3CBA8"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </ScrollView>
+</androidx.constraintlayout.widget.ConstraintLayout>

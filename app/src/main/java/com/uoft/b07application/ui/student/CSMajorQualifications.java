@@ -16,6 +16,8 @@ public class CSMajorQualifications extends AppCompatActivity {
     int yes_count = 0;
     int disabledBackgroundColor = android.graphics.Color.parseColor("#b6d7a8");
     boolean inStream = true;
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -199,5 +201,10 @@ public class CSMajorQualifications extends AppCompatActivity {
 
         Intent restart = new Intent(this, CSMajorQualifications.class);
         startActivity(restart);
+    }
+
+    public void goBackToPostPages(View view){
+        Intent PostPages = new Intent(this, StudentPOSTCheckerActivity.class);
+        startActivity(PostPages);
     }
 }

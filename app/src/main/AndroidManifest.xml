@@ -14,6 +14,11 @@
         android:theme="@style/Theme.MyApplication"
         tools:targetApi="31">
         <activity
+            android:name=".ui.student.CSMinorQualifications"
+            android:exported="false"
+            android:label="@string/title_activity_csminor_qualifications"
+            android:theme="@style/Theme.MyApplication" />
+        <activity
             android:name=".ui.menu.MenuActivity"
             android:exported="false" />
         <activity
@@ -36,7 +41,7 @@
             android:exported="false" />
         <activity
             android:name=".ui.student.StudentActivity"
-            android:exported="false"></activity>
+            android:exported="false" />
         <activity
             android:name=".ui.student.StudentComplaintActivity"
             android:exported="false" />
@@ -65,7 +70,6 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        
         <activity
             android:name=".ui.student.StudentFeedback"
             android:exported="true" />
