@@ -1,12 +1,12 @@
 package com.uoft.b07application.ui.login;
 
 public class LoginActivityPresenter {
-    private final LoginActivityModel loginModel;
-    private final LoginActivity loginView;
+    LoginActivityModel loginModel;
+    LoginActivity loginView;
 
-    public LoginActivityPresenter(LoginActivity view) {
+    public LoginActivityPresenter(LoginActivity view, LoginActivityModel model) {
         this.loginView = view;
-        loginModel = new LoginActivityModel();
+        this.loginModel = model;
     }
 
     public void validateCredentials(String username, String password) {
@@ -23,8 +23,8 @@ public class LoginActivityPresenter {
         // Call the Model to validate the user's credentials
         loginModel.loginUser(username, password, new LoginActivityModel.OnLoginFinishedListener() {
             @Override
-            public void onSuccess(String username, String name, String email, boolean isAdminOrStudent) {
-                if (isAdminOrStudent) {
+            public void onSuccess(String username, String name, String email, boolean isAdmin) {
+                if (isAdmin) {
                     loginView.navigateToAdminScreen(username, name, email);
                 } else {
                     loginView.navigateToStudentScreen(username, name, email);

@@ -12,11 +12,15 @@ public class AnnouncementModel {
     String date;
     String time;
 
-    public AnnouncementModel(){
+    String announcementKey;
+
+    public AnnouncementModel() {
 
     }
+
     public AnnouncementModel(String senderUsername, String senderEmail
-            , String recipient, String subject, String message, String date, String time) {
+            , String recipient, String subject, String message, String date, String time, String announcementKey) {
+
         this.senderUsername = senderUsername;
         this.senderEmail = senderEmail;
         this.recipient = "TO: " + recipient;
@@ -24,6 +28,10 @@ public class AnnouncementModel {
         this.message = message;
         this.date = date;
         this.time = time;
+
+
+        this.announcementKey = announcementKey;
+
     }
 
     public AnnouncementModel(HashMap<String, String> hashMap) {
@@ -33,15 +41,18 @@ public class AnnouncementModel {
         this.subject = "Subject: " + hashMap.get("subject");
         this.message = hashMap.get("message");
         this.date = hashMap.get("date");
-        this.time=hashMap.get("time");
+
+        this.time = hashMap.get("time");
+        this.announcementKey = hashMap.get("announcementKey");
     }
 
-    public void setDate(String date){
-        this.date=date;
+    public void setDate(String date) {
+        this.date = date;
     }
 
-    public void setTime(String time){
-        this.time=time;
+    public void setTime(String time) {
+        this.time = time;
+
     }
 
     public String getSenderUsername() {
@@ -64,7 +75,16 @@ public class AnnouncementModel {
         return message;
     }
 
-    public String getDate(){return date;}
+    public String getDate() {
+        return date;
+    }
 
-    public String getTime(){return time;}
+    public String getTime() {
+        return time;
+    }
+
+    public String getAnnouncementKey() {
+        return announcementKey;
+    }
+
 }

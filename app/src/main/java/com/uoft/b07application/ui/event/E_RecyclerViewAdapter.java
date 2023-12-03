@@ -16,6 +16,12 @@ import com.uoft.b07application.ui.event.EventModel;
 import com.uoft.b07application.ui.event.EventDialog;
 import com.google.firebase.database.DataSnapshot;
 
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.ValueEventListener;
+import com.uoft.b07application.ui.event.EventModel;
+import com.uoft.b07application.ui.event.EventDialog;
+import com.google.firebase.database.DataSnapshot;
+
 import androidx.annotation.NonNull;
 import androidx.fragment.app.FragmentActivity;
 import androidx.recyclerview.widget.RecyclerView;
@@ -72,7 +78,9 @@ public class E_RecyclerViewAdapter extends RecyclerView.Adapter<E_RecyclerViewAd
     @Override
     public void onBindViewHolder(@NonNull E_ViewHolder holder, int position) {
         int itemPosition = position;
-        holder.eventNameView.setText(String.format("Event: %s", events.get(position).getEventName()));
+
+        holder.eventNameView.setText(String.format("Event name: %s", events.get(position).getEventName()));
+
         holder.eventDateView.setText(String.format("Date: %s", events.get(position).getEventDate()));
         holder.eventKey.setText(events.get(position).getKey());
         if (viewFeedBackButtonVisibility) holder.setViewButtonVisibility(View.VISIBLE);
@@ -193,7 +201,9 @@ public class E_RecyclerViewAdapter extends RecyclerView.Adapter<E_RecyclerViewAd
         ImageButton viewFeedbackButton;
         ImageButton commentFeedbackButton;
 
+
         Button signupButton; // Add this line
+
 
 
         public E_ViewHolder(@NonNull View itemView) {
@@ -204,7 +214,10 @@ public class E_RecyclerViewAdapter extends RecyclerView.Adapter<E_RecyclerViewAd
             viewFeedbackButton = itemView.findViewById(R.id.view_feedback_button);
             commentFeedbackButton = itemView.findViewById(R.id.comment_feedback_button);
             signupButton = itemView.findViewById(R.id.signup_button);
+
             signupButton.setText("Sign Up"); // Set the text to "Signup"
+
+
         }
 
         public void setViewButtonVisibility(int visibility) {

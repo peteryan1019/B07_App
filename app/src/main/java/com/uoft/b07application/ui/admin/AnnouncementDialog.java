@@ -18,18 +18,22 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
+import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatDialogFragment;
 
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 import com.uoft.b07application.R;
 
 import java.util.HashMap;
 import java.util.Locale;
 
 public class AnnouncementDialog extends AppCompatDialogFragment {
-    DatabaseReference database;
+    final DatabaseReference databaseReference = FirebaseDatabase.getInstance().getReference();
     private String senderUsername;
     private String senderEmail;
 
@@ -42,7 +46,6 @@ public class AnnouncementDialog extends AppCompatDialogFragment {
         AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
         LayoutInflater inflater = getActivity().getLayoutInflater();
         View view = inflater.inflate(R.layout.compose_announcement, null);
-        database = FirebaseDatabase.getInstance().getReference();
 
 
         builder.setView(view)
@@ -120,6 +123,7 @@ public class AnnouncementDialog extends AppCompatDialogFragment {
 
 
         HashMap announcement = new HashMap();
+        DatabaseReference announcementRef = databaseReference.child("announcements").push();
         announcement.put("message", message);
         announcement.put("recipient", recipient);
         announcement.put("subject", subject);
@@ -128,8 +132,43 @@ public class AnnouncementDialog extends AppCompatDialogFragment {
         announcement.put("time", time);
         announcement.put("date", date);
 
+        announcement.put("announcementKey", announcementRef.getKey());
+        announcementRef.setValue(announcement);
+        createReadAnnouncement(announcementRef.getKey());
+    }
+    private void createReadAnnouncement(String announcementKey) {
+        databaseReference.child("users").child("admins").addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                for (DataSnapshot userSnapshot : dataSnapshot.getChildren()) {
+                    DatabaseReference readRef = databaseReference.child("reads").push();
+                    readRef.child("announcementKey").setValue(announcementKey);
+                    readRef.child("username").setValue(userSnapshot.child("username").getValue());
+                    readRef.child("isRead").setValue(false);
+                }
+            }
 
-        database.child("announcements").push().setValue(announcement);
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+                Toast.makeText(getContext(), "error to add read", Toast.LENGTH_SHORT);
+            }
+        });
+        databaseReference.child("users").child("students").addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                for (DataSnapshot userSnapshot : dataSnapshot.getChildren()) {
+                    DatabaseReference readRef = databaseReference.child("reads").push();
+                    readRef.child("announcementKey").setValue(announcementKey);
+                    readRef.child("username").setValue(userSnapshot.child("username").getValue());
+                    readRef.child("isRead").setValue(false);
+                }
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+                Toast.makeText(getContext(), "error to add read", Toast.LENGTH_SHORT);
+            }
+        });
     }
 }
 

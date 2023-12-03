@@ -45,11 +45,6 @@ public class SignupActivity extends AppCompatActivity {
                 final boolean isAdmin = adminSwitch.isChecked();
 
                 signupPresenter.validateSignup(name, email, username, password, isAdmin);
-
-                if (name.isEmpty() || email.isEmpty() || username.isEmpty() || password.isEmpty()) {
-                    Toast.makeText(SignupActivity.this, "Please fill in all fields!", Toast.LENGTH_SHORT).show();
-                    return;
-                }
             }
         });
 

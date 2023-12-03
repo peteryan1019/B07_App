@@ -1,15 +1,25 @@
 package com.uoft.b07application.ui.student;
 
 import android.content.Context;
+
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 import com.uoft.b07application.R;
 
-import android.content.SharedPreferences;
 import android.graphics.Color;
+import android.util.Log;
+
 import android.view.LayoutInflater;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.TextView;
 import android.view.View;
+
+import android.widget.Toast;
+
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
@@ -17,15 +27,19 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.uoft.b07application.ui.admin.AnnouncementModel;
 
 import java.util.ArrayList;
-import java.util.Collections;
+
 
 public class AnnouncementAdapter extends RecyclerView.Adapter<AnnouncementAdapter.AnnouncementViewHolder>{
     Context context;
     ArrayList<AnnouncementModel> announcementModels;
 
-    public AnnouncementAdapter(Context context, ArrayList<AnnouncementModel> announcementModels) {
+    String username;
+
+    public AnnouncementAdapter(Context context, ArrayList<AnnouncementModel> announcementModels, String username) {
         this.context = context;
         this.announcementModels = announcementModels;
+        this.username = username;
+
     }
 
     @NonNull
@@ -44,16 +58,59 @@ public class AnnouncementAdapter extends RecyclerView.Adapter<AnnouncementAdapte
         holder.time.setText(announcementModel.getTime());
         holder.sender_name.setText(announcementModel.getSenderUsername());
 
-//        SharedPreferences sharedPreferences = holder.itemView.getContext().getSharedPreferences("MyPrefs", Context.MODE_PRIVATE);
-//        boolean isDisabled = sharedPreferences.getBoolean("ButtonState_" + position, false);
+        DatabaseReference readsRef = FirebaseDatabase.getInstance().getReference("reads");
 
-//        if (isDisabled) {
-//            holder.button.setEnabled(false);
-//            holder.button.setBackgroundColor(Color.GRAY);
-//        } else {
-//            holder.button.setEnabled(true);
-//            holder.button.setBackgroundResource(R.color.original_background_color); // Assuming you have a drawable for the original background
-//        }
+        readsRef.orderByChild("announcementKey").equalTo(announcementModel.getAnnouncementKey()).addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                for (DataSnapshot readsSnapshot : snapshot.getChildren()){
+                    String targetUsername = (String) readsSnapshot.child("username").getValue();
+                    if(targetUsername.equals(username)){
+                        boolean isRead = (boolean) readsSnapshot.child("isRead").getValue();
+                        if(isRead){
+                            holder.button.setEnabled(false);
+                            holder.button.setText("already read");
+                            holder.button.setBackgroundColor(Color.GRAY);
+                        }
+
+                    }
+                }
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+
+            }
+        });
+        holder.button.setOnClickListener(new View.OnClickListener(){
+
+            @Override
+            public void onClick(View v) {
+                DatabaseReference readsRef = FirebaseDatabase.getInstance().getReference("reads");
+                readsRef.orderByChild("announcementKey").equalTo(announcementModel.getAnnouncementKey()).
+                        addListenerForSingleValueEvent(new ValueEventListener() {
+                    @Override
+                    public void onDataChange(@NonNull DataSnapshot snapshot) {
+                        for (DataSnapshot readsSnapshot : snapshot.getChildren()){
+                            String targetUsername = (String) readsSnapshot.child("username").getValue();
+                            if(targetUsername.equals(username)){
+                                boolean isRead = (boolean) readsSnapshot.child("isRead").getValue();
+                                if(!isRead){
+                                    readsRef.child(readsSnapshot.getKey()).child("isRead").setValue(true);
+                                    holder.setViewButtonRead();
+                                }
+                                else Toast.makeText(context, "Already read", Toast.LENGTH_SHORT).show();
+                            }
+                        }
+                    }
+
+                    @Override
+                    public void onCancelled(@NonNull DatabaseError error) {
+
+                    }
+                });
+            }
+        });
     }
 
 
@@ -75,21 +132,22 @@ public class AnnouncementAdapter extends RecyclerView.Adapter<AnnouncementAdapte
             sender_name=view.findViewById(R.id.sender_name);
 
             button = view.findViewById(R.id.unread_button);
-            button.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    button.setEnabled(false);
-                    button.setText("already read");
-                    button.setBackgroundColor(Color.GRAY);
 
-//                    SharedPreferences sharedPreferences = v.getContext().getSharedPreferences("MyPrefs", Context.MODE_PRIVATE);
-//                    SharedPreferences.Editor editor = sharedPreferences.edit();
-//                    editor.putBoolean("ButtonState_" + getBindingAdapterPosition(), true);
-//                    editor.apply();
-                }
-            });
+//            button.setOnClickListener(new View.OnClickListener() {
+//                @Override
+//                public void onClick(View v) {
+//                    button.setEnabled(false);
+//                    button.setText("already read");
+//                    button.setBackgroundColor(Color.GRAY);
+//                }
+//            });
 
 
+        }
+        public void setViewButtonRead() {
+            button.setEnabled(false);
+            button.setText("already read");
+            button.setBackgroundColor(Color.GRAY);
         }
 
     }

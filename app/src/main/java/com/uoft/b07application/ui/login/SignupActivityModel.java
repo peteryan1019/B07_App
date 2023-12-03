@@ -103,6 +103,9 @@ public class SignupActivityModel {
 
     private void addNewUserToRelations(String username, OnSignupFinishedListener listener){
         final DatabaseReference databaseReference = FirebaseDatabase.getInstance().getReference();
+
+        //add relations between events and this new user
+
         databaseReference.child("events").addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
@@ -119,6 +122,26 @@ public class SignupActivityModel {
                 listener.onError(databaseError.getMessage());
             }
         });
+
+
+        //add relations between announcements and this new user
+        databaseReference.child("announcements").addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                for (DataSnapshot announcementSnapshot : dataSnapshot.getChildren()) {
+                    DatabaseReference readRef = databaseReference.child("reads").push();
+                    readRef.child("announcementKey").setValue(announcementSnapshot.getKey());
+                    readRef.child("username").setValue(username);
+                    readRef.child("isRead").setValue(false);
+                }
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+                listener.onError(databaseError.getMessage());
+            }
+        });
+
     }
 }
 
