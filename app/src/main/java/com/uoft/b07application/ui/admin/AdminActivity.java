@@ -5,6 +5,7 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.Button;
 import android.widget.ImageButton;
 
 import androidx.annotation.NonNull;
@@ -21,8 +22,8 @@ public class AdminActivity extends MenuActivity {
     String email;
     String isadminorstudent;
     String username;
-    ImageButton adminAnnouncementButton, adminEventButton, adminReviewCommentsButton, adminProfileButton;
-
+    ImageButton adminAnnouncementButton,  adminEventButton,  adminReviewCommentsButton,  adminProfileButton;
+Button adminEventButton_1, adminAnnouncementButton_1, adminReviewCommentsButton_1, adminProfileButton_1;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         Intent i = getIntent();
@@ -47,12 +48,26 @@ public class AdminActivity extends MenuActivity {
         handleIntentExtra();
         Intent i = getIntent();
         adminAnnouncementButton = findViewById(R.id.admin_announcements_button);
+        adminAnnouncementButton_1 = findViewById(R.id.admin_announcements_text);
         adminEventButton = findViewById(R.id.admin_event_button);
+        adminEventButton_1=findViewById(R.id.admin_event_text);
+
+
         adminReviewCommentsButton = findViewById(R.id.admin_reviewcomments_button);
+        adminReviewCommentsButton_1=findViewById(R.id.admin_reviewcomments_text);
         adminProfileButton = findViewById(R.id.admin_profile_button);
+        adminProfileButton_1=findViewById(R.id.admin_profile_text);
         adminAnnouncementButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                Intent intent = new Intent(AdminActivity.this, AdminAnnouncementActivity.class);
+                putExtras(i, intent);
+                startActivity(intent);
+            }
+        });
+        adminAnnouncementButton_1.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
                 Intent intent = new Intent(AdminActivity.this, AdminAnnouncementActivity.class);
                 putExtras(i, intent);
                 startActivity(intent);
@@ -66,6 +81,14 @@ public class AdminActivity extends MenuActivity {
                 startActivity(intent);
             }
         });
+        adminEventButton_1.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(AdminActivity.this, AdminEventActivity.class);
+                putExtras(i, intent);
+                startActivity(intent);
+            }
+        });
         adminReviewCommentsButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -74,9 +97,26 @@ public class AdminActivity extends MenuActivity {
                 startActivity(intent);
             }
         });
+
+        adminReviewCommentsButton_1.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(AdminActivity.this, AdminReviewCommentsActivity.class);
+                putExtras(i, intent);
+                startActivity(intent);
+            }
+        });
         adminProfileButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                Intent intent = new Intent(AdminActivity.this, AdminProfileActivity.class);
+                putExtras(i, intent);
+                startActivity(intent);
+            }
+        });
+        adminProfileButton_1.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
                 Intent intent = new Intent(AdminActivity.this, AdminProfileActivity.class);
                 putExtras(i, intent);
                 startActivity(intent);

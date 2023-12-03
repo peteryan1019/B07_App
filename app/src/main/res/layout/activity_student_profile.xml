@@ -20,7 +20,7 @@
         android:visibility="visible"
         app:headerLayout="@layout/header"
         app:menu="@menu/student_menu"
-        tools:visibility="visible">
+        tools:visibility="gone">
 
 
     </com.google.android.material.navigation.NavigationView>

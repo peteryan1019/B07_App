@@ -33,6 +33,7 @@ public class AdminAnnouncementActivity extends AdminActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        Intent intent = getIntent();
         recyclerView = findViewById(R.id.announcement_recycler_view);
         adapter = new AN_RecyclerViewAdapter(this, announcementModels);
         recyclerView.setAdapter(adapter);

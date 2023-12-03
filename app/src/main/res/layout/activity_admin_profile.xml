@@ -20,7 +20,7 @@
         android:visibility="visible"
         app:headerLayout="@layout/header"
         app:menu="@menu/admin_menu"
-        tools:visibility="visible">
+        tools:visibility="gone">
 
 
     </com.google.android.material.navigation.NavigationView>
@@ -31,12 +31,12 @@
 
         <ScrollView
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
+            android:layout_height="wrap_content"
             android:background="@color/white">
 
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
+                android:layout_height="wrap_content"
                 android:background="@color/white">
 
 
@@ -55,10 +55,8 @@
                     layout="@layout/fragment_profile"
                     android:layout_width="401dp"
                     android:layout_height="wrap_content"
-                    tools:layout_editor_absoluteX="133dp"
-                    tools:layout_editor_absoluteY="38dp" />
-
-
+                    tools:layout_editor_absoluteX="1dp"
+                    tools:layout_editor_absoluteY="0dp" />
             </androidx.constraintlayout.widget.ConstraintLayout>
         </ScrollView>
 
