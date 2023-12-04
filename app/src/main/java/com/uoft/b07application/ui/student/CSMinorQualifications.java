@@ -70,7 +70,7 @@ public class CSMinorQualifications extends AppCompatActivity {
 
     public void restart(View view){
 
-        Intent restart = new Intent(this, CSMajorQualifications.class);
+        Intent restart = new Intent(this, CSMinorQualifications.class);
         startActivity(restart);
     }
 

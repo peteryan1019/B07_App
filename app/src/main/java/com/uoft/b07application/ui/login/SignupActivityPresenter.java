@@ -21,7 +21,7 @@ public class SignupActivityPresenter {
         }
 
         if (!username.matches("^[a-z0-9]+$")) {
-            signupView.showSignupError("Username should contain only lowercase alphanumeric characters!");
+            signupView.showSignupError("User name cannot contain spaces and must be lowercase alphanumerical!");
             return;
         }
 
