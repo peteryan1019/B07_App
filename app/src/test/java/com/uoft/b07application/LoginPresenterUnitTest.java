@@ -2,16 +2,8 @@ package com.uoft.b07application;
 
 import static org.mockito.Mockito.*;
 
-<<<<<<< HEAD
-import android.text.Editable;
-import android.view.View;
-import android.widget.EditText;
-
-=======
 import com.uoft.b07application.ui.login.LoginActivityModel;
->>>>>>> 2506eea0edbd7c642b729c2090c5877fb999d4e3
 import com.uoft.b07application.ui.login.LoginActivity;
-import com.uoft.b07application.ui.login.LoginActivityModel;
 import com.uoft.b07application.ui.login.LoginActivityPresenter;
 
 import org.junit.Test;
