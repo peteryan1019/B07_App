@@ -9,21 +9,22 @@
     android:id="@+id/nav_admin_header"
     android:padding="20dp">
 
-    <ImageView
-        android:id="@+id/imageView2"
+    <ImageButton
+        android:id="@+id/nav_app_icon"
         android:layout_width="75dp"
         android:layout_height="75dp"
-        android:src="@drawable/temporary_icon"
+        android:src="@drawable/app_icon"
+        android:background="@color/DeepBlue"
         app:layout_constraintStart_toStartOf="parent"
-        tools:layout_editor_absoluteY="6dp"></ImageView>
+        tools:layout_editor_absoluteY="6dp"></ImageButton>
 
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:fontFamily="@font/akaya_telivigala"
-        android:text="APP Name"
+        android:text="StudentEase"
         android:textSize="40sp"
-        app:layout_constraintTop_toBottomOf="@+id/imageView2"
+        app:layout_constraintTop_toBottomOf="@+id/nav_app_icon"
         tools:layout_editor_absoluteX="-1dp"></TextView>
 
 

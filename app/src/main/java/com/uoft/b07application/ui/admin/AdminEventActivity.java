@@ -1,14 +1,10 @@
 package com.uoft.b07application.ui.admin;
 
-import android.content.ComponentName;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
-import android.widget.AdapterView;
-import android.widget.ArrayAdapter;
 import android.widget.ImageButton;
-import android.widget.ListView;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -20,7 +16,9 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 import com.uoft.b07application.R;
-import com.uoft.b07application.ui.student.StudentFeedback;
+import com.uoft.b07application.ui.event.E_RecyclerViewAdapter;
+import com.uoft.b07application.ui.event.EventDialog;
+import com.uoft.b07application.ui.event.EventModel;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -39,8 +37,10 @@ public class AdminEventActivity extends AdminActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        Intent intent = getIntent();
         recyclerView = findViewById(R.id.admin_event_recycler_view);
-        adapter = new E_RecyclerViewAdapter(this, events);
+        adapter = new E_RecyclerViewAdapter(this, events, true,
+                intent.getStringExtra("name"), intent.getStringExtra("email"), intent.getStringExtra("username"));
         recyclerView.setAdapter(adapter);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
         resetEvents();
@@ -78,7 +78,8 @@ public class AdminEventActivity extends AdminActivity {
                 events.clear();
                 for(DataSnapshot childSnapshot: snapshot.getChildren()){
                     String key = childSnapshot.getKey();
-                    HashMap<String, String> childHashMap = (HashMap<String, String>) childSnapshot.getValue();
+                    HashMap<String, Object> childHashMap = (HashMap<String, Object>) childSnapshot.getValue();
+                    childHashMap.put("key", key);
                     EventModel childAnModel = new EventModel(childHashMap);
                     events.add(childAnModel);
                     Log.d(TAG, "key" + key + "values: " + childHashMap);

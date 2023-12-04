@@ -7,48 +7,11 @@
     android:padding="16dp">
 
     <TextView
-        android:id="@+id/nameLabel"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:text="Your Name:"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent" />
-
-    <EditText
-        android:id="@+id/nameEditText"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        app:layout_constraintTop_toBottomOf="@+id/nameLabel"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        android:hint="Enter your name..." />
-
-    <TextView
-        android:id="@+id/eventLabel"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:text="Event Name:"
-        app:layout_constraintTop_toBottomOf="@+id/nameEditText"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        android:layout_marginTop="16dp" />
-
-    <EditText
-        android:id="@+id/eventEditText"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        app:layout_constraintTop_toBottomOf="@+id/eventLabel"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        android:hint="Enter event name..." />
-
-    <TextView
         android:id="@+id/ratingLabel"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:text="How did you find the event from 1-10?"
-        app:layout_constraintTop_toBottomOf="@+id/eventEditText"
+        app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         android:layout_marginTop="16dp" />

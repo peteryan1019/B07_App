@@ -70,6 +70,15 @@
                     android:theme="?attr/actionBarTheme"
                     android:visibility="visible"
                     tools:ignore="MissingConstraints" />
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/announcement_recycler_view"
+                    android:layout_width="match_parent"
+                    android:layout_marginTop="5dp"
+                    android:layout_height="match_parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/student_inbox_toolbar"
+                    android:background="#ADD8E6"/>
 
             </androidx.constraintlayout.widget.ConstraintLayout>
         </ScrollView>

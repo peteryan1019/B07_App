@@ -20,7 +20,7 @@
         android:visibility="visible"
         app:headerLayout="@layout/header"
         app:menu="@menu/student_menu"
-        tools:visibility="visible">
+        tools:visibility="gone">
 
 
     </com.google.android.material.navigation.NavigationView>
@@ -40,7 +40,7 @@
                 android:background="@color/white">
 
 
-                <EditText
+                <TextView
                     android:id="@+id/post_checker_text"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
@@ -51,6 +51,7 @@
                     android:text="Select a Program of Study"
                     android:textAlignment="viewStart"
                     android:textAllCaps="false"
+                    android:textColor="@color/black"
                     android:textSize="28dp"
                     android:textStyle="bold"
                     app:layout_constraintBottom_toTopOf="@+id/Cs_Major"
@@ -88,7 +89,7 @@
                     android:layout_width="325dp"
                     android:layout_height="194dp"
                     android:layout_marginStart="48dp"
-                    android:layout_marginBottom="8dp"
+                    android:layout_marginBottom="24dp"
                     android:onClick="checkCSmajor"
                     android:text="CS Major"
                     app:backgroundTint="#B0EEF6"
@@ -99,7 +100,7 @@
                     android:id="@+id/Cs_Specialist"
                     android:layout_width="328dp"
                     android:layout_height="194dp"
-                    android:layout_marginBottom="20dp"
+                    android:layout_marginBottom="224dp"
                     android:onClick="checkCSspec"
                     android:text="CS Specialist"
                     app:backgroundTint="#F69999"
@@ -107,6 +108,18 @@
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintHorizontal_bias="0.657"
                     app:layout_constraintStart_toStartOf="parent" />
+
+                <Button
+                    android:id="@+id/button2"
+                    android:layout_width="324dp"
+                    android:layout_height="238dp"
+                    android:layout_marginStart="48dp"
+                    android:layout_marginTop="16dp"
+                    android:onClick="checkCSminor"
+                    android:text="CS Minor"
+                    app:backgroundTint="#C9F19C"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/Cs_Specialist" />
 
 
             </androidx.constraintlayout.widget.ConstraintLayout>

@@ -18,11 +18,16 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.uoft.b07application.R;
 
+import java.text.SimpleDateFormat;
+import java.util.Date;
+import java.util.Locale;
+
 public class StudentComplaintActivity extends StudentActivity {
     Button submit_button;
     FirebaseDatabase database;
     private EditText editTextComplaint;
     private boolean isTopicSelected = false;
+
 
     String topic;
     DatabaseReference reference;
@@ -78,18 +83,21 @@ public class StudentComplaintActivity extends StudentActivity {
         submit_button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if (!isTopicSelected) {
+                if (!isTopicSelected || topic.equals("Complaint Topic")) {
                     Toast.makeText(StudentComplaintActivity.this, "Please select a topic", Toast.LENGTH_SHORT).show();
                     return;}
-
-//                EditText complaint_topic = findViewById(R.id.complaint_topic);
-//                String topic = complaint_topic.getText().toString().trim();
                 String complaint_body = editTextComplaint.getText().toString().trim();
-                if (!complaint_body.isEmpty()) {
-                    // Generate a unique key for the complaint
-//                    String complaintId = reference.child("complaints").push().getKey();
+                SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd", Locale.getDefault());
+                SimpleDateFormat timeFormat = new SimpleDateFormat("HH:mm:ss", Locale.getDefault());
+                String currentDate = dateFormat.format(new Date());
+                String currentTime = timeFormat.format(new Date());
+                if (!complaint_body.isEmpty() && isTopicSelected) {
+                Complaint complaint = new Complaint(topic, complaint_body, currentDate, currentTime);
 
-                    reference.child(topic).setValue(complaint_body)
+                    // Generate a unique key for the complaint
+                    String complaintId = reference.child("complaints").push().getKey();
+
+                    reference.child(complaintId).setValue(complaint)
                             .addOnSuccessListener(new OnSuccessListener<Void>() {
                                 @Override
                                 public void onSuccess(Void aVoid) {

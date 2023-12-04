@@ -5,8 +5,11 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.RatingBar;
-import android.widget.TextView;
+import android.content.Intent;
 import android.widget.Toast;
+
+import androidx.annotation.NonNull;
+import androidx.appcompat.app.AppCompatActivity;
 
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
@@ -14,8 +17,7 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.uoft.b07application.R;
 
-import androidx.annotation.NonNull;
-import androidx.appcompat.app.AppCompatActivity;
+import java.util.HashMap;
 
 public class StudentFeedback extends AppCompatActivity {
     private EditText nameEditText;
@@ -31,8 +33,7 @@ public class StudentFeedback extends AppCompatActivity {
         setContentView(R.layout.student_feedback_layout);
 
         // Initialize UI elements
-        nameEditText = findViewById(R.id.nameEditText);
-        eventEditText = findViewById(R.id.eventEditText);
+
         commentEditText = findViewById(R.id.commentEditText);
         submitButton = findViewById(R.id.submitButton);
 
@@ -43,17 +44,23 @@ public class StudentFeedback extends AppCompatActivity {
         submitButton.setOnClickListener(view -> submitFeedback());
     }
 
-    private void saveFeedbackToFirebase(String name, String eventName, float rating, String feedbackComment) {
+    private void saveFeedbackToFirebase(float rating, String feedbackComment) {
+        //getExtra
+        Intent intent = getIntent();
         // Get the reference to the "feedback" node in the database
         DatabaseReference feedbackReference = FirebaseDatabase.getInstance().getReference().child("feedback");
 
-        String feedbackId = name + "_" + eventName;
+        HashMap<String, String> feedback = new HashMap<>();
+        feedback.put("commenterName", intent.getStringExtra("commenterName"));
+        feedback.put("commenterEmail", intent.getStringExtra("commenterEmail"));
+        feedback.put("eventKey", intent.getStringExtra("eventKey"));
+        feedback.put("eventName", intent.getStringExtra("eventName"));
+        feedback.put("rating", Float.toString(rating));
+        feedback.put("feedbackComment", feedbackComment);
 
-        // Create a Feedback object with the provided data
-        Feedback feedback = new Feedback(name, eventName, rating, feedbackComment);
 
         // Save the feedback to Firebase
-        feedbackReference.child(feedbackId).setValue(feedback)
+        feedbackReference.push().setValue(feedback)
                 .addOnSuccessListener(new OnSuccessListener<Void>() {
                     @Override
                     public void onSuccess(Void aVoid) {
@@ -72,37 +79,28 @@ public class StudentFeedback extends AppCompatActivity {
 
 
     private void submitFeedback() {
-        // Get the user-entered data
-        String name = ((EditText) findViewById(R.id.nameEditText)).getText().toString().trim();
-        String eventName = ((EditText) findViewById(R.id.eventEditText)).getText().toString().trim();
+
         String ratingText = ((EditText) findViewById(R.id.ratingEditText)).getText().toString().trim();
         String feedbackComment = ((EditText) findViewById(R.id.commentEditText)).getText().toString().trim();
 
-        // Validate the rating input
         float rating = 0;
         if (!ratingText.isEmpty()) {
             rating = Float.parseFloat(ratingText);
         }
 
-        if (!name.isEmpty() && !eventName.isEmpty() && rating >= 1 && rating <= 10 && !feedbackComment.isEmpty()) {
-            // Hide the UI elements
-            findViewById(R.id.nameLabel).setVisibility(View.GONE);
-            findViewById(R.id.nameEditText).setVisibility(View.GONE);
-            findViewById(R.id.eventLabel).setVisibility(View.GONE);
-            findViewById(R.id.eventEditText).setVisibility(View.GONE);
+        if (rating >= 1 && rating <= 10 && !feedbackComment.isEmpty()) {
+
             findViewById(R.id.ratingLabel).setVisibility(View.GONE);
             findViewById(R.id.ratingEditText).setVisibility(View.GONE);
             findViewById(R.id.commentsLabel).setVisibility(View.GONE);
             findViewById(R.id.commentEditText).setVisibility(View.GONE);
             findViewById(R.id.submitButton).setVisibility(View.GONE);
 
-            // Display a toast message
             Toast.makeText(this, "Feedback submitted successfully", Toast.LENGTH_SHORT).show();
 
             // Save feedback to Firebase
-            saveFeedbackToFirebase(name, eventName, rating, feedbackComment);
+            saveFeedbackToFirebase(rating, feedbackComment);
 
-            // Close the current activity (StudentFeedback)
             finish();
         } else {
             // Display an error message if any of the fields are empty or invalid

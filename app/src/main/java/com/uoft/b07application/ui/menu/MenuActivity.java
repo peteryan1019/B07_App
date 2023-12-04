@@ -36,7 +36,6 @@ public abstract class MenuActivity extends AppCompatActivity implements Navigati
         toggle.syncState();
         navigationView.setNavigationItemSelectedListener(this);
     }
-
     protected abstract int setLayoutId();
 
     protected abstract void setMenu();

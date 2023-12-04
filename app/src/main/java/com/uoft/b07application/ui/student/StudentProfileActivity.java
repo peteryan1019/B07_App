@@ -20,7 +20,7 @@ public class StudentProfileActivity extends StudentActivity {
     String updated_n;
     String updated_em;
     String username;
-    DatabaseReference reference;
+    final DatabaseReference reference = FirebaseDatabase.getInstance().getReference().child("users");
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -41,7 +41,6 @@ public class StudentProfileActivity extends StudentActivity {
     public void setButtonListeners(){
 
         //get list of current users on firebase
-        reference = FirebaseDatabase.getInstance().getReference().child("users");
         Intent i = getIntent();
         //collect the username and name and store it in a global variable
         old_n = i.getStringExtra("name");
@@ -115,7 +114,7 @@ public class StudentProfileActivity extends StudentActivity {
         Log.d("username", "username is " + username);
         //collect the updated text
         updated_n = new_name.getText().toString();
-        updated_em = new_email.getText().toString();
+        updated_em = new_email.getText().toString().toLowerCase();
         if(updated_n.equals("") || updated_em.equals("")){
             Toast.makeText(this, "you cannot have an empty string as username or email!", Toast.LENGTH_LONG).show();
         }
@@ -138,6 +137,8 @@ public class StudentProfileActivity extends StudentActivity {
                 if (isadminorstudent.equals("Is Admin")) {
                     reference.child("admins").child(username).child("name").setValue(updated_n);
                     reference.child("admins").child(username).child("email").setValue(updated_em);
+                    Log.d("testing", String.valueOf(username==null));
+                    Log.d("message", reference.child("admins").toString());
                 } else if (isadminorstudent.equals("Is Student")) {
                     reference.child("students").child(username).child("name").setValue(updated_n);
                     reference.child("students").child(username).child("email").setValue(updated_em);
@@ -149,6 +150,8 @@ public class StudentProfileActivity extends StudentActivity {
             }
             Log.d("old_n", "old_name is: "+ old_n);
             Log.d("old_em", "old_em is: "+ old_em);
+            Log.d("old_n", "update_n is: "+ updated_n);
+            Log.d("old_em", "update_em is: "+ updated_em);
             old_n = updated_n;
             old_em = updated_em;
         }

@@ -38,4 +38,9 @@ public class StudentPOSTCheckerActivity extends StudentActivity {
         Intent i = new Intent(this, CSSpecQualifications.class);
         startActivity(i);
     }
+
+    public void checkCSminor(View view){
+        Intent i = new Intent(this, CSMinorQualifications.class);
+        startActivity(i);
+    }
 }
