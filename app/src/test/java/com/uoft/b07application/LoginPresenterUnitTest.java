@@ -6,6 +6,7 @@ import com.uoft.b07application.ui.login.LoginActivityModel;
 import com.uoft.b07application.ui.login.LoginActivity;
 import com.uoft.b07application.ui.login.LoginActivityPresenter;
 
+import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.Mock;
@@ -19,10 +20,16 @@ public class LoginPresenterUnitTest {
     @Mock
     LoginActivity mockLoginView;
 
+    LoginActivityPresenter presenter;
+
+    @Before
+    public void setUp() {
+        presenter = new LoginActivityPresenter(mockLoginView, mockLoginModel);
+    }
+
     @Test
     public void testEmptyUsername() {
         // When username is empty, setUsernameError should be called
-        LoginActivityPresenter presenter = new LoginActivityPresenter(mockLoginView, mockLoginModel);
         presenter.validateCredentials("", "password");
         verify(mockLoginView).setUsernameError("Username cannot be empty");
     }
@@ -30,7 +37,6 @@ public class LoginPresenterUnitTest {
     @Test
     public void testEmptyPassword() {
         // When password is empty, setPasswordError should be called
-        LoginActivityPresenter presenter = new LoginActivityPresenter(mockLoginView, mockLoginModel);
         presenter.validateCredentials("username", "");
         verify(mockLoginView).setPasswordError("Password cannot be empty");
     }
@@ -46,7 +52,6 @@ public class LoginPresenterUnitTest {
             return null;
         }).when(mockLoginModel).loginUser(eq(adminUsername), eq(adminPassword), any(LoginActivityModel.OnLoginFinishedListener.class));
 
-        LoginActivityPresenter presenter = new LoginActivityPresenter(mockLoginView, mockLoginModel);
         presenter.validateCredentials(adminUsername, adminPassword);
 
         // Verify interactions: Expect the view to navigate to the admin screen
@@ -65,7 +70,6 @@ public class LoginPresenterUnitTest {
             return null;
         }).when(mockLoginModel).loginUser(eq(studentUsername), eq(studentPassword), any(LoginActivityModel.OnLoginFinishedListener.class));
 
-        LoginActivityPresenter presenter = new LoginActivityPresenter(mockLoginView, mockLoginModel);
         presenter.validateCredentials(studentUsername, studentPassword);
 
         // Verify interactions: Expect the view to navigate to the student screen
@@ -84,7 +88,6 @@ public class LoginPresenterUnitTest {
             return null;
         }).when(mockLoginModel).loginUser(eq(username), eq(password), any(LoginActivityModel.OnLoginFinishedListener.class));
 
-        LoginActivityPresenter presenter = new LoginActivityPresenter(mockLoginView, mockLoginModel);
         presenter.validateCredentials(username, password);
 
         // Verify interactions: Expect the view to display a login error

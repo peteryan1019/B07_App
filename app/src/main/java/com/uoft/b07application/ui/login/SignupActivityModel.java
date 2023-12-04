@@ -1,8 +1,7 @@
 package com.uoft.b07application.ui.login;
 
-import android.widget.Toast;
-
 import androidx.annotation.NonNull;
+import com.uoft.b07application.ui.profile.User;
 import com.uoft.b07application.ui.profile.Student;
 import com.uoft.b07application.ui.profile.Admin;
 
@@ -22,75 +21,18 @@ public class SignupActivityModel {
     public void registerUser(String name, String email, String username, String password, boolean isAdmin, OnSignupFinishedListener listener) {
         final DatabaseReference usersRef = FirebaseDatabase.getInstance().getReference("users");
 
-        // Check if the username already exists under admins
+        checkAdminUsernameExists(usersRef, username, listener, isAdmin, name, email, password);
+    }
+
+    private void checkAdminUsernameExists(DatabaseReference usersRef, String username, OnSignupFinishedListener listener,
+                                          boolean isAdmin, String name, String email, String password) {
         usersRef.child("admins").child(username).addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                 if (dataSnapshot.exists()) {
-                    // Username already exists as an admin
                     listener.onError("Username already exists");
                 } else {
-                    // Check if the username exists under students
-                    usersRef.child("students").child(username).addListenerForSingleValueEvent(new ValueEventListener() {
-                        @Override
-                        public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                            if (dataSnapshot.exists()) {
-                                // Username already exists as a student
-                                listener.onError("Username already exists");
-                            } else {
-                                // Check if the email exists under admins
-                                usersRef.child("admins").orderByChild("email").equalTo(email).addListenerForSingleValueEvent(new ValueEventListener() {
-                                    @Override
-                                    public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                                        if (dataSnapshot.exists()) {
-                                            // Email already exists as an admin
-                                            listener.onError("Email already exists");
-                                        } else {
-                                            // Check if the email exists under students
-                                            usersRef.child("students").orderByChild("email").equalTo(email).addListenerForSingleValueEvent(new ValueEventListener() {
-                                                @Override
-                                                public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                                                    if (dataSnapshot.exists()) {
-                                                        // Email already exists as a student
-                                                        listener.onError("Email already exists");
-                                                    } else {
-                                                        // Neither username nor email exists, proceed with signup
-                                                        String hashPassword = PasswordHasher.hashPassword(password);
-                                                        if (isAdmin) {
-                                                            DatabaseReference adminRef = usersRef.child("admins").child(username);
-                                                            Admin admin = new Admin(name, username, email, hashPassword);
-                                                            adminRef.setValue(admin);
-                                                        } else {
-                                                            DatabaseReference studentRef = usersRef.child("students").child(username);
-                                                            Student student = new Student(name, username, email, hashPassword);
-                                                            studentRef.setValue(student);
-                                                        }
-                                                        addNewUserToRelations(username, listener);
-                                                        listener.onSuccess();
-                                                    }
-                                                }
-
-                                                @Override
-                                                public void onCancelled(@NonNull DatabaseError databaseError) {
-                                                    listener.onError(databaseError.getMessage());
-                                                }
-                                            });
-                                        }
-                                    }
-
-                                    @Override
-                                    public void onCancelled(@NonNull DatabaseError databaseError) {
-                                        listener.onError(databaseError.getMessage());
-                                    }
-                                });
-                            }
-                        }
-
-                        @Override
-                        public void onCancelled(@NonNull DatabaseError databaseError) {
-                            listener.onError(databaseError.getMessage());
-                        }
-                    });
+                    checkStudentUsernameExists(usersRef, username, listener, isAdmin, name, email, password);
                 }
             }
 
@@ -99,6 +41,77 @@ public class SignupActivityModel {
                 listener.onError(databaseError.getMessage());
             }
         });
+    }
+
+    private void checkStudentUsernameExists(DatabaseReference usersRef, String username, OnSignupFinishedListener listener,
+                                            boolean isAdmin, String name, String email, String password) {
+        usersRef.child("students").child(username).addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                if (dataSnapshot.exists()) {
+                    listener.onError("Username already exists");
+                } else {
+                    checkAdminEmailExists(usersRef, username, listener, isAdmin, name, email, password);
+                }
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+                listener.onError(databaseError.getMessage());
+            }
+        });
+    }
+
+    private void checkAdminEmailExists(DatabaseReference usersRef, String username, OnSignupFinishedListener listener,
+                                       boolean isAdmin, String name, String email, String password) {
+        usersRef.child("admins").orderByChild("email").equalTo(email).addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                if (dataSnapshot.exists()) {
+                    listener.onError("Email already exists");
+                } else {
+                    checkStudentEmailExists(usersRef, username, listener, isAdmin, name, email, password);
+                }
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+                listener.onError(databaseError.getMessage());
+            }
+        });
+    }
+
+    private void checkStudentEmailExists(DatabaseReference usersRef, String username, OnSignupFinishedListener listener,
+                                         boolean isAdmin, String name, String email, String password) {
+        usersRef.child("students").orderByChild("email").equalTo(email).addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                if (dataSnapshot.exists()) {
+                    listener.onError("Email already exists");
+                } else {
+                    createUser(usersRef, username, listener, isAdmin, name, email, password);
+                }
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+                listener.onError(databaseError.getMessage());
+            }
+        });
+    }
+
+    private void createUser(DatabaseReference usersRef, String username, OnSignupFinishedListener listener,
+                            boolean isAdmin, String name, String email, String password) {
+        String hashPassword = PasswordHasher.hashPassword(password);
+        DatabaseReference userRef = isAdmin ? usersRef.child("admins").child(username) : usersRef.child("students").child(username);
+        User user = isAdmin ? new Admin(name, username, email, hashPassword) : new Student(name, username, email, hashPassword);
+
+        userRef.setValue(user)
+                .addOnSuccessListener(aVoid -> {
+                    addNewUserToRelations(username, listener);
+                    listener.onSuccess();
+                })
+                .addOnFailureListener(e -> listener.onError(e.getMessage()));
     }
 
     private void addNewUserToRelations(String username, OnSignupFinishedListener listener){
