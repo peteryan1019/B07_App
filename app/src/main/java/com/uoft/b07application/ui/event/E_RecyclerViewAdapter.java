@@ -47,8 +47,9 @@ public class E_RecyclerViewAdapter extends RecyclerView.Adapter<E_RecyclerViewAd
 
     DatabaseReference databaseReference;
     String username;
+    boolean signupButtonVisibility;
 
-    public E_RecyclerViewAdapter(Context context, ArrayList<EventModel> events, boolean visibility, String commenterName, String commenterEmail, String username) {
+    public E_RecyclerViewAdapter(Context context, ArrayList<EventModel> events, boolean visibility, String commenterName, String commenterEmail, String username, boolean signUpButtonVisibility) {
         this.context = context;
         this.events = events;
         this.viewFeedBackButtonVisibility = visibility;
@@ -56,6 +57,7 @@ public class E_RecyclerViewAdapter extends RecyclerView.Adapter<E_RecyclerViewAd
         this.commenterName = commenterName;
         this.databaseReference = FirebaseDatabase.getInstance().getReference();
         this.username = username;
+        this.signupButtonVisibility = signUpButtonVisibility;
     }
 
     //for checking if already signed
@@ -85,6 +87,9 @@ public class E_RecyclerViewAdapter extends RecyclerView.Adapter<E_RecyclerViewAd
         holder.eventKey.setText(events.get(position).getKey());
         if (viewFeedBackButtonVisibility) holder.setViewButtonVisibility(View.VISIBLE);
         else holder.setViewButtonVisibility(View.INVISIBLE);
+        if (signupButtonVisibility) holder.setSignUpVisibility(View.VISIBLE);
+        else holder.setSignUpVisibility(View.INVISIBLE);
+
         holder.commentFeedbackButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -222,6 +227,9 @@ public class E_RecyclerViewAdapter extends RecyclerView.Adapter<E_RecyclerViewAd
 
         public void setViewButtonVisibility(int visibility) {
             viewFeedbackButton.setVisibility(visibility);
+        }
+        public void setSignUpVisibility(int visibility) {
+            signupButton.setVisibility(visibility);
         }
     }
 }

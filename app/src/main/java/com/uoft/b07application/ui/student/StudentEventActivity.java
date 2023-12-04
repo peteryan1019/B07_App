@@ -36,7 +36,7 @@ public class StudentEventActivity extends StudentActivity {
         recyclerView = findViewById(R.id.student_event_recycler_view);
         Intent intent = getIntent();
         adapter = new E_RecyclerViewAdapter(this, events, false,
-                intent.getStringExtra("name"), intent.getStringExtra("email"), intent.getStringExtra("username"));
+                intent.getStringExtra("name"), intent.getStringExtra("email"), intent.getStringExtra("username"), true);
         recyclerView.setAdapter(adapter);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
         resetEvents();
