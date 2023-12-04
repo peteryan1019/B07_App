@@ -36,6 +36,7 @@ Button adminEventButton_1, adminAnnouncementButton_1, adminReviewCommentsButton_
         Log.d("email", "email is" +email);
         Log.d("admin state", "admin state is" + isadminorstudent);
         super.onCreate(savedInstanceState);
+
     }
     @Override
     protected int setLayoutId() {

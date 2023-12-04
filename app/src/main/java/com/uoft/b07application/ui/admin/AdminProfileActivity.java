@@ -8,8 +8,11 @@ import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 import com.uoft.b07application.R;
 
 public class AdminProfileActivity extends AdminActivity {
@@ -20,6 +23,8 @@ public class AdminProfileActivity extends AdminActivity {
     String updated_em;
     String username;
     DatabaseReference reference;
+
+    ValueEventListener valueEventListener;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -38,15 +43,61 @@ public class AdminProfileActivity extends AdminActivity {
     protected void setButtonListeners(){
         
         //get list of current users on firebase
+
         reference = FirebaseDatabase.getInstance().getReference().child("users");
+
         Intent i = getIntent();
         //collect the username and name and store it in a global variable
-        old_n = i.getStringExtra("name");
-        old_em = i.getStringExtra("email");
+
+        //save
+//        old_n = i.getStringExtra("name");
+//        old_em = i.getStringExtra("email");
         username = i.getStringExtra("username");
         isadminorstudent = i.getStringExtra("isadminorstudent");
-        updated_em = old_em;
-        updated_n = old_n;
+        Log.d("username", "username on edit profile is" + username);
+        Log.d("adminstate", "admin state on edit profile is" + isadminorstudent);
+
+//        reference.addValueEventListener(new ValueEventListener() {
+//            @Override
+//            public void onDataChange(DataSnapshot dataSnapshot) {
+//                if (dataSnapshot.exists()) {
+//                    if(isadminorstudent.equals("Is Admin")) {
+//                        String name = dataSnapshot.child("admins").child(username).child("name").getValue(String.class);
+//                        String email = dataSnapshot.child("admins").child(username).child("email").getValue(String.class);
+//                    }
+//                    else if(isadminorstudent.equals("Is Student")){
+//                        String name = dataSnapshot.child("students").child(username).child("name").getValue(String.class);
+//                        String email = dataSnapshot.child("students").child(username).child("email").getValue(String.class);
+//                    }
+//
+//                    if (name != null) {
+//                        old_n = name;
+//                        old_em = email;
+//                        updated_em = old_em;
+//                        updated_n = old_n;
+//                    }
+//                    else {
+//                        // Handle the case where "name" is null
+//                        Log.d("FetchData", "Name is null");
+//                    }
+//                } else {
+//                    // Handle the case where the dataSnapshot does not exist
+//                    Log.d("FetchData", "DataSnapshot does not exist");
+//                }
+//            }
+//
+//            @Override
+//            public void onCancelled(DatabaseError databaseError) {
+//            }
+//        });
+
+//        updated_em = old_em;
+//        updated_n = old_n;
+        //testing to read data
+
+        //
+
+        //testing to read data end
         Log.d("Old_n", "old_n is: "+ old_n);
         Log.d("Old_n", "old_em is: "+ old_em);
         Log.d("username", "username is :" + username);
@@ -63,6 +114,32 @@ public class AdminProfileActivity extends AdminActivity {
         user_name.setText(old_n);
         TextView user_email = (TextView) findViewById(R.id.ems);
         user_email.setText(old_em);
+    }
+
+    @Override
+    protected void onStart(){
+        super.onStart();
+
+        if (valueEventListener == null) {
+            // Initialize the listener
+            valueEventListener = new ValueEventListener() {
+                @Override
+                public void onDataChange(DataSnapshot dataSnapshot) {
+                    // This method is called when the data at the path changes
+                    String retrievedString = dataSnapshot.getValue(String.class);
+                    // Use the retrieved string as needed
+                }
+
+                @Override
+                public void onCancelled(DatabaseError databaseError) {
+                    // Getting Post failed, log a message
+                    Log.w("tag", "loadPost:onCancelled", databaseError.toException());
+                    // Handle failed read from database
+                }
+            };
+            // Attach the listener to the DatabaseReference
+            reference.addValueEventListener(valueEventListener);
+        }
     }
     public void editProfile(View view) {
         Button EditProfileStatus = findViewById(R.id.edit_profile);
