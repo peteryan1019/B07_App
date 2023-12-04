@@ -69,7 +69,7 @@ public class LoginActivity extends AppCompatActivity {
         intent.putExtra("username", username);
         intent.putExtra("name", name);
         intent.putExtra("email", email);
-        intent.putExtra("isadmin", "Is Admin");
+        intent.putExtra("isadminorstudent", "Is Admin");
         startActivity(intent);
     }
 
