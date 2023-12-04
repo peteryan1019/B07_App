@@ -199,4 +199,9 @@ public class CSSpecQualifications extends AppCompatActivity {
         Intent restart = new Intent(this, CSSpecQualifications.class);
         startActivity(restart);
     }
+
+    public void goBackToPostPages(View view){
+        Intent PostPages = new Intent(this, StudentPOSTCheckerActivity.class);
+        startActivity(PostPages);
+    }
 }

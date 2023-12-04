@@ -31,6 +31,10 @@ Button adminEventButton_1, adminAnnouncementButton_1, adminReviewCommentsButton_
         name = i.getStringExtra("name");
         email = i.getStringExtra("email");
         isadminorstudent = i.getStringExtra("isadminorstudent");
+        Log.d("username", "username is" +username);
+        Log.d("name", "name is" +name);
+        Log.d("email", "email is" +email);
+        Log.d("admin state", "admin state is" + isadminorstudent);
         super.onCreate(savedInstanceState);
     }
 
@@ -150,10 +154,13 @@ Button adminEventButton_1, adminAnnouncementButton_1, adminReviewCommentsButton_
             intent = new Intent(AdminActivity.this, AdminAnnouncementActivity.class);
             intent.putExtra("username", username);
             intent.putExtra("email", email);
+            putExtras(i, intent);
         } else if (menuItem.getItemId() == R.id.nav_departmentEvent) {
             intent = new Intent(AdminActivity.this, AdminEventActivity.class);
+            putExtras(i, intent);
         } else if (menuItem.getItemId() == R.id.nav_reviewComments) {
             intent = new Intent(AdminActivity.this, AdminReviewCommentsActivity.class);
+            putExtras(i, intent);
         } else if (menuItem.getItemId() == R.id.nav_admin_profile) {
             intent = new Intent(AdminActivity.this, AdminProfileActivity.class);
             intent.putExtra("username", name);
@@ -162,10 +169,11 @@ Button adminEventButton_1, adminAnnouncementButton_1, adminReviewCommentsButton_
             intent = new Intent(AdminActivity.this, LoginActivity.class);
         } else if (menuItem.getItemId() == R.id.nav_home){
             intent = new Intent(AdminActivity.this, AdminActivity.class);
+            putExtras(i, intent);
         }
         //switch statement does not work in this case for some reason
         if (intent != null) {
-            putExtras(i, intent);
+            //putExtras(i, intent);
             startActivity(intent);
             drawerLayout.closeDrawer(GravityCompat.START);
             return true;
@@ -182,6 +190,7 @@ Button adminEventButton_1, adminAnnouncementButton_1, adminReviewCommentsButton_
         Log.d("StudentActivity", "name is : " + name);
         Log.d("StudentActivity", "email is : " + email);
     }
+
     void putExtras(Intent i, Intent intent){
         String username = i.getStringExtra("username");
         String email = i.getStringExtra("email");
